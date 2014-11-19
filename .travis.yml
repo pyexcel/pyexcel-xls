@@ -1,0 +1,15 @@
+language: python
+notifications:
+  email: false
+env:
+  global:
+python:
+  - 2.6
+  - 2.7
+install:
+  - python setup.py install
+  - pip install -r tests/requirements.txt --use-mirrors
+script:
+  make test
+after_success:
+  codecov
