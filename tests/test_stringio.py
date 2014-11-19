@@ -1,7 +1,11 @@
 import os
+import sys
 import pyexcel
 from pyexcel.ext import xl
-from StringIO import StringIO
+if sys.version_info[0] < 3:
+    from StringIO import StringIO
+else:
+    from io import BytesIO as StringIO
 from base import create_sample_file1
 
 

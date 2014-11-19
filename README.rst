@@ -74,8 +74,9 @@ Here's the sample code::
     >>> # book.sheets() returns a dictionary of all sheet content
     >>> #   the keys represents sheet names
     >>> #   the values are two dimensional array
-    >>> print(book.sheets())
-    OrderedDict([(u'Sheet 1', [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]]), (u'Sheet 2', [[u'row 1', u'row 2', u'row 3']])])
+	>>> import json
+    >>> print(json.dumps(book.sheets()))
+    {"Sheet 1": [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]], "Sheet 2": [["row 1", "row 2", "row 3"]]}
 
 Write an xl to memory
 **********************
@@ -104,8 +105,8 @@ Continue from previous example::
     >>> # In reality, you might deal with xl file upload
     >>> # where you will read from requests.FILES['YOUR_XL_FILE']
     >>> book = XLBook(None, io.getvalue())
-    >>> print(book.sheets())
-    OrderedDict([(u'Sheet 1', [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]]), (u'Sheet 2', [[7.0, 8.0, 9.0], [10.0, 11.0, 12.0]])])
+    >>> print(json.dumps(book.sheets()))
+    {"Sheet 1": [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]], "Sheet 2": [[7.0, 8.0, 9.0], [10.0, 11.0, 12.0]]}
 
 
 As a pyexcel plugin
