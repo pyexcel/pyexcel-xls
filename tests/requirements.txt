@@ -1,4 +1,3 @@
-pyexcel
 pyexcel-ods
 nose
 rednose

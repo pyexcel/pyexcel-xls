@@ -6,8 +6,12 @@ env:
 python:
   - 2.6
   - 2.7
+  - 3.3
+  - 3.4
+  - pypy
 install:
   - python setup.py install
+  - pip install git+https://github.com/chfw/pyexcel.git
   - pip install -r tests/requirements.txt --use-mirrors
 script:
   make test
