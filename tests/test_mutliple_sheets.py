@@ -2,16 +2,11 @@ from base import PyexcelMultipleSheetBase
 import pyexcel
 import os
 from pyexcel.ext import xl
-import sys
-if sys.version_info[0] < 3:
-    from pyexcel.ext import ods
-else:
-    from pyexcel.ext import ods3
 
 
-class TestOdsNxlsMultipleSheets(PyexcelMultipleSheetBase):
+class TestXlsmNxlsMultipleSheets(PyexcelMultipleSheetBase):
     def setUp(self):
-        self.testfile = "multiple1.ods"
+        self.testfile = "multiple1.xlsm"
         self.testfile2 = "multiple1.xls"
         self.content = {
             "Sheet1": [[1, 1, 1, 1], [2, 2, 2, 2], [3, 3, 3, 3]],
@@ -24,10 +19,10 @@ class TestOdsNxlsMultipleSheets(PyexcelMultipleSheetBase):
         self._clean_up()
 
 
-class TestXlsNOdsMultipleSheets(PyexcelMultipleSheetBase):
+class TestXlsNXlsxMultipleSheets(PyexcelMultipleSheetBase):
     def setUp(self):
         self.testfile = "multiple1.xls"
-        self.testfile2 = "multiple1.ods"
+        self.testfile2 = "multiple1.xlsx"
         self.content = {
             "Sheet1": [[1, 1, 1, 1], [2, 2, 2, 2], [3, 3, 3, 3]],
             "Sheet2": [[4, 4, 4, 4], [5, 5, 5, 5], [6, 6, 6, 6]],
@@ -54,7 +49,7 @@ class TestAddBooks:
         w.close()
 
     def setUp(self):
-        self.testfile = "multiple1.ods"
+        self.testfile = "multiple1.xlsm"
         self.testfile2 = "multiple1.xls"
         self.testfile3 = "multiple2.xlsx"
         self.content = {
@@ -221,7 +216,7 @@ class TestAddBooks:
 
 class TestMultiSheetReader:
     def setUp(self):
-        self.testfile = "file_with_an_empty_sheet.ods"
+        self.testfile = "file_with_an_empty_sheet.xls"
 
     def test_reader_with_correct_sheets(self):
         r = pyexcel.BookReader(os.path.join("tests", "fixtures", self.testfile))

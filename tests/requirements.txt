@@ -1,4 +1,3 @@
-pyexcel-ods
 nose
 rednose
 nose-cov

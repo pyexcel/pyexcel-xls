@@ -1,3 +1,4 @@
+lxml
 pyexcel-ods3
 nose
 rednose
