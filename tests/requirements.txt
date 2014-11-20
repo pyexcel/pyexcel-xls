@@ -1,5 +1,5 @@
 nose
 rednose
 nose-cov
-codecov
+python-coveralls
 coverage
