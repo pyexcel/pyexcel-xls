@@ -5,8 +5,8 @@ pyexcel-xl
 .. image:: https://api.travis-ci.org/chfw/pyexcel-xl.png
     :target: http://travis-ci.org/chfw/pyexcel-xl
 
-.. image:: https://codecov.io/github/chfw/pyexcel-xl/coverage.png
-    :target: https://codecov.io/github/chfw/pyexcel-xl
+.. image:: https://coveralls.io/repos/chfw/pyexcel-xl/badge.png?branch=master 
+    :target: https://coveralls.io/r/chfw/pyexcel-xl?branch=master 
 
 .. image:: https://pypip.in/d/pyexcel-xl/badge.png
     :target: https://pypi.python.org/pypi/pyexcel-xl
