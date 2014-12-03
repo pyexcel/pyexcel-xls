@@ -9,9 +9,7 @@ try:
         "xlsx": XLBook
     })
     WRITERS.update({
-        "xls": XLWriter,
-        "xlsm": XLWriter,
-        "xlsx": XLWriter
+        "xls": XLWriter
     })
 except:
     # to allow this module to function independently

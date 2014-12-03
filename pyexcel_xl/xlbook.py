@@ -11,6 +11,7 @@ import sys
 import datetime
 import xlrd
 from xlwt import Workbook, XFStyle
+from pyexcel.ioext import SheetReader, BookReader, SheetWriter, BookWriter
 if sys.version_info[0] == 2 and sys.version_info[1] < 7:
     from ordereddict import OrderedDict
 else:
@@ -47,84 +48,66 @@ def xldate_to_python_date(value):
     return ret
 
 
-class XLSheet:
+class XLSheet(SheetReader):
     """
     xls sheet
 
     Currently only support first sheet in the file
     """
     def __init__(self, sheet):
-        self.worksheet = sheet
+        SheetReader.__init__(self, sheet)
+        self.name = sheet.name
 
     def number_of_rows(self):
         """
         Number of rows in the xls sheet
         """
-        return self.worksheet.nrows
+        return self.native_sheet.nrows
 
     def number_of_columns(self):
         """
         Number of columns in the xls sheet
         """
-        return self.worksheet.ncols
+        return self.native_sheet.ncols
 
     def cell_value(self, row, column):
         """
         Random access to the xls cells
         """
-        cell_type = self.worksheet.cell_type(row, column)
+        cell_type = self.native_sheet.cell_type(row, column)
         my_type = XLS_FORMAT_CONVERSION[cell_type]
-        value = self.worksheet.cell_value(row, column)
+        value = self.native_sheet.cell_value(row, column)
         if my_type == datetime.datetime:
             value = xldate_to_python_date(value)
         return value
 
 
-def to_array(sheet):
-    array = []
-    for r in range(0, sheet.number_of_rows()):
-        row = []
-        for c in range(0, sheet.number_of_columns()):
-            row.append(sheet.cell_value(r, c))
-        array.append(row)
-    return array
-
-
-class XLBook:
+class XLBook(BookReader):
     """
     XLSBook reader
 
     It reads xls, xlsm, xlsx work book
     """
+    def sheetIterator(self):
+        return self.native_book.sheets()
 
-    def __init__(self, filename, file_content=None, **keywords):
-        self.workbook = xlrd.open_workbook(filename, file_contents=file_content)
-        self.mysheets = OrderedDict()
-        for name in self.workbook.sheet_names():
-            data = to_array(XLSheet(
-                self.workbook.sheet_by_name(name)))
-            self.mysheets[name] = data
+    def getSheet(self, native_sheet):
+        return XLSheet(native_sheet)
 
-    def sheets(self):
-        """Get sheets in a dictionary"""
-        return self.mysheets
+    def load_from_memory(self, file_content):
+        return xlrd.open_workbook(None, file_contents=file_content)
+
+    def load_from_file(self, filename):
+        return xlrd.open_workbook(filename)
 
 
-class XLSheetWriter:
+class XLSheetWriter(SheetWriter):
     """
     xls, xlsx and xlsm sheet writer
     """
-    def __init__(self, wb, name):
-        self.wb = wb
-        if name:
-            sheet_name = name
-        else:
-            sheet_name = "pyexcel_sheet1"
-        self.ws = self.wb.add_sheet(sheet_name)
+    def set_sheet_name(self, name):
+        self.native_sheet = self.native_book.add_sheet(name)
         self.current_row = 0
-
-    def set_size(self, size):
-        pass
 
     def write_row(self, array):
         """
@@ -145,45 +128,22 @@ class XLSheetWriter:
                 style = XFStyle()
                 style.num_format_str = "HH:MM:SS"
             if style:
-                self.ws.write(self.current_row, i, value, style)
+                self.native_sheet.write(self.current_row, i, value, style)
             else:
-                self.ws.write(self.current_row, i, value)
+                self.native_sheet.write(self.current_row, i, value)
         self.current_row += 1
 
-    def write_array(self, table):
-        for r in table:
-            self.write_row(r)
 
-    def close(self):
-        """
-        This call actually save the file
-        """
-        pass
-
-
-class XLWriter:
+class XLWriter(BookWriter):
     """
     xls, xlsx and xlsm writer
     """
     def __init__(self, file):
-        self.file = file
+        BookWriter.__init__(self, file)
         self.wb = Workbook()
-        self.current_row = 0
 
     def create_sheet(self, name):
-        return XLSheetWriter(self.wb, name)
-
-    def write(self, sheet_dicts):
-        """Write a dictionary to a multi-sheet file
-
-        Requirements for the dictionary is: key is the sheet name,
-        its value must be two dimensional array
-        """
-        keys = sheet_dicts.keys()
-        for name in keys:
-            sheet = self.create_sheet(name)
-            sheet.write_array(sheet_dicts[name])
-            sheet.close()
+        return XLSheetWriter(self.wb, None, name)
 
     def close(self):
         """

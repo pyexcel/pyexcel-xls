@@ -17,7 +17,7 @@ pyexcel-xl
 .. image:: https://pypip.in/implementation/pyexcel-xl/badge.png
     :target: https://pypi.python.org/pypi/pyexcel-xl
 
-**pyexcel-xl** is a tiny wrapper library to read, manipulate and write data in xls, xlsx and xlsm fromat. You are likely to use it with `pyexcel <https://github.com/chfw/pyexcel>`_. 
+**pyexcel-xl** is a tiny wrapper library to read, manipulate and write data in xls format and it can read xlsx and xlsm fromat. You are likely to use it with `pyexcel <https://github.com/chfw/pyexcel>`_. 
 
 Installation
 ============
