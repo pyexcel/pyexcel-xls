@@ -145,7 +145,7 @@ Writing to an xl file
 
 Here is the sample code::
 
-    >>> sheet.save_as("another_file.xlsx")
+    >>> sheet.save_as("another_file.xls")
 
 Reading from a IO instance
 ================================
@@ -155,10 +155,10 @@ You got to wrap the binary content with stream to get xls working::
     >>> # This is just an illustration
     >>> # In reality, you might deal with xl file upload
     >>> # where you will read from requests.FILES['YOUR_XL_FILE']
-    >>> xlfile = "another_file.xlsx"
+    >>> xlfile = "another_file.xls"
     >>> with open(xlfile, "rb") as f:
     ...     content = f.read()
-    ...     r = pe.load_book_from_memory("xlsx", content)
+    ...     r = pe.load_book_from_memory("xls", content)
     ...     print(r)
     ...
     Sheet Name: Sheet 1
@@ -202,4 +202,4 @@ Dependencies
 
    >>> import os
    >>> os.unlink("your_file.xls")
-   >>> os.unlink("another_file.xlsx")
+   >>> os.unlink("another_file.xls")
