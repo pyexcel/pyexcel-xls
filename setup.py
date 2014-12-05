@@ -11,18 +11,19 @@ with open("README.rst", 'r') as readme:
 
 dependencies = [
     'xlrd',
-    'xlwt-future'
+    'xlwt-future',
+    'pyexcel-io'
 ]
 if sys.version_info[0] == 2 and sys.version_info[1] < 7:
     dependencies.append('ordereddict')
 
 setup(
-    name='pyexcel-xl',
+    name='pyexcel-xls',
     author="C. W.",
     version='0.0.1',
     author_email="wangc_2011@hotmail.com",
-    url="https://github.com/chfw/pyexcel-xl",
-    description='A wrapper library to read, manipulate and write data in xls, xlsx and xlsm format',
+    url="https://github.com/chfw/pyexcel-xls",
+    description='A wrapper library to read, manipulate and write data in xls format. It reads xlsx and xlsm format',
     install_requires=dependencies,
     packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
     include_package_data=True,

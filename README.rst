@@ -1,36 +1,36 @@
 ===========
-pyexcel-xl
+pyexcel-xls
 ===========
 
-.. image:: https://api.travis-ci.org/chfw/pyexcel-xl.png
-    :target: http://travis-ci.org/chfw/pyexcel-xl
+.. image:: https://api.travis-ci.org/chfw/pyexcel-xls.png
+    :target: http://travis-ci.org/chfw/pyexcel-xls
 
-.. image:: https://coveralls.io/repos/chfw/pyexcel-xl/badge.png?branch=master 
-    :target: https://coveralls.io/r/chfw/pyexcel-xl?branch=master 
+.. image:: https://coveralls.io/repos/chfw/pyexcel-xls/badge.png?branch=master 
+    :target: https://coveralls.io/r/chfw/pyexcel-xls?branch=master 
 
-.. image:: https://pypip.in/d/pyexcel-xl/badge.png
-    :target: https://pypi.python.org/pypi/pyexcel-xl
+.. image:: https://pypip.in/d/pyexcel-xls/badge.png
+    :target: https://pypi.python.org/pypi/pyexcel-xls
 
-.. image:: https://pypip.in/py_versions/pyexcel-xl/badge.png
-    :target: https://pypi.python.org/pypi/pyexcel-xl
+.. image:: https://pypip.in/py_versions/pyexcel-xls/badge.png
+    :target: https://pypi.python.org/pypi/pyexcel-xls
 
-.. image:: https://pypip.in/implementation/pyexcel-xl/badge.png
-    :target: https://pypi.python.org/pypi/pyexcel-xl
+.. image:: https://pypip.in/implementation/pyexcel-xls/badge.png
+    :target: https://pypi.python.org/pypi/pyexcel-xls
 
-**pyexcel-xl** is a tiny wrapper library to read, manipulate and write data in xls format and it can read xlsx and xlsm fromat. You are likely to use it with `pyexcel <https://github.com/chfw/pyexcel>`_. 
+**pyexcel-xls** is a tiny wrapper library to read, manipulate and write data in xls format and it can read xlsx and xlsm fromat. You are likely to use it with `pyexcel <https://github.com/chfw/pyexcel>`_. 
 
 Installation
 ============
 
 You can install it via pip::
 
-    $ pip install pyexcel-xl
+    $ pip install pyexcel-xls
 
 
 or clone it and install it::
 
-    $ git clone http://github.com/chfw/pyexcel-xl.git
-    $ cd pyexcel-xl
+    $ git clone http://github.com/chfw/pyexcel-xls.git
+    $ cd pyexcel-xls
     $ python setup.py install
 
 Usage
@@ -39,7 +39,7 @@ Usage
 As a standalone library
 ------------------------
 
-Write to an xl file
+Write to an xls file
 *********************
 
 .. testcode::
@@ -50,12 +50,12 @@ Write to an xl file
     ...     from StringIO import StringIO
     ... else:
     ...     from io import BytesIO as StringIO
-    >>> from pyexcel.ext.xl import OrderedDict
+    >>> from pyexcel.ext.xls import OrderedDict
 
 
 Here's the sample code to write a dictionary to an xl file::
 
-    >>> from pyexcel.ext.xl import XLWriter
+    >>> from pyexcel_xls import XLWriter
     >>> data = OrderedDict() # from collections import OrderedDict
     >>> data.update({"Sheet 1": [[1, 2, 3], [4, 5, 6]]})
     >>> data.update({"Sheet 2": [["row 1", "row 2", "row 3"]]})
@@ -63,12 +63,12 @@ Here's the sample code to write a dictionary to an xl file::
     >>> writer.write(data)
     >>> writer.close()
 
-Read from an xl file
+Read from an xls file
 **********************
 
 Here's the sample code::
 
-    >>> from pyexcel.ext.xl import XLBook
+    >>> from pyexcel_xls import XLBook
 
     >>> book = XLBook("your_file.xls")
     >>> # book.sheets() returns a dictionary of all sheet content
@@ -78,12 +78,12 @@ Here's the sample code::
     >>> print(json.dumps(book.sheets()))
     {"Sheet 1": [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]], "Sheet 2": [["row 1", "row 2", "row 3"]]}
 
-Write an xl to memory
+Write an xls to memory
 **********************
 
 Here's the sample code to write a dictionary to an xl file::
 
-    >>> from pyexcel.ext.xl import XLWriter
+    >>> from pyexcel_xls import XLWriter
     >>> data = OrderedDict()
     >>> data.update({"Sheet 1": [[1, 2, 3], [4, 5, 6]]})
     >>> data.update({"Sheet 2": [[7, 8, 9], [10, 11, 12]]})
@@ -96,7 +96,7 @@ Here's the sample code to write a dictionary to an xl file::
     >>> # object for downloading
 
     
-Read from an xl from memory
+Read from an xls from memory
 *****************************
 
 Continue from previous example::
@@ -114,7 +114,7 @@ As a pyexcel plugin
 
 Import it in your file to enable this plugin::
 
-    from pyexcel.ext import xl
+    from pyexcel.ext import xls
 
 Please note only pyexcel version 0.0.4+ support this.
 
@@ -124,7 +124,7 @@ Reading from an xl file
 Here is the sample code::
 
     >>> import pyexcel as pe
-    >>> from pyexcel.ext import xl
+    >>> from pyexcel.ext import xls
     
     # "example.xls"
     >>> sheet = pe.load_book("your_file.xls")
