@@ -1,5 +1,5 @@
 """
-    pyexcel.ext.xlbook
+    pyexcel.ext.xls
     ~~~~~~~~~~~~~~~~~~~
 
     The lower level xls/xlsx/xlsm file format handler using xlrd/xlwt
