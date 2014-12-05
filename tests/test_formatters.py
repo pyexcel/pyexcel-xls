@@ -1,5 +1,5 @@
 import pyexcel as pe
-import pyexcel.ext.xl
+import pyexcel.ext.xls
 import datetime
 import os
 

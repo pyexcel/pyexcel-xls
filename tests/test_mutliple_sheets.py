@@ -1,7 +1,7 @@
 from base import PyexcelMultipleSheetBase
 import pyexcel
 import os
-from pyexcel.ext import xl
+from pyexcel.ext import xls
 
 
 class TestXlsNxlsMultipleSheets(PyexcelMultipleSheetBase):

@@ -1,5 +1,5 @@
 import os
-from pyexcel.ext import xl
+from pyexcel.ext import xls
 from base import PyexcelWriterBase, PyexcelHatWriterBase
 
 
@@ -11,10 +11,10 @@ class TestNativeXLWriter:
             "Sheet3": [[u'X', u'Y', u'Z'], [1, 4, 7], [2, 5, 8], [3, 6, 9]]
         }
         self.testfile = "xlwriter.xls"
-        writer = xl.XLWriter(self.testfile)
+        writer = xls.XLWriter(self.testfile)
         writer.write(self.content)
         writer.close()
-        reader = xl.XLBook(self.testfile)
+        reader = xls.XLBook(self.testfile)
         content = reader.sheets()
         assert content == self.content
 

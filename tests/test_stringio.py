@@ -1,7 +1,7 @@
 import os
 import sys
 import pyexcel
-from pyexcel.ext import xl
+from pyexcel.ext import xls
 if sys.version_info[0] < 3:
     from StringIO import StringIO
 else:
