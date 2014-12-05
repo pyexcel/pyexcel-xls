@@ -11,7 +11,7 @@ python:
   - pypy
 install:
   - pip install git+https://github.com/chfw/pyexcel.git
-  - pip install git+https://github.com/chfw/pyexcel_io.git  
+  - pip install git+https://github.com/chfw/pyexcel-io.git  
   - python setup.py install
   - pip install -r tests/requirements.txt
 script:
