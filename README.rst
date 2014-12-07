@@ -53,7 +53,7 @@ Write to an xls file
     >>> from pyexcel.ext.xls import OrderedDict
 
 
-Here's the sample code to write a dictionary to an xl file::
+Here's the sample code to write a dictionary to an xls file::
 
     >>> from pyexcel_xls import XLWriter
     >>> data = OrderedDict() # from collections import OrderedDict
@@ -81,7 +81,7 @@ Here's the sample code::
 Write an xls to memory
 **********************
 
-Here's the sample code to write a dictionary to an xl file::
+Here's the sample code to write a dictionary to an xls file::
 
     >>> from pyexcel_xls import XLWriter
     >>> data = OrderedDict()
@@ -102,7 +102,7 @@ Read from an xls from memory
 Continue from previous example::
 
     >>> # This is just an illustration
-    >>> # In reality, you might deal with xl file upload
+    >>> # In reality, you might deal with xls file upload
     >>> # where you will read from requests.FILES['YOUR_XL_FILE']
     >>> book = XLBook(None, io.getvalue())
     >>> print(json.dumps(book.sheets()))
@@ -118,7 +118,7 @@ Import it in your file to enable this plugin::
 
 Please note only pyexcel version 0.0.4+ support this.
 
-Reading from an xl file
+Reading from an xls file
 ************************
 
 Here is the sample code::
@@ -140,7 +140,7 @@ Here is the sample code::
     | row 1 | row 2 | row 3 |
     +-------+-------+-------+
 
-Writing to an xl file
+Writing to an xls file
 **********************
 
 Here is the sample code::
@@ -153,7 +153,7 @@ Reading from a IO instance
 You got to wrap the binary content with stream to get xls working::
 
     >>> # This is just an illustration
-    >>> # In reality, you might deal with xl file upload
+    >>> # In reality, you might deal with xls file upload
     >>> # where you will read from requests.FILES['YOUR_XL_FILE']
     >>> xlfile = "another_file.xls"
     >>> with open(xlfile, "rb") as f:

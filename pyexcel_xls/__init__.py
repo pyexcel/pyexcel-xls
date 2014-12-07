@@ -56,7 +56,10 @@ class XLSheet(SheetReader):
     """
     def __init__(self, sheet):
         SheetReader.__init__(self, sheet)
-        self.name = sheet.name
+
+    @property
+    def name(self):
+        return self.native_sheet.name
 
     def number_of_rows(self):
         """
