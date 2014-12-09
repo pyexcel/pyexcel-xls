@@ -94,13 +94,13 @@ class XLBook(BookReader):
     def sheetIterator(self):
         return self.native_book.sheets()
 
-    def getSheet(self, native_sheet):
+    def getSheet(self, native_sheet, **keywords):
         return XLSheet(native_sheet)
 
-    def load_from_memory(self, file_content):
+    def load_from_memory(self, file_content, **keywords):
         return xlrd.open_workbook(None, file_contents=file_content)
 
-    def load_from_file(self, filename):
+    def load_from_file(self, filename, **keywords):
         return xlrd.open_workbook(filename)
 
 
