@@ -54,9 +54,6 @@ class XLSheet(SheetReader):
 
     Currently only support first sheet in the file
     """
-    def __init__(self, sheet):
-        SheetReader.__init__(self, sheet)
-
     @property
     def name(self):
         return self.native_sheet.name
@@ -141,7 +138,7 @@ class XLWriter(BookWriter):
     """
     xls, xlsx and xlsm writer
     """
-    def __init__(self, file):
+    def __init__(self, file, **keywords):
         BookWriter.__init__(self, file)
         self.wb = Workbook()
 
