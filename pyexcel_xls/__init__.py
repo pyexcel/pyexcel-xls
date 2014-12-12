@@ -91,13 +91,13 @@ class XLBook(BookReader):
     def sheetIterator(self):
         return self.native_book.sheets()
 
-    def getSheet(self, native_sheet, **keywords):
+    def getSheet(self, native_sheet):
         return XLSheet(native_sheet)
 
-    def load_from_memory(self, file_content, **keywords):
+    def load_from_memory(self, file_content):
         return xlrd.open_workbook(None, file_contents=file_content)
 
-    def load_from_file(self, filename, **keywords):
+    def load_from_file(self, filename):
         return xlrd.open_workbook(filename)
 
 
@@ -139,7 +139,7 @@ class XLWriter(BookWriter):
     xls, xlsx and xlsm writer
     """
     def __init__(self, file, **keywords):
-        BookWriter.__init__(self, file)
+        BookWriter.__init__(self, file, **keywords)
         self.wb = Workbook()
 
     def create_sheet(self, name):
