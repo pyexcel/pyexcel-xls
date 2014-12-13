@@ -12,7 +12,7 @@ with open("README.rst", 'r') as readme:
 dependencies = [
     'xlrd',
     'xlwt-future',
-    'pyexcel-io'
+    'pyexcel-io>=0.0.2'
 ]
 if sys.version_info[0] == 2 and sys.version_info[1] < 7:
     dependencies.append('ordereddict')
@@ -20,7 +20,7 @@ if sys.version_info[0] == 2 and sys.version_info[1] < 7:
 setup(
     name='pyexcel-xls',
     author="C. W.",
-    version='0.0.1',
+    version='0.0.2',
     author_email="wangc_2011@hotmail.com",
     url="https://github.com/chfw/pyexcel-xls",
     description='A wrapper library to read, manipulate and write data in xls format. It reads xlsx and xlsm format',
