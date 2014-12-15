@@ -117,7 +117,9 @@ class XLSheetWriter(SheetWriter):
             value = array[i]
             style = None
             tmp_array = []
-            if isinstance(value, datetime.date) or isinstance(value, datetime.datetime):
+            is_date_type = (isinstance(value, datetime.date) or
+                            isinstance(value, datetime.datetime))
+            if is_date_type:
                 tmp_array = [value.year, value.month, value.day]
                 value = xlrd.xldate.xldate_from_date_tuple(tmp_array, 0)
                 style = XFStyle()
@@ -167,4 +169,4 @@ except:
     # to allow this module to function independently
     pass
 
-__VERSION__ = "0.0.1"
+__VERSION__ = "0.0.3"
