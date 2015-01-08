@@ -1,3 +1,9 @@
+"""
+
+  This file keeps all fixes for issues found
+
+"""
+
 import os
 import pyexcel as pe
 import pyexcel.ext.xls
