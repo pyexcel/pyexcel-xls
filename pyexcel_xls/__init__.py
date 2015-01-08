@@ -45,6 +45,15 @@ def xldate_to_python_date(value):
         ret = datetime.date(date_tuple[0],
                             date_tuple[1],
                             date_tuple[2])
+    else:
+        ret = datetime.datetime(
+            date_tuple[0],
+            date_tuple[1],
+            date_tuple[2],
+            date_tuple[3],
+            date_tuple[4],
+            date_tuple[5]
+        )
     return ret
 
 
