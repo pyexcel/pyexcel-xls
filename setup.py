@@ -30,6 +30,7 @@ setup(
     long_description=README_txt,
     zip_safe=False,
     tests_require=['nose'],
+    keywords=['excel', 'xls', 'xlsx'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Topic :: Office/Business',
