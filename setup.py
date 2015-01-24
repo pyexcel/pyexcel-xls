@@ -31,6 +31,7 @@ setup(
     zip_safe=False,
     tests_require=['nose'],
     keywords=['excel', 'xls', 'xlsx'],
+    license='GNU GPLv3',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Topic :: Office/Business',
