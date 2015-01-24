@@ -193,6 +193,12 @@ You need to pass a StringIO instance to Writer::
     >>> # object for downloading
 
 
+Known Issues
+=============
+
+* If a zero was typed in a DATE formatted field in xls, you will get "01/01/1900".
+* If a zero was typed in a TIME formatted field in xls, you will get "00:00:00".
+
 Dependencies
 ============
 

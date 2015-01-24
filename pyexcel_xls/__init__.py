@@ -18,6 +18,11 @@ else:
     from collections import OrderedDict
 
 
+DEFAULT_DATE_FORMAT = "DD/MM/YY"
+DEFAULT_TIME_FORMAT = "HH:MM:SS"
+DEFAULT_DATETIME_FORMAT = "%s %s" % (DEFAULT_DATE_FORMAT, DEFAULT_TIME_FORMAT)
+
+
 XLS_FORMAT_CONVERSION = {
     xlrd.XL_CELL_TEXT: str,
     xlrd.XL_CELL_EMPTY: None,
@@ -65,6 +70,7 @@ class XLSheet(SheetReader):
     """
     @property
     def name(self):
+        """This is required by :class:`SheetReader`"""
         return self.native_sheet.name
 
     def number_of_rows(self):
@@ -98,15 +104,19 @@ class XLBook(BookReader):
     It reads xls, xlsm, xlsx work book
     """
     def sheetIterator(self):
+        """Return iterable sheet array"""
         return self.native_book.sheets()
 
     def getSheet(self, native_sheet):
+        """Create a xls sheet"""
         return XLSheet(native_sheet)
 
     def load_from_memory(self, file_content):
+        """Provide the way to load xls from memory"""
         return xlrd.open_workbook(None, file_contents=file_content)
 
     def load_from_file(self, filename):
+        """Provide the way to load xls from a file"""
         return xlrd.open_workbook(filename)
 
 
@@ -115,6 +125,8 @@ class XLSheetWriter(SheetWriter):
     xls, xlsx and xlsm sheet writer
     """
     def set_sheet_name(self, name):
+        """Create a sheet
+        """
         self.native_sheet = self.native_book.add_sheet(name)
         self.current_row = 0
 
@@ -127,22 +139,23 @@ class XLSheetWriter(SheetWriter):
             style = None
             tmp_array = []
             if isinstance(value, datetime.datetime):
-                tmp_array = [value.year, value.month, value.day,
-                             value.hour, value.minute, value.second
+                tmp_array = [
+                    value.year, value.month, value.day,
+                    value.hour, value.minute, value.second
                 ]
                 value = xlrd.xldate.xldate_from_datetime_tuple(tmp_array, 0)
                 style = XFStyle()
-                style.num_format_str = "DD/MM/YY HH:MM:SS"
+                style.num_format_str = DEFAULT_DATETIME_FORMAT
             elif isinstance(value, datetime.date):
                 tmp_array = [value.year, value.month, value.day]
                 value = xlrd.xldate.xldate_from_date_tuple(tmp_array, 0)
                 style = XFStyle()
-                style.num_format_str = "DD/MM/YY"
+                style.num_format_str = DEFAULT_DATE_FORMAT
             elif isinstance(value, datetime.time):
                 tmp_array = [value.hour, value.minute, value.second]
                 value = xlrd.xldate.xldate_from_time_tuple(tmp_array)
                 style = XFStyle()
-                style.num_format_str = "HH:MM:SS"
+                style.num_format_str = DEFAULT_TIME_FORMAT
             if style:
                 self.native_sheet.write(self.current_row, i, value, style)
             else:
@@ -155,10 +168,12 @@ class XLWriter(BookWriter):
     xls, xlsx and xlsm writer
     """
     def __init__(self, file, **keywords):
+        """Initialize a xlwt work book"""
         BookWriter.__init__(self, file, **keywords)
         self.wb = Workbook()
 
     def create_sheet(self, name):
+        """Create a xlwt writer"""
         return XLSheetWriter(self.wb, None, name)
 
     def close(self):
@@ -183,4 +198,4 @@ except:
     # to allow this module to function independently
     pass
 
-__VERSION__ = "0.0.3"
+__VERSION__ = "0.0.4"
