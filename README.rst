@@ -8,6 +8,9 @@ pyexcel-xls
 .. image:: https://coveralls.io/repos/chfw/pyexcel-xls/badge.png?branch=master 
     :target: https://coveralls.io/r/chfw/pyexcel-xls?branch=master 
 
+.. image:: https://pypip.in/version/pyexcel/badge.png
+    :target: https://pypi.python.org/pypi/pyexcel
+
 .. image:: https://pypip.in/d/pyexcel-xls/badge.png
     :target: https://pypi.python.org/pypi/pyexcel-xls
 

@@ -198,4 +198,4 @@ except:
     # to allow this module to function independently
     pass
 
-__VERSION__ = "0.0.4"
+__VERSION__ = "0.0.5"
