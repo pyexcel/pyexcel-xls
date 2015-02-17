@@ -103,21 +103,38 @@ class XLBook(BookReader):
 
     It reads xls, xlsm, xlsx work book
     """
+    def __init__(self, filename, file_content=None, sheetname=None, **keywords):
+        BookReader.__init__(self, filename, file_content=file_content, sheetname=sheetname, **keywords)
+        self.native_book.release_resources()
+        
     def sheetIterator(self):
         """Return iterable sheet array"""
-        return self.native_book.sheets()
+        
+        if self.sheet_name is not None:
+            return [self.native_book.sheet_by_name(self.sheet_name)]
+        elif self.sheet_index is not None:
+            return [self.native_book.sheet_by_index(self.sheet_index)]
+        else:
+            return self.native_book.sheets()
 
     def getSheet(self, native_sheet):
         """Create a xls sheet"""
         return XLSheet(native_sheet)
 
-    def load_from_memory(self, file_content):
+    def load_from_memory(self, file_content, **keywords):
         """Provide the way to load xls from memory"""
-        return xlrd.open_workbook(None, file_contents=file_content)
+        on_demand = False
+        if self.sheet_name is not None or self.sheet_index is not None:
+            on_demand = True
+        return xlrd.open_workbook(None, file_contents=file_content,
+                                      on_demand=on_demand)
 
-    def load_from_file(self, filename):
+    def load_from_file(self, filename, **keywords):
         """Provide the way to load xls from a file"""
-        return xlrd.open_workbook(filename)
+        on_demand = False
+        if self.sheet_name is not None or self.sheet_index is not None:
+            on_demand = True
+        return xlrd.open_workbook(filename, on_demand=on_demand)
 
 
 class XLSheetWriter(SheetWriter):
@@ -198,4 +215,4 @@ except:
     # to allow this module to function independently
     pass
 
-__VERSION__ = "0.0.5"
+__VERSION__ = "0.0.6"
