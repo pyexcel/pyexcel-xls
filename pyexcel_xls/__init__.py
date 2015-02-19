@@ -107,7 +107,7 @@ class XLBook(BookReader):
         BookReader.__init__(self, filename, file_content=file_content, sheetname=sheetname, **keywords)
         self.native_book.release_resources()
         
-    def sheetIterator(self):
+    def sheet_iterator(self):
         """Return iterable sheet array"""
         
         if self.sheet_name is not None:
@@ -121,7 +121,7 @@ class XLBook(BookReader):
         else:
             return self.native_book.sheets()
 
-    def getSheet(self, native_sheet):
+    def get_sheet(self, native_sheet):
         """Create a xls sheet"""
         return XLSheet(native_sheet)
 
