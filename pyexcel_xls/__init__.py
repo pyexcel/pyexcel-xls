@@ -111,7 +111,11 @@ class XLBook(BookReader):
         """Return iterable sheet array"""
         
         if self.sheet_name is not None:
-            return [self.native_book.sheet_by_name(self.sheet_name)]
+            try:
+                sheet = self.native_book.sheet_by_name(self.sheet_name)
+                return [sheet]
+            except xlrd.XLRDError:
+                raise ValueError("%s cannot be found" % self.sheet_name)
         elif self.sheet_index is not None:
             return [self.native_book.sheet_by_index(self.sheet_index)]
         else:
