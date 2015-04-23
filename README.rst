@@ -138,7 +138,7 @@ Here is the sample code::
     >>> from pyexcel.ext import xls
     
     # "example.xls"
-    >>> sheet = pe.load_book("your_file.xls")
+    >>> sheet = pe.get_book(file_name="your_file.xls")
     >>> sheet
     Sheet Name: Sheet 1
     +---+---+---+
@@ -169,7 +169,7 @@ You got to wrap the binary content with stream to get xls working::
     >>> xlfile = "another_file.xls"
     >>> with open(xlfile, "rb") as f:
     ...     content = f.read()
-    ...     r = pe.load_book_from_memory("xls", content)
+    ...     r = pe.get_book(file_type="xls", content=content)
     ...     print(r)
     ...
     Sheet Name: Sheet 1
