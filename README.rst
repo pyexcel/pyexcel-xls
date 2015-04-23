@@ -8,8 +8,8 @@ pyexcel-xls - Let you focus on data, instead of xls format
 .. image:: https://coveralls.io/repos/chfw/pyexcel-xls/badge.png?branch=master 
     :target: https://coveralls.io/r/chfw/pyexcel-xls?branch=master 
 
-.. image:: https://pypip.in/version/pyexcel/badge.png
-    :target: https://pypi.python.org/pypi/pyexcel
+.. image:: https://pypip.in/version/pyexcel-xls/badge.png
+    :target: https://pypi.python.org/pypi/pyexcel-xls
 
 .. image:: https://pypip.in/d/pyexcel-xls/badge.png
     :target: https://pypi.python.org/pypi/pyexcel-xls
@@ -200,6 +200,10 @@ You need to pass a StringIO instance to Writer::
     >>> # In reality, you might give it to your http response
     >>> # object for downloading
 
+License
+=========
+
+New BSD License
 
 Known Issues
 =============
