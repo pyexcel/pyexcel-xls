@@ -1,5 +1,5 @@
 """
-    pyexcel.ext.xls
+    pyexcel_xls
     ~~~~~~~~~~~~~~~~~~~
 
     The lower level xls/xlsm file format handler using xlrd/xlwt
@@ -11,7 +11,14 @@ import sys
 import datetime
 import xlrd
 from xlwt import Workbook, XFStyle
-from pyexcel_io import SheetReader, BookReader, SheetWriter, BookWriter
+from pyexcel_io import (
+    SheetReader,
+    BookReader,
+    SheetWriter,
+    BookWriter,
+    READERS,
+    WRITERS
+)
 if sys.version_info[0] == 2 and sys.version_info[1] < 7:
     from ordereddict import OrderedDict
 else:
@@ -203,20 +210,15 @@ class XLWriter(BookWriter):
         """
         self.wb.save(self.file)
 
-try:
-    from pyexcel.io import READERS
-    from pyexcel.io import WRITERS
 
-    READERS.update({
-        "xls": XLBook,
-        "xlsm": XLBook,
-        "xlsx": XLBook
-    })
-    WRITERS.update({
-        "xls": XLWriter
-    })
-except:
-    # to allow this module to function independently
-    pass
+READERS.update({
+    "xls": XLBook,
+    "xlsm": XLBook,
+    "xlsx": XLBook
+})
+WRITERS.update({
+    "xls": XLWriter
+})
 
-__VERSION__ = "0.0.6"
+
+__VERSION__ = "0.0.7"
