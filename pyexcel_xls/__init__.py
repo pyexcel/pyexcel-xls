@@ -17,12 +17,12 @@ from pyexcel_io import (
     SheetWriter,
     BookWriter,
     READERS,
-    WRITERS
+    WRITERS,
+    isstream,
+    load_data as read_data,
+    store_data as write_data
 )
-if sys.version_info[0] == 2 and sys.version_info[1] < 7:
-    from ordereddict import OrderedDict
-else:
-    from collections import OrderedDict
+PY2 = sys.version_info[0] == 2
 
 
 DEFAULT_DATE_FORMAT = "DD/MM/YY"
@@ -137,7 +137,7 @@ class XLBook(BookReader):
         on_demand = False
         if self.sheet_name is not None or self.sheet_index is not None:
             on_demand = True
-        return xlrd.open_workbook(None, file_contents=file_content,
+        return xlrd.open_workbook(None, file_contents=file_content.getvalue(),
                                       on_demand=on_demand)
 
     def load_from_file(self, filename, **keywords):
@@ -219,6 +219,30 @@ READERS.update({
 WRITERS.update({
     "xls": XLWriter
 })
+
+
+def is_string(atype):
+    """find out if a type is str or not"""
+    if atype == str:
+            return True
+    elif PY2:
+        if atype == unicode:
+            return True
+        elif atype == str:
+            return True
+    return False
+
+
+def store_data(afile, data, file_type=None, **keywords):
+    if isstream(afile) and file_type is None:
+        file_type='xls'
+    write_data(afile, data, file_type=file_type, **keywords)
+
+
+def load_data(afile, file_type=None, **keywords):
+    if isstream(afile) and file_type is None:
+        file_type='xls'
+    return read_data(afile, file_type=file_type, **keywords)
 
 
 __VERSION__ = "0.0.7"
