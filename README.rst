@@ -93,7 +93,7 @@ Here's the sample code to write a dictionary to an xls file::
     >>> data.update({"Sheet 1": [[1, 2, 3], [4, 5, 6]]})
     >>> data.update({"Sheet 2": [[7, 8, 9], [10, 11, 12]]})
     >>> io = StringIO()
-    >>> writer = store_data(io, data)
+    >>> store_data(io, data)
     >>> # do something with the io
     >>> # In reality, you might give it to your http response
     >>> # object for downloading
@@ -128,8 +128,6 @@ Here is the sample code::
 
     >>> import pyexcel as pe
     >>> from pyexcel.ext import xls
-    
-    # "example.xls"
     >>> sheet = pe.get_book(file_name="your_file.xls")
     >>> sheet
     Sheet Name: Sheet 1
@@ -157,9 +155,9 @@ You got to wrap the binary content with stream to get xls working::
 
     >>> # This is just an illustration
     >>> # In reality, you might deal with xls file upload
-    >>> # where you will read from requests.FILES['YOUR_XL_FILE']
-    >>> xlfile = "another_file.xls"
-    >>> with open(xlfile, "rb") as f:
+    >>> # where you will read from requests.FILES['YOUR_XLS_FILE']
+    >>> xlsfile = "another_file.xls"
+    >>> with open(xlsfile, "rb") as f:
     ...     content = f.read()
     ...     r = pe.get_book(file_type="xls", file_content=content)
     ...     print(r)
@@ -208,7 +206,7 @@ Dependencies
 
 1. xlrd
 2. xlwt-future
-
+3. pyexcel-io >= 0.0.4
 
 .. testcode::
    :hide:
