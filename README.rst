@@ -66,19 +66,19 @@ Write to an xls file
 
 Here's the sample code to write a dictionary to an xls file::
 
-    >>> from pyexcel_xls import store_data
+    >>> from pyexcel_xls import save_data
     >>> data = OrderedDict() # from collections import OrderedDict
     >>> data.update({"Sheet 1": [[1, 2, 3], [4, 5, 6]]})
     >>> data.update({"Sheet 2": [["row 1", "row 2", "row 3"]]})
-    >>> store_data("your_file.xls", data)
+    >>> save_data("your_file.xls", data)
 
 Read from an xls file
 **********************
 
 Here's the sample code::
 
-    >>> from pyexcel_xls import load_data
-    >>> data = load_data("your_file.xls")
+    >>> from pyexcel_xls import get_data
+    >>> data = get_data("your_file.xls")
     >>> import json
     >>> print(json.dumps(data))
     {"Sheet 1": [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]], "Sheet 2": [["row 1", "row 2", "row 3"]]}
@@ -88,7 +88,7 @@ Write an xls to memory
 
 Here's the sample code to write a dictionary to an xls file::
 
-    >>> from pyexcel_xls import store_data
+    >>> from pyexcel_xls import save_data
     >>> data = OrderedDict()
     >>> data.update({"Sheet 1": [[1, 2, 3], [4, 5, 6]]})
     >>> data.update({"Sheet 2": [[7, 8, 9], [10, 11, 12]]})
@@ -107,7 +107,7 @@ Continue from previous example::
     >>> # This is just an illustration
     >>> # In reality, you might deal with xls file upload
     >>> # where you will read from requests.FILES['YOUR_XL_FILE']
-    >>> data = load_data(io)
+    >>> data = get_data(io)
     >>> print(json.dumps(data))
     {"Sheet 1": [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]], "Sheet 2": [[7.0, 8.0, 9.0], [10.0, 11.0, 12.0]]}
 
