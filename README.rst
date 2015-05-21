@@ -93,7 +93,7 @@ Here's the sample code to write a dictionary to an xls file::
     >>> data.update({"Sheet 1": [[1, 2, 3], [4, 5, 6]]})
     >>> data.update({"Sheet 2": [[7, 8, 9], [10, 11, 12]]})
     >>> io = StringIO()
-    >>> store_data(io, data)
+    >>> save_data(io, data)
     >>> # do something with the io
     >>> # In reality, you might give it to your http response
     >>> # object for downloading
