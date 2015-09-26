@@ -19,7 +19,6 @@ from pyexcel_io import (
     READERS,
     WRITERS,
     isstream,
-    is_string,
     load_data as read_data,
     store_data as write_data
 )
@@ -111,13 +110,16 @@ class XLBook(BookReader):
 
     It reads xls, xlsm, xlsx work book
     """
-    def __init__(self, filename, file_content=None, sheetname=None, **keywords):
-        BookReader.__init__(self, filename, file_content=file_content, sheetname=sheetname, **keywords)
+    def __init__(self, filename, file_content=None,
+                 sheetname=None, **keywords):
+        BookReader.__init__(self, filename,
+                            file_content=file_content,
+                            sheetname=sheetname, **keywords)
         self.native_book.release_resources()
-        
+
     def sheet_iterator(self):
         """Return iterable sheet array"""
-        
+
         if self.sheet_name is not None:
             try:
                 sheet = self.native_book.sheet_by_name(self.sheet_name)
@@ -139,7 +141,7 @@ class XLBook(BookReader):
         if self.sheet_name is not None or self.sheet_index is not None:
             on_demand = True
         return xlrd.open_workbook(None, file_contents=file_content.getvalue(),
-                                      on_demand=on_demand)
+                                  on_demand=on_demand)
 
     def load_from_file(self, filename, **keywords):
         """Provide the way to load xls from a file"""
@@ -226,13 +228,13 @@ WRITERS.update({
 
 def get_data(afile, file_type=None, **keywords):
     if isstream(afile) and file_type is None:
-        file_type='xls'
+        file_type = 'xls'
     return read_data(afile, file_type=file_type, **keywords)
 
 
 def save_data(afile, data, file_type=None, **keywords):
     if isstream(afile) and file_type is None:
-        file_type='xls'
+        file_type = 'xls'
     write_data(afile, data, file_type=file_type, **keywords)
 
 

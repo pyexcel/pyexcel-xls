@@ -8,21 +8,6 @@ pyexcel-xls - Let you focus on data, instead of xls format
 .. image:: https://coveralls.io/repos/chfw/pyexcel-xls/badge.png?branch=master 
     :target: https://coveralls.io/r/chfw/pyexcel-xls?branch=master 
 
-.. image:: https://pypip.in/version/pyexcel-xls/badge.png
-    :target: https://pypi.python.org/pypi/pyexcel-xls
-
-.. image:: https://pypip.in/d/pyexcel-xls/badge.png
-    :target: https://pypi.python.org/pypi/pyexcel-xls
-
-.. image:: https://pypip.in/py_versions/pyexcel-xls/badge.png
-    :target: https://pypi.python.org/pypi/pyexcel-xls
-
-.. image:: https://pypip.in/implementation/pyexcel-xls/badge.png
-    :target: https://pypi.python.org/pypi/pyexcel-xls
-
-.. image:: http://img.shields.io/gittip/chfw.svg
-    :target: https://gratipay.com/chfw/
-
 **pyexcel-xls** is a tiny wrapper library to read, manipulate and write data in xls format and it can read xlsx and xlsm fromat. You are likely to use it with `pyexcel <https://github.com/chfw/pyexcel>`_. 
 
 Known constraints
