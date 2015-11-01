@@ -36,9 +36,7 @@ class TestAddBooks:
         3,3,3,3
         """
         self.rows = 3
-        w = pyexcel.BookWriter(file)
-        w.write_book_from_dict(self.content)
-        w.close()
+        pyexcel.save_book_as(bookdict=self.content,dest_file_name=file)
 
     def setUp(self):
         self.testfile = "multiple1.xls"
