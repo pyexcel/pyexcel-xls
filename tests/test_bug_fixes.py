@@ -25,7 +25,7 @@ class TestBugFix:
     def test_pyexcel_xls_issue_2(self):
         data = OrderedDict()
         array = []
-        for i in xrange(4100):
+        for i in range(4100):
             array.append([datetime.datetime.now()])
         data.update({"test": array})
         s = xls.save_data("test.xls", data)
