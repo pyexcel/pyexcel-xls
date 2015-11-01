@@ -18,12 +18,14 @@ Fonts, colors and charts are not supported.
 Installation
 ============
 
-You can install it via pip::
+You can install it via pip:
 
-    $ pip install pyexcel-xls
+.. code-block:: bash
 
 
-or clone it and install it::
+or clone it and install it:
+
+.. code-block:: bash
 
     $ git clone http://github.com/chfw/pyexcel-xls.git
     $ cd pyexcel-xls
@@ -49,7 +51,9 @@ Write to an xls file
     >>> from pyexcel_io import OrderedDict
 
 
-Here's the sample code to write a dictionary to an xls file::
+Here's the sample code to write a dictionary to an xls file:
+
+.. code-block:: python
 
     >>> from pyexcel_xls import save_data
     >>> data = OrderedDict() # from collections import OrderedDict
@@ -60,7 +64,9 @@ Here's the sample code to write a dictionary to an xls file::
 Read from an xls file
 **********************
 
-Here's the sample code::
+Here's the sample code:
+
+.. code-block:: python
 
     >>> from pyexcel_xls import get_data
     >>> data = get_data("your_file.xls")
@@ -71,7 +77,9 @@ Here's the sample code::
 Write an xls to memory
 **********************
 
-Here's the sample code to write a dictionary to an xls file::
+Here's the sample code to write a dictionary to an xls file:
+
+.. code-block:: python
 
     >>> from pyexcel_xls import save_data
     >>> data = OrderedDict()
@@ -87,7 +95,9 @@ Here's the sample code to write a dictionary to an xls file::
 Read from an xls from memory
 *****************************
 
-Continue from previous example::
+Continue from previous example:
+
+.. code-block:: python
 
     >>> # This is just an illustration
     >>> # In reality, you might deal with xls file upload
@@ -100,7 +110,9 @@ Continue from previous example::
 As a pyexcel plugin
 --------------------
 
-Import it in your file to enable this plugin::
+Import it in your file to enable this plugin:
+
+.. code-block:: python
 
     from pyexcel.ext import xls
 
@@ -109,7 +121,9 @@ Please note only pyexcel version 0.0.4+ support this.
 Reading from an xls file
 ************************
 
-Here is the sample code::
+Here is the sample code:
+
+.. code-block:: python
 
     >>> import pyexcel as pe
     >>> from pyexcel.ext import xls
@@ -129,14 +143,18 @@ Here is the sample code::
 Writing to an xls file
 **********************
 
-Here is the sample code::
+Here is the sample code:
+
+.. code-block:: python
 
     >>> sheet.save_as("another_file.xls")
 
 Reading from a IO instance
 ================================
 
-You got to wrap the binary content with stream to get xls working::
+You got to wrap the binary content with stream to get xls working:
+
+.. code-block:: python
 
     >>> # This is just an illustration
     >>> # In reality, you might deal with xls file upload
@@ -162,7 +180,9 @@ You got to wrap the binary content with stream to get xls working::
 Writing to a StringIO instance
 ================================
 
-You need to pass a StringIO instance to Writer::
+You need to pass a StringIO instance to Writer:
+
+.. code-block:: python
 
     >>> data = [
     ...     [1, 2, 3],
