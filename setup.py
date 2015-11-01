@@ -20,7 +20,7 @@ if sys.version_info[0] == 2 and sys.version_info[1] < 7:
 setup(
     name='pyexcel-xls',
     author="C. W.",
-    version='0.0.7',
+    version='0.0.8',
     author_email="wangc_2011@hotmail.com",
     url="https://github.com/chfw/pyexcel-xls",
     description='A wrapper library to read, manipulate and write data in xls format. It reads xlsx and xlsm format',

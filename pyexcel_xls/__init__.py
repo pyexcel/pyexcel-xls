@@ -238,4 +238,4 @@ def save_data(afile, data, file_type=None, **keywords):
     write_data(afile, data, file_type=file_type, **keywords)
 
 
-__VERSION__ = "0.0.7"
+__VERSION__ = "0.0.8"
