@@ -201,7 +201,7 @@ class XLWriter(BookWriter):
     def __init__(self, file, **keywords):
         """Initialize a xlwt work book"""
         BookWriter.__init__(self, file, **keywords)
-        self.wb = Workbook()
+        self.wb = Workbook(style_compression=2)
 
     def create_sheet(self, name):
         """Create a xlwt writer"""
