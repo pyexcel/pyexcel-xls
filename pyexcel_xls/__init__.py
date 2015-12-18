@@ -198,10 +198,20 @@ class XLWriter(BookWriter):
     """
     xls, xlsx and xlsm writer
     """
-    def __init__(self, file, **keywords):
-        """Initialize a xlwt work book"""
+    def __init__(self, file, encoding='ascii',
+                 style_compression=2, **keywords):
+        """Initialize a xlwt work book
+
+
+        :param encoding: content encoding, defaults to 'ascii'
+        :param style_compression: undocumented, but 2 is magically
+                                  better
+        reference: `style_compression <https://groups.google.com/
+        forum/#!topic/python-excel/tUZkMRi8ITw>`_
+        """
         BookWriter.__init__(self, file, **keywords)
-        self.wb = Workbook(style_compression=2)
+        self.wb = Workbook(style_compression=style_compression,
+                           encoding=encoding)
 
     def create_sheet(self, name):
         """Create a xlwt writer"""
