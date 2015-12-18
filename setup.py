@@ -9,18 +9,21 @@ import sys
 with open("README.rst", 'r') as readme:
     README_txt = readme.read()
 
-dependencies = [
-    'xlrd',
-    'xlwt-future',
-    'pyexcel-io>=0.0.4'
-]
+with open("requirements.txt", 'r') as requirements_txt:
+    lines = requirements_txt.readlines()
+    lines = map(lambda x: x.rstrip(), lines)
+    dependencies = lines
+
+with open("VERSION", "r") as version:
+    version_txt = version.read().rstrip()
+
 if sys.version_info[0] == 2 and sys.version_info[1] < 7:
     dependencies.append('ordereddict')
 
 setup(
     name='pyexcel-xls',
     author="C. W.",
-    version='0.0.8',
+    version=version_txt,
     author_email="wangc_2011@hotmail.com",
     url="https://github.com/chfw/pyexcel-xls",
     description='A wrapper library to read, manipulate and write data in xls format. It reads xlsx and xlsm format',
