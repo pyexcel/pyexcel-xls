@@ -1,3 +1,3 @@
-pyexcel-iO==0.1.0i-rc1
+pyexcel-io==0.1.0-rc1
 xlrd
 xlwt-future
