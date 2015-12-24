@@ -10,7 +10,7 @@ with open("README.rst", 'r') as readme:
     README_txt = readme.read()
 
 dependencies = [
-    'pyexcel-io>=0.1.0',
+    'pyexcel-io==0.1.0-rc1',
     'xlrd',
     'xlwt-future'
 ]
