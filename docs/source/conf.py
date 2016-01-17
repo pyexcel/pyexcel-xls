@@ -52,7 +52,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'pyexcel-xls'
-copyright = u'2015, C.W.'
+copyright = u'2015-2016, Onni Software Ltd.'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
