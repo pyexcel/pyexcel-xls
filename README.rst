@@ -22,6 +22,7 @@ You can install it via pip:
 
 .. code-block:: bash
 
+    $ pip install pyexcel-xls
 
 or clone it and install it:
 

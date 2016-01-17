@@ -29,3 +29,4 @@ class TestBugFix:
             array.append([datetime.datetime.now()])
         data.update({"test": array})
         s = xls.save_data("test.xls", data)
+        os.unlink("test.xls")

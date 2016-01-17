@@ -4,7 +4,7 @@
 
     The lower level xls/xlsm file format handler using xlrd/xlwt
 
-    :copyright: (c) 2015 by Onni Software Ltd
+    :copyright: (c) 2015-2016 by Onni Software Ltd
     :license: New BSD License
 """
 import sys
@@ -19,7 +19,7 @@ from pyexcel_io import (
     READERS,
     WRITERS,
     isstream,
-    load_data as read_data,
+    get_data as read_data,
     store_data as write_data
 )
 PY2 = sys.version_info[0] == 2
@@ -198,10 +198,20 @@ class XLWriter(BookWriter):
     """
     xls, xlsx and xlsm writer
     """
-    def __init__(self, file, **keywords):
-        """Initialize a xlwt work book"""
+    def __init__(self, file, encoding='ascii',
+                 style_compression=2, **keywords):
+        """Initialize a xlwt work book
+
+
+        :param encoding: content encoding, defaults to 'ascii'
+        :param style_compression: undocumented, but 2 is magically
+                                  better
+        reference: `style_compression <https://groups.google.com/
+        forum/#!topic/python-excel/tUZkMRi8ITw>`_
+        """
         BookWriter.__init__(self, file, **keywords)
-        self.wb = Workbook(style_compression=2)
+        self.wb = Workbook(style_compression=style_compression,
+                           encoding=encoding)
 
     def create_sheet(self, name):
         """Create a xlwt writer"""

@@ -16,6 +16,8 @@ class TestNativeXLWriter:
         writer.close()
         reader = xls.XLBook(self.testfile)
         content = reader.sheets()
+        for key in content.keys():
+            content[key] = list(content[key])
         assert content == self.content
 
     def tearDown(self):
