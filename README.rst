@@ -2,13 +2,13 @@
 pyexcel-xls - Let you focus on data, instead of xls format
 =============================================================
 
-.. image:: https://api.travis-ci.org/chfw/pyexcel-xls.png
-    :target: http://travis-ci.org/chfw/pyexcel-xls
+.. image:: https://api.travis-ci.org/pyexcel/pyexcel-xls.png
+    :target: http://travis-ci.org/pyexcel/pyexcel-xls
 
-.. image:: https://coveralls.io/repos/chfw/pyexcel-xls/badge.png?branch=master 
-    :target: https://coveralls.io/r/chfw/pyexcel-xls?branch=master 
+.. image:: https://codecov.io/github/pyexcel/pyexcel-xls/coverage.png
+    :target: https://codecov.io/github/pyexcel/pyexcel-xls
 
-**pyexcel-xls** is a tiny wrapper library to read, manipulate and write data in xls format and it can read xlsx and xlsm fromat. You are likely to use it with `pyexcel <https://github.com/chfw/pyexcel>`_. 
+**pyexcel-xls** is a tiny wrapper library to read, manipulate and write data in xls format and it can read xlsx and xlsm fromat. You are likely to use it with `pyexcel <https://github.com/pyexcel/pyexcel>`_. 
 
 Known constraints
 ==================
@@ -27,7 +27,7 @@ or clone it and install it:
 
 .. code-block:: bash
 
-    $ git clone http://github.com/chfw/pyexcel-xls.git
+    $ git clone http://github.com/pyexcel/pyexcel-xls.git
     $ cd pyexcel-xls
     $ python setup.py install
 
