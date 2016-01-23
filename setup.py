@@ -4,7 +4,6 @@ except ImportError:
     from ez_setup import use_setuptools
     use_setuptools()
     from setuptools import setup, find_packages
-import sys
 
 with open("README.rst", 'r') as readme:
     README_txt = readme.read()
@@ -12,38 +11,43 @@ with open("README.rst", 'r') as readme:
 dependencies = [
     'pyexcel-io>=0.1.0',
     'xlrd',
-    'xlwt-future'
+    'xlwt-future',
 ]
 
-with open("VERSION", "r") as version:
-    version_txt = version.read().rstrip()
+extra_dependencies = {}
 
-if sys.version_info[0] == 2 and sys.version_info[1] < 7:
-    dependencies.append('ordereddict')
 
 setup(
     name='pyexcel-xls',
-    author="C. W.",
-    version=version_txt,
-    author_email="wangc_2011@hotmail.com",
-    url="https://github.com/chfw/pyexcel-xls",
+    author='C. W.',
+    version='0.1.0',
+    author_email='wangc_2011 (at) hotmail.com',
+    url='https://github.com/pyexcel/pyexcel-xls',
     description='A wrapper library to read, manipulate and write data in xls format. It reads xlsx and xlsm format',
     install_requires=dependencies,
+    extras_require=extras,
     packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
     include_package_data=True,
     long_description=README_txt,
     zip_safe=False,
     tests_require=['nose'],
-    keywords=['excel', 'xls', 'xlsx'],
-    license='GNU GPLv3',
+    keywords=[
+        'excel',
+        'python',
+        'pyexcel',
+        'xls',
+        'xlsx',
+        'xlsm'
+    ],
+    license='New BSD',
     classifiers=[
-        'Development Status :: 3 - Alpha',
         'Topic :: Office/Business',
         'Topic :: Utilities',
         'Topic :: Software Development :: Libraries',
         'Programming Language :: Python',
         'License :: OSI Approved :: BSD License',
         'Intended Audience :: Developers',
+        'Development Status :: 3 - Alpha',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.3',

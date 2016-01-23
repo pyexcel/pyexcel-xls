@@ -1,6 +1,6 @@
-=============================================================
+================================================================================
 pyexcel-xls - Let you focus on data, instead of xls format
-=============================================================
+================================================================================
 
 .. image:: https://api.travis-ci.org/pyexcel/pyexcel-xls.png
     :target: http://travis-ci.org/pyexcel/pyexcel-xls
@@ -11,12 +11,12 @@ pyexcel-xls - Let you focus on data, instead of xls format
 **pyexcel-xls** is a tiny wrapper library to read, manipulate and write data in xls format and it can read xlsx and xlsm fromat. You are likely to use it with `pyexcel <https://github.com/pyexcel/pyexcel>`_. 
 
 Known constraints
-==================
+================================================================================
 
 Fonts, colors and charts are not supported. 
 
 Installation
-============
+================================================================================
 
 You can install it via pip:
 
@@ -33,20 +33,21 @@ or clone it and install it:
     $ python setup.py install
 
 Usage
-=====
+================================================================================
 
 New feature
------------------
+--------------------------------------------------------------------------------
+
 
 1. Passing "streaming=True" to get_data, you will get the two dimensional array as a generator
 2. Passing "data=your_generator" to save_data is acceptable too.
 
 
 As a standalone library
-------------------------
+--------------------------------------------------------------------------------
 
 Write to an xls file
-*********************
+********************************************************************************
 
 .. testcode::
    :hide:
@@ -70,7 +71,7 @@ Here's the sample code to write a dictionary to an xls file:
     >>> save_data("your_file.xls", data)
 
 Read from an xls file
-**********************
+********************************************************************************
 
 Here's the sample code:
 
@@ -83,7 +84,7 @@ Here's the sample code:
     {"Sheet 1": [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]], "Sheet 2": [["row 1", "row 2", "row 3"]]}
 
 Write an xls to memory
-**********************
+********************************************************************************
 
 Here's the sample code to write a dictionary to an xls file:
 
@@ -99,9 +100,10 @@ Here's the sample code to write a dictionary to an xls file:
     >>> # In reality, you might give it to your http response
     >>> # object for downloading
 
-    
+
+
 Read from an xls from memory
-*****************************
+********************************************************************************
 
 Continue from previous example:
 
@@ -109,14 +111,14 @@ Continue from previous example:
 
     >>> # This is just an illustration
     >>> # In reality, you might deal with xls file upload
-    >>> # where you will read from requests.FILES['YOUR_XL_FILE']
+    >>> # where you will read from requests.FILES['YOUR_XLS_FILE']
     >>> data = get_data(io)
     >>> print(json.dumps(data))
     {"Sheet 1": [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]], "Sheet 2": [[7.0, 8.0, 9.0], [10.0, 11.0, 12.0]]}
 
 
 As a pyexcel plugin
---------------------
+--------------------------------------------------------------------------------
 
 Import it in your file to enable this plugin:
 
@@ -127,7 +129,7 @@ Import it in your file to enable this plugin:
 Please note only pyexcel version 0.0.4+ support this.
 
 Reading from an xls file
-************************
+********************************************************************************
 
 Here is the sample code:
 
@@ -149,7 +151,7 @@ Here is the sample code:
     +-------+-------+-------+
 
 Writing to an xls file
-**********************
+********************************************************************************
 
 Here is the sample code:
 
@@ -158,7 +160,7 @@ Here is the sample code:
     >>> sheet.save_as("another_file.xls")
 
 Reading from a IO instance
-================================
+================================================================================
 
 You got to wrap the binary content with stream to get xls working:
 
@@ -186,7 +188,7 @@ You got to wrap the binary content with stream to get xls working:
 
 
 Writing to a StringIO instance
-================================
+================================================================================
 
 You need to pass a StringIO instance to Writer:
 
@@ -204,7 +206,7 @@ You need to pass a StringIO instance to Writer:
     >>> # object for downloading
 
 License
-=========
+================================================================================
 
 New BSD License
 
