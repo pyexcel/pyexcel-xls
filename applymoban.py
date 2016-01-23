@@ -11,5 +11,5 @@ system("moban -cd {0} -td {1} .moban.d -t setup.py -o setup.py -c moban.yaml".fo
 system("moban -cd {0} -td {1} .moban.d -t travis.yml -o .travis.yml -c moban.yaml".format(config_dir, template_dir))
 system("moban -cd {0} -td .moban.d -t requirements.txt -o requirements.txt -c moban.yaml".format(config_dir))
 system("moban -cd {0} -td {1} -t LICENSE.jj2 -o LICENSE -c moban.yaml".format(config_dir, template_dir))
-system("moban -cd {0} -td {1} -t tests/requirements.txt.jj2 -o tests/requirements.txt -c moban.yaml".format(config_dir, template_dir))
+system("moban -cd {0} -td {1} .moban.d -t tests/requirements.txt -o tests/requirements.txt -c moban.yaml".format(config_dir, template_dir))
 system("moban -cd {0} -td {1} .moban.d -t MANIFEST.in.jj2 -o MANIFEST.in -c moban.yaml".format(config_dir, template_dir))
