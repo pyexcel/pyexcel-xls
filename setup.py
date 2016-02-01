@@ -14,7 +14,7 @@ dependencies = [
     'xlwt-future',
 ]
 
-extra_dependencies = {}
+extras = {}
 
 
 setup(
