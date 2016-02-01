@@ -10,6 +10,13 @@ pyexcel-xls - Let you focus on data, instead of xls format
 
 **pyexcel-xls** is a tiny wrapper library to read, manipulate and write data in xls format and it can read xlsx and xlsm fromat. You are likely to use it with `pyexcel <https://github.com/pyexcel/pyexcel>`_. 
 
+Known constraints
+==================
+
+Fonts, colors and charts are not supported. 
+Installation
+================================================================================
+
 You can install it via pip:
 
 .. code-block:: bash
