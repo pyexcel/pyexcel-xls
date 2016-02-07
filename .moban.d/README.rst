@@ -10,11 +10,4 @@ Known Issues
 
 * If a zero was typed in a DATE formatted field in xls, you will get "01/01/1900".
 * If a zero was typed in a TIME formatted field in xls, you will get "00:00:00".
-
-Dependencies
-============
-
-1. xlrd
-2. xlwt-future
-3. pyexcel-io >= 0.0.4
 {%endblock%}
