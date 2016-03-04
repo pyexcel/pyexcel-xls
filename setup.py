@@ -19,8 +19,8 @@ extras = {}
 
 setup(
     name='pyexcel-xls',
-    author='C. W.',
-    version='0.1.0',
+    author='C.W.',
+    version='0.2.0',
     author_email='wangc_2011 (at) hotmail.com',
     url='https://github.com/pyexcel/pyexcel-xls',
     description='A wrapper library to read, manipulate and write data in xls format. It reads xlsx and xlsm format',

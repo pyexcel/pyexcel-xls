@@ -1,9 +1,9 @@
 configuration:
-  - configuration_dir: "commons/config"
-  - template_dir:
-    - "commons/templates"
-    - ".moban.d"
-  - configuration: pyexcel_xls.yaml
+  configuration_dir: "commons/config"
+  template_dir:
+  - "commons/templates"
+  - ".moban.d"
+  configuration: pyexcel_xls.yaml
 targets:
   - README.rst: README.rst
   - setup.py: setup.py

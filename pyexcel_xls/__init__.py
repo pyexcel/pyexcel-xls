@@ -16,8 +16,6 @@ from pyexcel_io import (
     BookReader,
     SheetWriter,
     BookWriter,
-    READERS,
-    WRITERS,
     isstream,
     get_data as read_data,
     store_data as write_data
@@ -224,18 +222,6 @@ class XLWriter(BookWriter):
         self.wb.save(self.file)
 
 
-READERS.update({
-    "xls": XLBook,
-    "xlsm": XLBook,
-    "xlsx": XLBook
-})
-
-
-WRITERS.update({
-    "xls": XLWriter
-})
-
-
 def get_data(afile, file_type=None, **keywords):
     if isstream(afile) and file_type is None:
         file_type = 'xls'
@@ -248,4 +234,8 @@ def save_data(afile, data, file_type=None, **keywords):
     write_data(afile, data, file_type=file_type, **keywords)
 
 
-__VERSION__ = "0.0.8"
+def extend_pyexcel(ReaderFactory, WriterFactory):
+    ReaderFactory.add_factory("xls", XLBook)
+    ReaderFactory.add_factory("xlsm", XLBook)
+    ReaderFactory.add_factory("xlsx", XLBook)
+    WriterFactory.add_factory("xls", XLWriter)
