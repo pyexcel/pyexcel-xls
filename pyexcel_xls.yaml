@@ -4,7 +4,7 @@ nick_name: xls
 version: 0.2.0
 file_type: xls
 dependencies:
-  - pyexcel-io>=0.1.0
+  - pyexcel-io>=0.2.0
   - xlrd
   - xlwt-future
 description: |
