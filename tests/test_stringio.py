@@ -1,7 +1,6 @@
 import os
 import sys
 import pyexcel
-from pyexcel.ext import xls
 if sys.version_info[0] < 3:
     from StringIO import StringIO
 else:
@@ -11,7 +10,7 @@ from base import create_sample_file1
 
 class TestStringIO:
 
-    def test_ods_stringio(self):
+    def test_xlss_stringio(self):
         odsfile = "cute.xls"
         create_sample_file1(odsfile)
         with open(odsfile, "rb") as f:

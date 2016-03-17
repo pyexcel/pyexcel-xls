@@ -13,14 +13,17 @@ import xlrd
 from xlwt import Workbook, XFStyle
 from pyexcel_io import (
     SheetReader,
-    BookReader,
     SheetWriter,
-    BookWriter,
     isstream,
     get_data as read_data,
     store_data as write_data
 )
+from pyexcel_io.base import NewBookReader, NewWriter
 PY2 = sys.version_info[0] == 2
+if PY2 and sys.version_info[1] < 7:
+    from ordereddict import OrderedDict
+else:
+    from collections import OrderedDict
 
 
 DEFAULT_DATE_FORMAT = "DD/MM/YY"
@@ -102,51 +105,62 @@ class XLSheet(SheetReader):
         return value
 
 
-class XLBook(BookReader):
+class XLSBook(NewBookReader):
     """
     XLSBook reader
 
     It reads xls, xlsm, xlsx work book
     """
-    def __init__(self, filename, file_content=None,
-                 sheetname=None, **keywords):
-        BookReader.__init__(self, filename,
-                            file_content=file_content,
-                            sheetname=sheetname, **keywords)
-        self.native_book.release_resources()
+    def __init__(self):
+        NewBookReader.__init__(self, 'xls')
+        self.file_stream = None
+        self.file_name = None
+        self.book = None
 
-    def sheet_iterator(self):
-        """Return iterable sheet array"""
+    def close(self):
+        if self.book:
+            self.book.release_resources()
 
-        if self.sheet_name is not None:
-            try:
-                sheet = self.native_book.sheet_by_name(self.sheet_name)
-                return [sheet]
-            except xlrd.XLRDError:
-                raise ValueError("%s cannot be found" % self.sheet_name)
-        elif self.sheet_index is not None:
-            return [self.native_book.sheet_by_index(self.sheet_index)]
+    def load_from_stream(self, file_stream):
+        self.file_stream = file_stream
+
+    def load_from_file(self, file_name):
+        self.file_name = file_name
+
+    def read_sheet_by_index(self, sheet_index):
+        self.book = self._get_book(on_demand=True)
+        sheet = self.book.sheet_by_index(sheet_index)
+        xlsheet = XLSheet(sheet)
+        return {sheet.name: xlsheet.to_array()}
+
+    def read_sheet_by_name(self, sheet_name):
+        self.book = self._get_book(on_demand=True)
+        try:
+            sheet = self.book.sheet_by_name(sheet_name)
+        except xlrd.XLRDError as e:
+            print(e)
+            raise ValueError("%s cannot be found" % sheet_name)
+        xlsheet = XLSheet(sheet)
+        return {sheet.name: xlsheet.to_array()}
+
+    def read_all(self):
+        result = OrderedDict()
+        self.book = self._get_book()
+        for sheet in self.book.sheets():
+            xlsheet = XLSheet(sheet)
+            result[sheet.name] = xlsheet.to_array()
+        return result
+
+    def _get_book(self, on_demand=False):
+        if self.file_name:
+            xls_book = xlrd.open_workbook(self.file_name, on_demand=on_demand)
         else:
-            return self.native_book.sheets()
-
-    def get_sheet(self, native_sheet):
-        """Create a xls sheet"""
-        return XLSheet(native_sheet)
-
-    def load_from_memory(self, file_content, **keywords):
-        """Provide the way to load xls from memory"""
-        on_demand = False
-        if self.sheet_name is not None or self.sheet_index is not None:
-            on_demand = True
-        return xlrd.open_workbook(None, file_contents=file_content.getvalue(),
-                                  on_demand=on_demand)
-
-    def load_from_file(self, filename, **keywords):
-        """Provide the way to load xls from a file"""
-        on_demand = False
-        if self.sheet_name is not None or self.sheet_index is not None:
-            on_demand = True
-        return xlrd.open_workbook(filename, on_demand=on_demand)
+            xls_book = xlrd.open_workbook(
+                None,
+                file_contents=self.file_stream.getvalue(),
+                on_demand=on_demand
+            )
+        return xls_book
 
 
 class XLSheetWriter(SheetWriter):
@@ -192,34 +206,28 @@ class XLSheetWriter(SheetWriter):
         self.current_row += 1
 
 
-class XLWriter(BookWriter):
+class XLSWriter(NewWriter):
     """
     xls, xlsx and xlsm writer
     """
-    def __init__(self, file, encoding='ascii',
-                 style_compression=2, **keywords):
-        """Initialize a xlwt work book
+    def __init__(self):
+        NewWriter.__init__(self, 'xls')
+        self.work_book = None
 
-
-        :param encoding: content encoding, defaults to 'ascii'
-        :param style_compression: undocumented, but 2 is magically
-                                  better
-        reference: `style_compression <https://groups.google.com/
-        forum/#!topic/python-excel/tUZkMRi8ITw>`_
-        """
-        BookWriter.__init__(self, file, **keywords)
-        self.wb = Workbook(style_compression=style_compression,
+    def open(self, file_name,
+             encoding='ascii', style_compression=2, **keywords):
+        NewWriter.open(self, file_name, **keywords)
+        self.work_book = Workbook(style_compression=style_compression,
                            encoding=encoding)
 
     def create_sheet(self, name):
-        """Create a xlwt writer"""
-        return XLSheetWriter(self.wb, None, name)
+        return XLSheetWriter(self.work_book, None, name)
 
     def close(self):
         """
         This call actually save the file
         """
-        self.wb.save(self.file)
+        self.work_book.save(self.file_alike_object)
 
 
 def get_data(afile, file_type=None, **keywords):
@@ -235,7 +243,7 @@ def save_data(afile, data, file_type=None, **keywords):
 
 
 def extend_pyexcel(ReaderFactory, WriterFactory):
-    ReaderFactory.add_factory("xls", XLBook)
-    ReaderFactory.add_factory("xlsm", XLBook)
-    ReaderFactory.add_factory("xlsx", XLBook)
-    WriterFactory.add_factory("xls", XLWriter)
+    ReaderFactory.add_factory("xls", XLSBook)
+    ReaderFactory.add_factory("xlsm", XLSBook)
+    ReaderFactory.add_factory("xlsx", XLSBook)
+    WriterFactory.add_factory("xls", XLSWriter)
