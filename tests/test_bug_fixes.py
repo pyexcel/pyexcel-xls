@@ -6,8 +6,8 @@
 
 import os
 import pyexcel as pe
-import pyexcel.ext.xls as xls
-from pyexcel_io import OrderedDict
+from pyexcel.ext import xls
+from _compact import OrderedDict
 import datetime
 
 
