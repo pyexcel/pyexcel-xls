@@ -76,11 +76,6 @@ class XLSheet(SheetReader):
 
     Currently only support first sheet in the file
     """
-    @property
-    def name(self):
-        """This is required by :class:`SheetReader`"""
-        return self.native_sheet.name
-
     def number_of_rows(self):
         """
         Number of rows in the xls sheet
@@ -103,6 +98,18 @@ class XLSheet(SheetReader):
         if my_type == datetime.datetime:
             value = xldate_to_python_date(value)
         return value
+
+    def to_array(self):
+        for r in range(0, self.number_of_rows()):
+            row = []
+            tmp_row = []
+            for c in range(0, self.number_of_columns()):
+                cell_value = self.cell_value(r, c)
+                tmp_row.append(cell_value)
+                if cell_value is not None and cell_value != '':
+                    row += tmp_row
+                    tmp_row = []
+            yield row
 
 
 class XLSBook(NewBookReader):
