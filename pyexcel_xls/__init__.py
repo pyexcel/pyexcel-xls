@@ -250,7 +250,13 @@ def save_data(afile, data, file_type=None, **keywords):
 
 
 def extend_pyexcel(RWManager):
-    RWManager.register_reader("xls", XLSBook)
-    RWManager.register_reader("xlsm", XLSBook)
-    RWManager.register_reader("xlsx", XLSBook)
-    RWManager.register_writer("xls", XLSWriter)
+    RWManager.register_readers(
+        {
+            "xls": XLSBook,
+            "xlsm": XLSBook,
+            "xlsx": XLSBook
+        })
+    RWManager.register_a_writer("xls", XLSWriter)
+    RWManager.register_file_type_as_binary_stream('xls')
+    RWManager.register_file_type_as_binary_stream('xlsm')
+    RWManager.register_file_type_as_binary_stream('xlsx')
