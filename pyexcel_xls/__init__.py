@@ -249,8 +249,8 @@ def save_data(afile, data, file_type=None, **keywords):
     write_data(afile, data, file_type=file_type, **keywords)
 
 
-def extend_pyexcel(ReaderFactory, WriterFactory):
-    ReaderFactory.add_factory("xls", XLSBook)
-    ReaderFactory.add_factory("xlsm", XLSBook)
-    ReaderFactory.add_factory("xlsx", XLSBook)
-    WriterFactory.add_factory("xls", XLSWriter)
+def extend_pyexcel(RWManager):
+    RWManager.register_reader("xls", XLSBook)
+    RWManager.register_reader("xlsm", XLSBook)
+    RWManager.register_reader("xlsx", XLSBook)
+    RWManager.register_writer("xls", XLSWriter)
