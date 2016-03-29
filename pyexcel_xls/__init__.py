@@ -18,7 +18,7 @@ from pyexcel_io import (
     get_data as read_data,
     store_data as write_data
 )
-from pyexcel_io.base import NewBookReader, NewWriter
+from pyexcel_io.base import BookReader, BookWriter
 PY2 = sys.version_info[0] == 2
 if PY2 and sys.version_info[1] < 7:
     from ordereddict import OrderedDict
@@ -112,14 +112,14 @@ class XLSheet(SheetReader):
             yield row
 
 
-class XLSBook(NewBookReader):
+class XLSBook(BookReader):
     """
     XLSBook reader
 
     It reads xls, xlsm, xlsx work book
     """
     def __init__(self):
-        NewBookReader.__init__(self, 'xls')
+        BookReader.__init__(self, 'xls')
         self.file_stream = None
         self.file_name = None
         self.book = None
@@ -213,17 +213,17 @@ class XLSheetWriter(SheetWriter):
         self.current_row += 1
 
 
-class XLSWriter(NewWriter):
+class XLSWriter(BookWriter):
     """
     xls, xlsx and xlsm writer
     """
     def __init__(self):
-        NewWriter.__init__(self, 'xls')
+        BookWriter.__init__(self, 'xls')
         self.work_book = None
 
     def open(self, file_name,
              encoding='ascii', style_compression=2, **keywords):
-        NewWriter.open(self, file_name, **keywords)
+        BookWriter.open(self, file_name, **keywords)
         self.work_book = Workbook(style_compression=style_compression,
                            encoding=encoding)
 
