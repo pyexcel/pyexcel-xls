@@ -11,10 +11,12 @@ import sys
 import datetime
 import xlrd
 from xlwt import Workbook, XFStyle
+
 from pyexcel_io.io import get_data as read_data, isstream, store_data as write_data
 from pyexcel_io.book import BookReader, BookWriter
 from pyexcel_io.sheet import SheetReader, SheetWriter
 from pyexcel_io.manager import RWManager
+
 PY2 = sys.version_info[0] == 2
 if PY2 and sys.version_info[1] < 7:
     from ordereddict import OrderedDict
