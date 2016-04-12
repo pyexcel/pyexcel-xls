@@ -11,10 +11,10 @@ import sys
 import datetime
 import xlrd
 from xlwt import Workbook, XFStyle
-from pyexcel_io import get_data as read_data
-from pyexcel_io.io import isstream, store_data as write_data
+from pyexcel_io.io import get_data as read_data, isstream, store_data as write_data
 from pyexcel_io.book import BookReader, BookWriter
 from pyexcel_io.sheet import SheetReader, SheetWriter
+from pyexcel_io.manager import RWManager
 PY2 = sys.version_info[0] == 2
 if PY2 and sys.version_info[1] < 7:
     from ordereddict import OrderedDict
@@ -116,19 +116,22 @@ class XLSBook(BookReader):
     """
     def __init__(self):
         BookReader.__init__(self, 'xls')
-        self.file_stream = None
-        self.file_name = None
         self.book = None
+        self.file_content = None
+
+    def open(self, file_name, **keywords):
+        BookReader.open(self, file_name, **keywords)
+
+    def open_stream(self, file_stream, **keywords):
+        BookReader.open_stream(self, file_stream, **keywords)
+
+    def open_content(self, file_content, **keywords):
+        self.keywords = keywords
+        self.file_content = file_content
 
     def close(self):
         if self.book:
             self.book.release_resources()
-
-    def load_from_stream(self, file_stream):
-        self.file_stream = file_stream
-
-    def load_from_file(self, file_name):
-        self.file_name = file_name
 
     def read_sheet_by_index(self, sheet_index):
         self.book = self._get_book(on_demand=True)
@@ -157,10 +160,16 @@ class XLSBook(BookReader):
     def _get_book(self, on_demand=False):
         if self.file_name:
             xls_book = xlrd.open_workbook(self.file_name, on_demand=on_demand)
-        else:
+        elif self.file_stream:
             xls_book = xlrd.open_workbook(
                 None,
                 file_contents=self.file_stream.getvalue(),
+                on_demand=on_demand
+            )
+        elif self.file_content:
+            xls_book = xlrd.open_workbook(
+                None,
+                file_contents=self.file_content,
                 on_demand=on_demand
             )
         return xls_book
@@ -245,14 +254,13 @@ def save_data(afile, data, file_type=None, **keywords):
     write_data(afile, data, file_type=file_type, **keywords)
 
 
-def extend_pyexcel(RWManager):
-    RWManager.register_readers(
-        {
-            "xls": XLSBook,
-            "xlsm": XLSBook,
-            "xlsx": XLSBook
-        })
-    RWManager.register_a_writer("xls", XLSWriter)
-    RWManager.register_file_type_as_binary_stream('xls')
-    RWManager.register_file_type_as_binary_stream('xlsm')
-    RWManager.register_file_type_as_binary_stream('xlsx')
+RWManager.register_readers(
+    {
+        "xls": XLSBook,
+        "xlsm": XLSBook,
+        "xlsx": XLSBook
+    })
+RWManager.register_a_writer("xls", XLSWriter)
+RWManager.register_file_type_as_binary_stream('xls')
+RWManager.register_file_type_as_binary_stream('xlsm')
+RWManager.register_file_type_as_binary_stream('xlsx')
