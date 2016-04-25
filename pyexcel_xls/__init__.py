@@ -8,6 +8,7 @@
     :license: New BSD License
 """
 import sys
+import math
 import datetime
 import xlrd
 from xlwt import Workbook, XFStyle
@@ -15,7 +16,6 @@ from xlwt import Workbook, XFStyle
 from pyexcel_io.io import get_data as read_data, isstream, store_data as write_data
 from pyexcel_io.book import BookReader, BookWriter
 from pyexcel_io.sheet import SheetReader, SheetWriter
-from pyexcel_io.manager import RWManager
 
 PY2 = sys.version_info[0] == 2
 if PY2 and sys.version_info[1] < 7:
@@ -39,6 +39,12 @@ XLS_FORMAT_CONVERSION = {
     xlrd.XL_CELL_ERROR: None
 }
 
+
+def is_integer_ok_for_xl_float(value):
+    if value == math.floor(value):
+        return True
+    else:
+        return False
 
 def xldate_to_python_date(value):
     """
@@ -74,6 +80,10 @@ class XLSheet(SheetReader):
 
     Currently only support first sheet in the file
     """
+    def __init__(self, sheet, auto_detect_int=True, **keywords):
+        SheetReader.__init__(self, sheet, **keywords)
+        self.auto_detect_int = auto_detect_int
+    
     def number_of_rows(self):
         """
         Number of rows in the xls sheet
@@ -95,6 +105,9 @@ class XLSheet(SheetReader):
         value = self.native_sheet.cell_value(row, column)
         if my_type == datetime.datetime:
             value = xldate_to_python_date(value)
+        elif my_type == float and self.auto_detect_int:
+            if is_integer_ok_for_xl_float(value):
+                value = int(value)
         return value
 
     def to_array(self):
@@ -117,7 +130,7 @@ class XLSBook(BookReader):
     It reads xls, xlsm, xlsx work book
     """
     def __init__(self):
-        BookReader.__init__(self, 'xls')
+        BookReader.__init__(self)
         self.book = None
         self.file_content = None
 
@@ -138,7 +151,7 @@ class XLSBook(BookReader):
     def read_sheet_by_index(self, sheet_index):
         self.book = self._get_book(on_demand=True)
         sheet = self.book.sheet_by_index(sheet_index)
-        xlsheet = XLSheet(sheet)
+        xlsheet = XLSheet(sheet, **self.keywords)
         return {sheet.name: xlsheet.to_array()}
 
     def read_sheet_by_name(self, sheet_name):
@@ -155,7 +168,7 @@ class XLSBook(BookReader):
         result = OrderedDict()
         self.book = self._get_book()
         for sheet in self.book.sheets():
-            xlsheet = XLSheet(sheet)
+            xlsheet = XLSheet(sheet, **self.keywords)
             result[sheet.name] = xlsheet.to_array()
         return result
 
@@ -225,7 +238,7 @@ class XLSWriter(BookWriter):
     xls, xlsx and xlsm writer
     """
     def __init__(self):
-        BookWriter.__init__(self, 'xls')
+        BookWriter.__init__(self)
         self.work_book = None
 
     def open(self, file_name,
@@ -256,13 +269,23 @@ def save_data(afile, data, file_type=None, **keywords):
     write_data(afile, data, file_type=file_type, **keywords)
 
 
-RWManager.register_readers(
-    {
-        "xls": XLSBook,
-        "xlsm": XLSBook,
-        "xlsx": XLSBook
-    })
-RWManager.register_a_writer("xls", XLSWriter)
-RWManager.register_file_type_as_binary_stream('xls')
-RWManager.register_file_type_as_binary_stream('xlsm')
-RWManager.register_file_type_as_binary_stream('xlsx')
+_xls_registry = {
+    "file_type": "xls",
+    "reader": XLSBook,
+    "writer": XLSWriter,
+    "stream_type": "binary"
+}
+
+_xlsm_registry = {
+    "file_type": "xlsm",
+    "reader": XLSBook,
+    "stream_type": "binary"
+}
+
+_xlsx_registry = {
+    "file_type": "xlsm",
+    "reader": XLSBook,
+    "stream_type": "binary"
+}
+
+exports = (_xls_registry, _xlsm_registry, _xlsx_registry)
