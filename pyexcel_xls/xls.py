@@ -45,6 +45,7 @@ def is_integer_ok_for_xl_float(value):
     else:
         return False
 
+
 def xldate_to_python_date(value):
     """
     convert xl date to python date
