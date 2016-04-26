@@ -58,7 +58,11 @@ Write to an xls file
     ...     from StringIO import StringIO
     ... else:
     ...     from io import BytesIO as StringIO
-    >>> from pyexcel_io._compact import OrderedDict
+    >>> PY2 = sys.version_info[0] == 2
+    >>> if PY2 and sys.version_info[1] < 7:
+    ...      from ordereddict import OrderedDict
+    ... else:
+    ...     from collections import OrderedDict
 
 
 Here's the sample code to write a dictionary to an xls file:

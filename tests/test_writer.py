@@ -1,5 +1,5 @@
 import os
-from pyexcel_xls import XLSWriter, XLSBook
+from pyexcel_xls.xls import XLSWriter, XLSBook
 from base import PyexcelWriterBase, PyexcelHatWriterBase
 
 
