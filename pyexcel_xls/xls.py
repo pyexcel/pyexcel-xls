@@ -28,17 +28,6 @@ DEFAULT_TIME_FORMAT = "HH:MM:SS"
 DEFAULT_DATETIME_FORMAT = "%s %s" % (DEFAULT_DATE_FORMAT, DEFAULT_TIME_FORMAT)
 
 
-XLS_FORMAT_CONVERSION = {
-    xlrd.XL_CELL_TEXT: str,
-    xlrd.XL_CELL_EMPTY: None,
-    xlrd.XL_CELL_DATE: datetime.datetime,
-    xlrd.XL_CELL_NUMBER: float,
-    xlrd.XL_CELL_BOOLEAN: int,
-    xlrd.XL_CELL_BLANK: None,
-    xlrd.XL_CELL_ERROR: None
-}
-
-
 def is_integer_ok_for_xl_float(value):
     if value == math.floor(value):
         return True
@@ -101,11 +90,10 @@ class XLSheet(SheetReader):
         Random access to the xls cells
         """
         cell_type = self.native_sheet.cell_type(row, column)
-        my_type = XLS_FORMAT_CONVERSION[cell_type]
         value = self.native_sheet.cell_value(row, column)
-        if my_type == datetime.datetime:
+        if cell_type == xlrd.XL_CELL_DATE:
             value = xldate_to_python_date(value)
-        elif my_type == float and self.auto_detect_int:
+        elif cell_type == xlrd.XL_CELL_NUMBER and self.auto_detect_int:
             if is_integer_ok_for_xl_float(value):
                 value = int(value)
         return value
