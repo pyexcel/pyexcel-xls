@@ -150,13 +150,13 @@ Here is the sample code:
     >>> # from pyexcel.ext import xls
     >>> sheet = pe.get_book(file_name="your_file.xls")
     >>> sheet
-    Sheet Name: Sheet 1
+    Sheet 1:
     +---+---+---+
     | 1 | 2 | 3 |
     +---+---+---+
     | 4 | 5 | 6 |
     +---+---+---+
-    Sheet Name: Sheet 2
+    Sheet 2
     +-------+-------+-------+
     | row 1 | row 2 | row 3 |
     +-------+-------+-------+
@@ -186,13 +186,13 @@ You got to wrap the binary content with stream to get xls working:
     ...     r = pe.get_book(file_type="xls", file_content=content)
     ...     print(r)
     ...
-    Sheet Name: Sheet 1
+    Sheet 1:
     +---+---+---+
     | 1 | 2 | 3 |
     +---+---+---+
     | 4 | 5 | 6 |
     +---+---+---+
-    Sheet Name: Sheet 2
+    Sheet 2:
     +-------+-------+-------+
     | row 1 | row 2 | row 3 |
     +-------+-------+-------+
