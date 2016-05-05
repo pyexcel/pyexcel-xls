@@ -1,1 +1,1 @@
-nosetests --with-cov --cov pyexcel_xls --cov tests --with-doctest --doctest-extension=.rst
+nosetests --with-cov --cov pyexcel_xls --cov tests --with-doctest --doctest-extension=.rst tests README.rst
