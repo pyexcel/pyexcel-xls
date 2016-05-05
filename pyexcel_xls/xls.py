@@ -249,19 +249,22 @@ _xls_registry = {
     "file_type": "xls",
     "reader": XLSBook,
     "writer": XLSWriter,
-    "stream_type": "binary"
+    "stream_type": "binary",
+    "mime_type": "application/vnd.ms-excel"
 }
 
 _xlsm_registry = {
     "file_type": "xlsm",
     "reader": XLSBook,
-    "stream_type": "binary"
+    "stream_type": "binary",
+    "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 }
 
 _xlsx_registry = {
-    "file_type": "xlsm",
+    "file_type": "xlsx",
     "reader": XLSBook,
-    "stream_type": "binary"
+    "stream_type": "binary",
+    "mime_type": "application/vnd.ms-excel.sheet.macroenabled.12"
 }
 
 exports = (_xls_registry, _xlsm_registry, _xlsx_registry)
