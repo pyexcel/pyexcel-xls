@@ -245,26 +245,37 @@ class XLSWriter(BookWriter):
         self.work_book.save(self.file_alike_object)
 
 
-_xls_registry = {
+_xls_reader_registry = {
     "file_type": "xls",
     "reader": XLSBook,
+    "stream_type": "binary",
+    "mime_type": "application/vnd.ms-excel",
+    "library": "xlrd"
+}
+
+_xls_writer_registry = {
+    "file_type": "xls",
     "writer": XLSWriter,
     "stream_type": "binary",
-    "mime_type": "application/vnd.ms-excel"
+    "mime_type": "application/vnd.ms-excel",
+    "library": "xlwt-future"
 }
 
 _xlsm_registry = {
     "file_type": "xlsm",
     "reader": XLSBook,
     "stream_type": "binary",
-    "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "library": "xlrd"
 }
 
 _xlsx_registry = {
     "file_type": "xlsx",
     "reader": XLSBook,
     "stream_type": "binary",
-    "mime_type": "application/vnd.ms-excel.sheet.macroenabled.12"
+    "mime_type": "application/vnd.ms-excel.sheet.macroenabled.12",
+    "library": "xlrd"
 }
 
-exports = (_xls_registry, _xlsm_registry, _xlsx_registry)
+exports = (_xls_reader_registry, _xls_writer_registry,
+           _xlsm_registry, _xlsx_registry)
