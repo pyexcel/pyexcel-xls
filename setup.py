@@ -27,7 +27,8 @@ INSTALL_REQUIRES = [
     'xlwt-future',
 ]
 
-EXTRAS_REQUIRE = {}
+EXTRAS_REQUIRE = {
+}
 
 CLASSIFIERS = [
     'Topic :: Office/Business',
