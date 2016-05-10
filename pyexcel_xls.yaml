@@ -7,5 +7,4 @@ dependencies:
   - pyexcel-io>=0.1.0
   - xlrd
   - xlwt-future
-description: |
-  A wrapper library to read, manipulate and write data in xls format. It reads xlsx and xlsm format
+description: A wrapper library to read, manipulate and write data in xls format. It reads xlsx and xlsm format
