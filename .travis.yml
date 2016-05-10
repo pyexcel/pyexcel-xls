@@ -10,6 +10,21 @@ python:
   - 3.3
   - 3.4
   - 3.5
+matrix:
+  include:
+    - python: 2.7
+      dist: trusty
+      sudo: required
+      virtualenv:
+        system_site_packages: true
+      addons:
+        apt:
+          packages:
+            - python-xlwt
+            - python-xlrd
+            - python-coverage
+            - python-nose
+            - python-mock
 before_install:
   - pip install https://github.com/pyexcel/pyexcel-io/archive/master.zip
   - pip install https://github.com/pyexcel/pyexcel/archive/master.zip
