@@ -6,6 +6,24 @@
   - pypy
 {%endblock%}
 
+{%block extra_matrix%}
+matrix:
+  include:
+    - python: 2.7
+      dist: trusty
+      sudo: required
+      virtualenv:
+        system_site_packages: true
+      addons:
+        apt:
+          packages:
+            - python-xlwt
+            - python-xlrd
+            - python-coverage
+            - python-nose
+            - python-mock
+{%endblock%}
+
 {%block custom_install %}
   - pip install https://github.com/pyexcel/pyexcel-io/archive/master.zip
   - pip install https://github.com/pyexcel/pyexcel/archive/master.zip
