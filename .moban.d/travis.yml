@@ -24,8 +24,5 @@ matrix:
             - python-mock
 {%endblock%}
 
-{%block custom_install %}
-  - pip install https://github.com/pyexcel/pyexcel-io/archive/master.zip
-  - pip install https://github.com/pyexcel/pyexcel/archive/master.zip
-  - if [[ $TRAVIS_PYTHON_VERSION == "2.6" ]]; then pip install ordereddict; fi
+{%block custom_install %}  - if [[ $TRAVIS_PYTHON_VERSION == "2.6" ]]; then pip install ordereddict; fi
 {%endblock%}
