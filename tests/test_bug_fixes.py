@@ -6,7 +6,7 @@
 
 import os
 import pyexcel as pe
-from pyexcel.ext import xls
+from pyexcel_xls import save_data
 from _compact import OrderedDict
 import datetime
 
@@ -28,5 +28,5 @@ class TestBugFix:
         for i in range(4100):
             array.append([datetime.datetime.now()])
         data.update({"test": array})
-        s = xls.save_data("test.xls", data)
+        s = save_data("test.xls", data)
         os.unlink("test.xls")
