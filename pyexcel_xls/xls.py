@@ -29,10 +29,8 @@ DEFAULT_DATETIME_FORMAT = "%s %s" % (DEFAULT_DATE_FORMAT, DEFAULT_TIME_FORMAT)
 
 
 def is_integer_ok_for_xl_float(value):
-    if value == math.floor(value):
-        return True
-    else:
-        return False
+    """check if a float value had zero value in digits"""
+    return value == math.floor(value)
 
 
 def xldate_to_python_date(value):
@@ -72,7 +70,11 @@ class XLSheet(SheetReader):
     def __init__(self, sheet, auto_detect_int=True, **keywords):
         SheetReader.__init__(self, sheet, **keywords)
         self.auto_detect_int = auto_detect_int
-    
+
+    @property
+    def name(self):
+        return self.native_sheet.name
+
     def number_of_rows(self):
         """
         Number of rows in the xls sheet
@@ -99,16 +101,16 @@ class XLSheet(SheetReader):
         return value
 
     def to_array(self):
-        for r in range(0, self.number_of_rows()):
-            row = []
+        for row in range(0, self.number_of_rows()):
+            return_row = []
             tmp_row = []
-            for c in range(0, self.number_of_columns()):
-                cell_value = self.cell_value(r, c)
+            for column in range(0, self.number_of_columns()):
+                cell_value = self.cell_value(row, column)
                 tmp_row.append(cell_value)
                 if cell_value is not None and cell_value != '':
-                    row += tmp_row
+                    return_row += tmp_row
                     tmp_row = []
-            yield row
+            yield return_row
 
 
 class XLSBook(BookReader):
@@ -119,7 +121,6 @@ class XLSBook(BookReader):
     """
     def __init__(self):
         BookReader.__init__(self)
-        self.book = None
         self.file_content = None
 
     def open(self, file_name, **keywords):
@@ -133,32 +134,33 @@ class XLSBook(BookReader):
         self.file_content = file_content
 
     def close(self):
-        if self.book:
-            self.book.release_resources()
+        if self.native_book:
+            self.native_book.release_resources()
 
     def read_sheet_by_index(self, sheet_index):
-        self.book = self._get_book(on_demand=True)
-        sheet = self.book.sheet_by_index(sheet_index)
-        xlsheet = XLSheet(sheet, **self.keywords)
-        return {sheet.name: xlsheet.to_array()}
+        self.native_book = self._get_book(on_demand=True)
+        sheet = self.native_book.sheet_by_index(sheet_index)
+        return self.read_sheet(sheet)
 
     def read_sheet_by_name(self, sheet_name):
-        self.book = self._get_book(on_demand=True)
+        self.native_book = self._get_book(on_demand=True)
         try:
-            sheet = self.book.sheet_by_name(sheet_name)
-        except xlrd.XLRDError as e:
-            print(e)
+            sheet = self.native_book.sheet_by_name(sheet_name)
+        except xlrd.XLRDError:
             raise ValueError("%s cannot be found" % sheet_name)
-        xlsheet = XLSheet(sheet)
-        return {sheet.name: xlsheet.to_array()}
+        return self.read_sheet(sheet)
 
     def read_all(self):
         result = OrderedDict()
-        self.book = self._get_book()
-        for sheet in self.book.sheets():
-            xlsheet = XLSheet(sheet, **self.keywords)
-            result[sheet.name] = xlsheet.to_array()
+        self.native_book = self._get_book()
+        for sheet in self.native_book.sheets():
+            data_dict = self.read_sheet(sheet)
+            result.update(data_dict)
         return result
+
+    def read_sheet(self, native_sheet):
+        sheet = XLSheet(native_sheet, **self.keywords)
+        return {sheet.name: sheet.to_array()}
 
     def _get_book(self, on_demand=False):
         if self.file_name:
@@ -233,7 +235,7 @@ class XLSWriter(BookWriter):
              encoding='ascii', style_compression=2, **keywords):
         BookWriter.open(self, file_name, **keywords)
         self.work_book = Workbook(style_compression=style_compression,
-                           encoding=encoding)
+                                  encoding=encoding)
 
     def create_sheet(self, name):
         return XLSheetWriter(self.work_book, None, name)
@@ -248,25 +250,19 @@ class XLSWriter(BookWriter):
 _xls_reader_registry = {
     "file_type": "xls",
     "reader": XLSBook,
-    "stream_type": "binary",
-    "mime_type": "application/vnd.ms-excel",
-    "library": "xlrd"
-}
-
-_xls_writer_registry = {
-    "file_type": "xls",
     "writer": XLSWriter,
     "stream_type": "binary",
     "mime_type": "application/vnd.ms-excel",
-    "library": "xlwt-future"
+    "library": "pyexcel-xls"
 }
+
 
 _xlsm_registry = {
     "file_type": "xlsm",
     "reader": XLSBook,
     "stream_type": "binary",
     "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    "library": "xlrd"
+    "library": "pyexcel-xls"
 }
 
 _xlsx_registry = {
@@ -274,8 +270,9 @@ _xlsx_registry = {
     "reader": XLSBook,
     "stream_type": "binary",
     "mime_type": "application/vnd.ms-excel.sheet.macroenabled.12",
-    "library": "xlrd"
+    "library": "pyexcel-xls"
 }
 
-exports = (_xls_reader_registry, _xls_writer_registry,
-           _xlsm_registry, _xlsx_registry)
+exports = (_xls_reader_registry,
+           _xlsm_registry,
+           _xlsx_registry)

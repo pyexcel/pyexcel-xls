@@ -55,9 +55,9 @@ class TestAddBooks:
 
 
     def test_load_a_single_sheet2(self):
-        b1 = pyexcel.load_book(self.testfile, sheet_index=2)
+        b1 = pyexcel.load_book(self.testfile, sheet_index=0)
         assert len(b1.sheet_names()) == 1
-        assert b1['Sheet3'].to_array() == self.content['Sheet3']
+        assert b1['Sheet1'].to_array() == self.content['Sheet1']
 
     @raises(IndexError)
     def test_load_a_single_sheet3(self):
