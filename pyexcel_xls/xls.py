@@ -125,13 +125,16 @@ class XLSBook(BookReader):
 
     def open(self, file_name, **keywords):
         BookReader.open(self, file_name, **keywords)
-
+        self._get_params()
+        
     def open_stream(self, file_stream, **keywords):
         BookReader.open_stream(self, file_stream, **keywords)
+        self._get_params()
 
     def open_content(self, file_content, **keywords):
         self.keywords = keywords
         self.file_content = file_content
+        self._get_params()
 
     def close(self):
         if self.native_book:
@@ -154,6 +157,8 @@ class XLSBook(BookReader):
         result = OrderedDict()
         self.native_book = self._get_book()
         for sheet in self.native_book.sheets():
+            if self.skip_hidden_sheets and sheet.visibility != 0:
+                continue
             data_dict = self.read_sheet(sheet)
             result.update(data_dict)
         return result
@@ -178,6 +183,9 @@ class XLSBook(BookReader):
                 on_demand=on_demand
             )
         return xls_book
+
+    def _get_params(self):
+        self.skip_hidden_sheets = self.keywords.get('skip_hidden_sheets', True)
 
 
 class XLSheetWriter(SheetWriter):
