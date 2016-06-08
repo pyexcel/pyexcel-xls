@@ -20,7 +20,7 @@ class TestBugFix:
         s = pe.load(os.path.join("tests",
                                  "test-fixtures",
                                  "test-date-format.xls"))
-        assert s[0,0] == datetime.datetime(2015, 11, 11, 11, 12, 0)
+        assert s[0, 0] == datetime.datetime(2015, 11, 11, 11, 12, 0)
 
     def test_pyexcel_xls_issue_2(self):
         data = OrderedDict()
@@ -28,5 +28,5 @@ class TestBugFix:
         for i in range(4100):
             array.append([datetime.datetime.now()])
         data.update({"test": array})
-        s = save_data("test.xls", data)
+        save_data("test.xls", data)
         os.unlink("test.xls")

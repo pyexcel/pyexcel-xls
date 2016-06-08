@@ -126,7 +126,7 @@ class XLSBook(BookReader):
     def open(self, file_name, **keywords):
         BookReader.open(self, file_name, **keywords)
         self._get_params()
-        
+
     def open_stream(self, file_stream, **keywords):
         BookReader.open_stream(self, file_stream, **keywords)
         self._get_params()
@@ -264,12 +264,15 @@ _xls_reader_registry = {
     "library": "pyexcel-xls"
 }
 
+_XLSM_MIME = (
+    "application/" +
+    "vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 
 _xlsm_registry = {
     "file_type": "xlsm",
     "reader": XLSBook,
     "stream_type": "binary",
-    "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "mime_type": _XLSM_MIME,
     "library": "pyexcel-xls"
 }
 

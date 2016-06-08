@@ -7,6 +7,7 @@
     :copyright: (c) 2015-2016 by Onni Software Ltd
     :license: New BSD License
 """
+# flake8: noqa
 # this line has to be place above all else
 # because of dynamic import
 _FILE_TYPE = 'xls'
@@ -28,5 +29,3 @@ def save_data(afile, data, file_type=None, **keywords):
     if isstream(afile) and file_type is None:
         file_type = _FILE_TYPE
     write_data(afile, data, file_type=file_type, **keywords)
-
-
