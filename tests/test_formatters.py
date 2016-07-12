@@ -15,7 +15,8 @@ class TestDateFormat:
         01/01/15 13:13:13
         0.0      0.0
         """
-        r = pe.get_sheet(file_name=os.path.join("tests", "fixtures", "date_field.xls"))
+        r = pe.get_sheet(file_name=os.path.join("tests", "fixtures",
+                                                "date_field.xls"))
         assert isinstance(r[1, 0], datetime.date) is True
         assert r[1, 0].strftime("%d/%m/%y") == "25/12/14"
         assert isinstance(r[1, 1], datetime.time) is True
