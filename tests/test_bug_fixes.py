@@ -8,6 +8,7 @@ import os
 import pyexcel as pe
 from pyexcel_xls import save_data
 from _compact import OrderedDict
+from nose.tools import eq_
 import datetime
 
 
@@ -30,3 +31,17 @@ class TestBugFix:
         data.update({"test": array})
         save_data("test.xls", data)
         os.unlink("test.xls")
+
+    def test_issue_9_hidden_sheet(self):
+        test_file = os.path.join("tests", "fixtures", "hidden_sheets.xls")
+        book_dict = pe.get_book_dict(file_name=test_file)
+        assert "hidden" not in book_dict
+        eq_(book_dict['shown'], [['A', 'B']])
+
+    def test_issue_9_hidden_sheet_2(self):
+        test_file = os.path.join("tests", "fixtures", "hidden_sheets.xls")
+        book_dict = pe.get_book_dict(file_name=test_file,
+                                     skip_hidden_sheets=False)
+        assert "hidden" in book_dict
+        eq_(book_dict['shown'], [['A', 'B']])
+        eq_(book_dict['hidden'], [['a', 'b']])

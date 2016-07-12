@@ -23,7 +23,7 @@ class PyexcelHatWriterBase:
 
     def test_series_table(self):
         pyexcel.save_as(adict=self.content, dest_file_name=self.testfile)
-        r = pyexcel.SeriesReader(self.testfile)
+        r = pyexcel.get_sheet(file_name=self.testfile, name_columns_by_row=0)
         actual = pyexcel.utils.to_dict(r)
         assert actual == self.content
 
@@ -47,7 +47,7 @@ class PyexcelWriterBase:
 
     def test_write_array(self):
         self._create_a_file(self.testfile)
-        r = pyexcel.Reader(self.testfile)
+        r = pyexcel.get_sheet(file_name=self.testfile)
         actual = pyexcel.utils.to_array(r.rows())
         assert actual == self.content
 
