@@ -1,11 +1,11 @@
 Change log
 ================================================================================
 
-0.2.1 - unreleased
+0.2.1 - 13.07.2016
 --------------------------------------------------------------------------------
 
 Added
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+********************************************************************************
 
 #. `#9 <https://github.com/pyexcel/pyexcel-xls/issues/9>`_, `skip_hidden_sheets` is added. By default, hidden sheets are skipped when reading all sheets. Reading sheet by name or by index are not affected.
 
@@ -14,14 +14,14 @@ Added
 --------------------------------------------------------------------------------
 
 Added
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+********************************************************************************
 
 #. By default, `float` will be converted to `int` where fits. `auto_detect_int`, a flag to switch off the autoatic conversion from `float` to `int`.
 #. 'library=pyexcel-xls' was added so as to inform pyexcel to use it instead of other libraries, in the situation where there are more than one plugin for a file type, e.g. xlsm
 
 
 Updated
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+********************************************************************************
 
 #. support the auto-import feature of pyexcel-io 0.2.0
 #. xlwt is now used for python 2 implementation while xlwt-future is used for python 3
@@ -30,7 +30,7 @@ Updated
 --------------------------------------------------------------------------------
 
 Added
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+********************************************************************************
 
 #. Passing "streaming=True" to get_data, you will get the two dimensional array as a generator
 #. Passing "data=your_generator" to save_data is acceptable too.
