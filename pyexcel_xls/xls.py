@@ -102,11 +102,11 @@ class XLSheet(SheetReader):
 
     def to_array(self):
         for row in range(0, self.number_of_rows()):
-            return_row = []
-            tmp_row = []
             if self.skip_row(row, self.start_row, self.row_limit):
                 continue
 
+            return_row = []
+            tmp_row = []
             for column in range(0, self.number_of_columns()):
                 skip_column = self.skip_column(column,
                                                self.start_column,
