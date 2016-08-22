@@ -1,10 +1,11 @@
 overrides: "pyexcel.yaml"
 name: "pyexcel-xls"
 nick_name: xls
-version: 0.2.1
+version: 0.2.2
+release: 0.2.1
 file_type: xls
 dependencies:
-  - pyexcel-io>=0.1.0
+  - pyexcel-io>=0.2.2
   - xlrd
   - xlwt;python_version<"3"
   - xlwt-future;python_version>="3"
