@@ -6,7 +6,7 @@ from nose.tools import eq_
 
 class TestFilter:
     def setUp(self):
-        self.test_file = "test_filter.xlsx"
+        self.test_file = "test_filter.xls"
         sample = [
             [1, 21, 31],
             [2, 22, 32],
