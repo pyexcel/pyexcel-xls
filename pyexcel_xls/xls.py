@@ -87,7 +87,7 @@ class XLSheet(SheetReader):
         """
         return self.native_sheet.ncols
 
-    def cell_value(self, row, column):
+    def _cell_value(self, row, column):
         """
         Random access to the xls cells
         """
@@ -99,27 +99,6 @@ class XLSheet(SheetReader):
             if is_integer_ok_for_xl_float(value):
                 value = int(value)
         return value
-
-    def to_array(self):
-        for row in range(0, self.number_of_rows()):
-            if self.skip_row(row, self.start_row, self.row_limit):
-                continue
-
-            return_row = []
-            tmp_row = []
-            for column in range(0, self.number_of_columns()):
-                skip_column = self.skip_column(column,
-                                               self.start_column,
-                                               self.column_limit)
-                if skip_column:
-                    continue
-
-                cell_value = self.cell_value(row, column)
-                tmp_row.append(cell_value)
-                if cell_value is not None and cell_value != '':
-                    return_row += tmp_row
-                    tmp_row = []
-            yield return_row
 
 
 class XLSBook(BookReader):
