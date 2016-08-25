@@ -63,7 +63,7 @@ def xldate_to_python_date(value):
 
 class XLSheet(SheetReader):
     """
-    xls sheet
+    xls, xlsx, xlsm sheet reader
 
     Currently only support first sheet in the file
     """
@@ -178,7 +178,7 @@ class XLSBook(BookReader):
 
 class XLSheetWriter(SheetWriter):
     """
-    xls, xlsx and xlsm sheet writer
+    xls sheet writer
     """
     def set_sheet_name(self, name):
         """Create a sheet
@@ -190,7 +190,7 @@ class XLSheetWriter(SheetWriter):
         """
         write a row into the file
         """
-        for i in range(0, len(array)):
+        for i in range(len(array)):
             value = array[i]
             style = None
             tmp_array = []
@@ -221,7 +221,7 @@ class XLSheetWriter(SheetWriter):
 
 class XLSWriter(BookWriter):
     """
-    xls, xlsx and xlsm writer
+    xls writer
     """
     def __init__(self):
         BookWriter.__init__(self)
