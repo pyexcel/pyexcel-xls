@@ -4,6 +4,9 @@ except ImportError:
     from ez_setup import use_setuptools
     use_setuptools()
     from setuptools import setup, find_packages
+import sys
+PY2 = sys.version_info[0] == 2
+PY26 = PY2 and sys.version_info[1] < 7
 
 NAME = 'pyexcel-xls'
 AUTHOR = 'C.W.'
@@ -30,13 +33,12 @@ INSTALL_REQUIRES = [
     'xlrd',
 ]
 
+if PY2:
+    INSTALL_REQUIRES.append('xlwt')
+if not PY2:
+    INSTALL_REQUIRES.append('xlwt-future')
+
 EXTRAS_REQUIRE = {
-    ':python_version<"3"': [
-        'xlwt'
-    ],
-    ':python_version>="3"': [
-        'xlwt-future'
-    ],
 }
 
 CLASSIFIERS = [
