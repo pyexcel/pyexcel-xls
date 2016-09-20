@@ -190,8 +190,7 @@ class XLSheetWriter(SheetWriter):
         """
         write a row into the file
         """
-        for i in range(len(array)):
-            value = array[i]
+        for i, value in enumerate(array):
             style = None
             tmp_array = []
             if isinstance(value, datetime.datetime):

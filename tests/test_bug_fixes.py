@@ -45,3 +45,12 @@ class TestBugFix:
         assert "hidden" in book_dict
         eq_(book_dict['shown'], [['A', 'B']])
         eq_(book_dict['hidden'], [['a', 'b']])
+
+    def test_issue_10_generator_as_content(self):
+        def data_gen():
+            def custom_row_renderer(row):
+                for e in row:
+                    yield e
+            for i in range(2):
+                yield custom_row_renderer([1,2])
+        save_data("test.xls", {"sheet": data_gen()})
