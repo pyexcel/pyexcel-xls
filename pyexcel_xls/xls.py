@@ -28,39 +28,6 @@ DEFAULT_TIME_FORMAT = "HH:MM:SS"
 DEFAULT_DATETIME_FORMAT = "%s %s" % (DEFAULT_DATE_FORMAT, DEFAULT_TIME_FORMAT)
 
 
-def is_integer_ok_for_xl_float(value):
-    """check if a float value had zero value in digits"""
-    return value == math.floor(value)
-
-
-def xldate_to_python_date(value):
-    """
-    convert xl date to python date
-    """
-    date_tuple = xlrd.xldate_as_tuple(value, 0)
-    ret = None
-    if date_tuple == (0, 0, 0, 0, 0, 0):
-        ret = datetime.datetime(1900, 1, 1, 0, 0, 0)
-    elif date_tuple[0:3] == (0, 0, 0):
-        ret = datetime.time(date_tuple[3],
-                            date_tuple[4],
-                            date_tuple[5])
-    elif date_tuple[3:6] == (0, 0, 0):
-        ret = datetime.date(date_tuple[0],
-                            date_tuple[1],
-                            date_tuple[2])
-    else:
-        ret = datetime.datetime(
-            date_tuple[0],
-            date_tuple[1],
-            date_tuple[2],
-            date_tuple[3],
-            date_tuple[4],
-            date_tuple[5]
-        )
-    return ret
-
-
 class XLSheet(SheetReader):
     """
     xls, xlsx, xlsm sheet reader
@@ -240,6 +207,39 @@ class XLSWriter(BookWriter):
         This call actually save the file
         """
         self.work_book.save(self.file_alike_object)
+
+
+def is_integer_ok_for_xl_float(value):
+    """check if a float value had zero value in digits"""
+    return value == math.floor(value)
+
+
+def xldate_to_python_date(value):
+    """
+    convert xl date to python date
+    """
+    date_tuple = xlrd.xldate_as_tuple(value, 0)
+    ret = None
+    if date_tuple == (0, 0, 0, 0, 0, 0):
+        ret = datetime.datetime(1900, 1, 1, 0, 0, 0)
+    elif date_tuple[0:3] == (0, 0, 0):
+        ret = datetime.time(date_tuple[3],
+                            date_tuple[4],
+                            date_tuple[5])
+    elif date_tuple[3:6] == (0, 0, 0):
+        ret = datetime.date(date_tuple[0],
+                            date_tuple[1],
+                            date_tuple[2])
+    else:
+        ret = datetime.datetime(
+            date_tuple[0],
+            date_tuple[1],
+            date_tuple[2],
+            date_tuple[3],
+            date_tuple[4],
+            date_tuple[5]
+        )
+    return ret
 
 
 _xls_reader_registry = {

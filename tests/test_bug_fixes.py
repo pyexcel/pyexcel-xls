@@ -52,5 +52,5 @@ class TestBugFix:
                 for e in row:
                     yield e
             for i in range(2):
-                yield custom_row_renderer([1,2])
+                yield custom_row_renderer([1, 2])
         save_data("test.xls", {"sheet": data_gen()})
