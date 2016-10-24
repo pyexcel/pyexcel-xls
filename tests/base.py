@@ -8,7 +8,7 @@ def create_sample_file1(file):
     table.append(data[:4])
     table.append(data[4:8])
     table.append(data[8:12])
-    pyexcel.save_as(dest_file_name=file, array=table)
+    pyexcel.save_as(array=table, dest_file_name=file)
 
 
 class PyexcelHatWriterBase:
@@ -24,8 +24,7 @@ class PyexcelHatWriterBase:
     def test_series_table(self):
         pyexcel.save_as(adict=self.content, dest_file_name=self.testfile)
         r = pyexcel.get_sheet(file_name=self.testfile, name_columns_by_row=0)
-        actual = pyexcel.utils.to_dict(r)
-        assert actual == self.content
+        assert r.dict == self.content
 
 
 class PyexcelWriterBase:
@@ -48,29 +47,14 @@ class PyexcelWriterBase:
     def test_write_array(self):
         self._create_a_file(self.testfile)
         r = pyexcel.get_sheet(file_name=self.testfile)
-        actual = pyexcel.utils.to_array(r.rows())
-        assert actual == self.content
-
-    def test_write_reader(self):
-        """
-        Use reader as data container
-
-        this test case shows the file written by pyexcel
-        can be read back by itself
-        """
-        self._create_a_file(self.testfile)
-        r = pyexcel.Reader(self.testfile)
-        r.save_as(self.testfile2)
-        r2 = pyexcel.Reader(self.testfile2)
-        r2.format(int)
-        actual = pyexcel.utils.to_array(r2.rows())
+        actual = list(r.rows())
         assert actual == self.content
 
 
 class PyexcelMultipleSheetBase:
 
     def _write_test_file(self, filename):
-        pyexcel.save_book_as(dest_file_name=filename, bookdict=self.content)
+        pyexcel.save_book_as(bookdict=self.content, dest_file_name=filename)
 
     def _clean_up(self):
         if os.path.exists(self.testfile2):
@@ -87,36 +71,17 @@ class PyexcelMultipleSheetBase:
 
     def test_reading_through_sheets(self):
         b = pyexcel.BookReader(self.testfile)
-        data = pyexcel.utils.to_array(b["Sheet1"].rows())
+        data = list(b["Sheet1"].rows())
         expected = [[1, 1, 1, 1], [2, 2, 2, 2], [3, 3, 3, 3]]
         assert data == expected
-        data = pyexcel.utils.to_array(b["Sheet2"].rows())
+        data = list(b["Sheet2"].rows())
         expected = [[4, 4, 4, 4], [5, 5, 5, 5], [6, 6, 6, 6]]
         assert data == expected
-        data = pyexcel.utils.to_array(b["Sheet3"].rows())
+        data = list(b["Sheet3"].rows())
         expected = [[u'X', u'Y', u'Z'], [1, 4, 7], [2, 5, 8], [3, 6, 9]]
         assert data == expected
         sheet3 = b["Sheet3"]
         sheet3.name_columns_by_row(0)
-        data = pyexcel.utils.to_array(b["Sheet3"].rows())
+        data = list(b["Sheet3"].rows())
         expected = [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
         assert data == expected
-
-    def test_iterate_through_sheets(self):
-        b = pyexcel.BookReader(self.testfile)
-        for s in b:
-            data = pyexcel.utils.to_array(s)
-            assert self.content[s.name] == data
-        si = pyexcel.iterators.SheetIterator(b)
-        for s in si:
-            data = pyexcel.utils.to_array(s)
-            assert self.content[s.name] == data
-
-    def test_random_access_operator(self):
-        r = pyexcel.BookReader(self.testfile)
-        value = r["Sheet1"][0, 1]
-        assert value == 1
-        value = r["Sheet3"][0, 1]
-        assert value == 'Y'
-        r["Sheet3"].name_columns_by_row(0)
-        assert r["Sheet3"][0, 1] == 4

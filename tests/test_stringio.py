@@ -12,7 +12,7 @@ class TestStringIO:
             content = f.read()
             r = pyexcel.get_sheet(file_type="xls", file_content=content)
             result = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 1.1, 1]
-            actual = pyexcel.utils.to_array(r.enumerate())
+            actual = list(r.enumerate())
             assert result == actual
         if os.path.exists(xlsfile):
             os.unlink(xlsfile)
@@ -26,5 +26,5 @@ class TestStringIO:
                              array=data)
         r = pyexcel.get_sheet(file_type="xls", file_content=io.getvalue())
         result = [1, 2, 3, 4, 5, 6]
-        actual = pyexcel.utils.to_array(r.enumerate())
+        actual = list(r.enumerate())
         assert result == actual
