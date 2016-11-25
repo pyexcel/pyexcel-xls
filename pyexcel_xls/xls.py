@@ -140,7 +140,8 @@ class XLSBook(BookReader):
         return xls_book
 
     def _get_params(self):
-        self.skip_hidden_sheets = self._keywords.get('skip_hidden_sheets', True)
+        self.skip_hidden_sheets = self._keywords.get(
+            'skip_hidden_sheets', True)
 
 
 class XLSheetWriter(SheetWriter):
