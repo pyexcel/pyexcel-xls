@@ -40,26 +40,26 @@ class XLSheet(SheetReader):
 
     @property
     def name(self):
-        return self.native_sheet.name
+        return self._native_sheet.name
 
     def number_of_rows(self):
         """
         Number of rows in the xls sheet
         """
-        return self.native_sheet.nrows
+        return self._native_sheet.nrows
 
     def number_of_columns(self):
         """
         Number of columns in the xls sheet
         """
-        return self.native_sheet.ncols
+        return self._native_sheet.ncols
 
     def _cell_value(self, row, column):
         """
         Random access to the xls cells
         """
-        cell_type = self.native_sheet.cell_type(row, column)
-        value = self.native_sheet.cell_value(row, column)
+        cell_type = self._native_sheet.cell_type(row, column)
+        value = self._native_sheet.cell_value(row, column)
         if cell_type == xlrd.XL_CELL_DATE:
             value = xldate_to_python_date(value)
         elif cell_type == xlrd.XL_CELL_NUMBER and self.auto_detect_int:
@@ -76,7 +76,7 @@ class XLSBook(BookReader):
     """
     def __init__(self):
         BookReader.__init__(self)
-        self.file_content = None
+        self._file_content = None
 
     def open(self, file_name, **keywords):
         BookReader.open(self, file_name, **keywords)
@@ -87,31 +87,31 @@ class XLSBook(BookReader):
         self._get_params()
 
     def open_content(self, file_content, **keywords):
-        self.keywords = keywords
-        self.file_content = file_content
+        self._keywords = keywords
+        self._file_content = file_content
         self._get_params()
 
     def close(self):
-        if self.native_book:
-            self.native_book.release_resources()
+        if self._native_book:
+            self._native_book.release_resources()
 
     def read_sheet_by_index(self, sheet_index):
-        self.native_book = self._get_book(on_demand=True)
-        sheet = self.native_book.sheet_by_index(sheet_index)
+        self._native_book = self._get_book(on_demand=True)
+        sheet = self._native_book.sheet_by_index(sheet_index)
         return self.read_sheet(sheet)
 
     def read_sheet_by_name(self, sheet_name):
-        self.native_book = self._get_book(on_demand=True)
+        self._native_book = self._get_book(on_demand=True)
         try:
-            sheet = self.native_book.sheet_by_name(sheet_name)
+            sheet = self._native_book.sheet_by_name(sheet_name)
         except xlrd.XLRDError:
             raise ValueError("%s cannot be found" % sheet_name)
         return self.read_sheet(sheet)
 
     def read_all(self):
         result = OrderedDict()
-        self.native_book = self._get_book()
-        for sheet in self.native_book.sheets():
+        self._native_book = self._get_book()
+        for sheet in self._native_book.sheets():
             if self.skip_hidden_sheets and sheet.visibility != 0:
                 continue
             data_dict = self.read_sheet(sheet)
@@ -119,28 +119,28 @@ class XLSBook(BookReader):
         return result
 
     def read_sheet(self, native_sheet):
-        sheet = XLSheet(native_sheet, **self.keywords)
+        sheet = XLSheet(native_sheet, **self._keywords)
         return {sheet.name: sheet.to_array()}
 
     def _get_book(self, on_demand=False):
-        if self.file_name:
-            xls_book = xlrd.open_workbook(self.file_name, on_demand=on_demand)
-        elif self.file_stream:
+        if self._file_name:
+            xls_book = xlrd.open_workbook(self._file_name, on_demand=on_demand)
+        elif self._file_stream:
             xls_book = xlrd.open_workbook(
                 None,
-                file_contents=self.file_stream.getvalue(),
+                file_contents=self._file_stream.getvalue(),
                 on_demand=on_demand
             )
-        elif self.file_content:
+        elif self._file_content:
             xls_book = xlrd.open_workbook(
                 None,
-                file_contents=self.file_content,
+                file_contents=self._file_content,
                 on_demand=on_demand
             )
         return xls_book
 
     def _get_params(self):
-        self.skip_hidden_sheets = self.keywords.get('skip_hidden_sheets', True)
+        self.skip_hidden_sheets = self._keywords.get('skip_hidden_sheets', True)
 
 
 class XLSheetWriter(SheetWriter):
@@ -150,7 +150,7 @@ class XLSheetWriter(SheetWriter):
     def set_sheet_name(self, name):
         """Create a sheet
         """
-        self.native_sheet = self.native_book.add_sheet(name)
+        self._native_sheet = self._native_book.add_sheet(name)
         self.current_row = 0
 
     def write_row(self, array):
@@ -179,9 +179,9 @@ class XLSheetWriter(SheetWriter):
                 style = XFStyle()
                 style.num_format_str = DEFAULT_TIME_FORMAT
             if style:
-                self.native_sheet.write(self.current_row, i, value, style)
+                self._native_sheet.write(self.current_row, i, value, style)
             else:
-                self.native_sheet.write(self.current_row, i, value)
+                self._native_sheet.write(self.current_row, i, value)
         self.current_row += 1
 
 
@@ -206,7 +206,7 @@ class XLSWriter(BookWriter):
         """
         This call actually save the file
         """
-        self.work_book.save(self.file_alike_object)
+        self.work_book.save(self._file_alike_object)
 
 
 def is_integer_ok_for_xl_float(value):
