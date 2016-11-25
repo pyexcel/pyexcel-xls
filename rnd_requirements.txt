@@ -1,2 +1,3 @@
 https://github.com/pyexcel/pyexcel/archive/io3.zip
+https://github.com/pyexcel/pyexcel-io/archive/master.zip
 
