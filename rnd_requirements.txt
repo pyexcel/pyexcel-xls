@@ -1,2 +1,2 @@
-https://github.com/pyexcel/pyexcel/archive/master.zip
+https://github.com/pyexcel/pyexcel/archive/io3.zip
 
