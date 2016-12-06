@@ -36,7 +36,7 @@ class XLSheet(SheetReader):
     """
     def __init__(self, sheet, auto_detect_int=True, **keywords):
         SheetReader.__init__(self, sheet, **keywords)
-        self.auto_detect_int = auto_detect_int
+        self.__auto_detect_int = auto_detect_int
 
     @property
     def name(self):
@@ -62,7 +62,7 @@ class XLSheet(SheetReader):
         value = self._native_sheet.cell_value(row, column)
         if cell_type == xlrd.XL_CELL_DATE:
             value = xldate_to_python_date(value)
-        elif cell_type == xlrd.XL_CELL_NUMBER and self.auto_detect_int:
+        elif cell_type == xlrd.XL_CELL_NUMBER and self.__auto_detect_int:
             if is_integer_ok_for_xl_float(value):
                 value = int(value)
         return value
