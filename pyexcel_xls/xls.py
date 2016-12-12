@@ -131,12 +131,14 @@ class XLSBook(BookReader):
                 file_contents=self._file_stream.getvalue(),
                 on_demand=on_demand
             )
-        elif self._file_content:
+        elif self._file_content is not None:
             xls_book = xlrd.open_workbook(
                 None,
                 file_contents=self._file_content,
                 on_demand=on_demand
             )
+        else:
+            raise IOError("No valid file name or file content found.")
         return xls_book
 
     def _get_params(self):

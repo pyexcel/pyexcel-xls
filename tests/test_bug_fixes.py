@@ -8,7 +8,7 @@ import os
 import pyexcel as pe
 from pyexcel_xls import save_data
 from _compact import OrderedDict
-from nose.tools import eq_
+from nose.tools import eq_, raises
 import datetime
 
 
@@ -54,3 +54,7 @@ class TestBugFix:
             for i in range(2):
                 yield custom_row_renderer([1, 2])
         save_data("test.xls", {"sheet": data_gen()})
+
+    @raises(IOError)
+    def test_issue_13_empty_file_content(self):
+        pe.get_sheet(file_content='', file_type='xls')
