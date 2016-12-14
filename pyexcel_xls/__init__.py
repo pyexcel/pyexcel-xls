@@ -11,23 +11,12 @@
 # this line has to be place above all else
 # because of dynamic import
 __FILE_TYPE__ = 'xls'
-__XLS_META__ = {
+__META__ = {
     'file_type': __FILE_TYPE__,
+    'other_types': ['xlsx', 'xlsm'],
     'stream_type': 'binary'
 }
-__XLSX_META__ = {
-    'file_type': 'xlsx',
-    'stream_type': 'binary'
-}
-__XLSM_META__ = {
-    'file_type': 'xlsm',
-    'stream_type': 'binary'
-}
-__pyexcel_io_plugins__ = [
-    __XLS_META__,
-    __XLSX_META__,
-    __XLSM_META__
-]
+__pyexcel_io_plugins__ = [__META__]
 
 
 from pyexcel_io.io import get_data as read_data, isstream, store_data as write_data
