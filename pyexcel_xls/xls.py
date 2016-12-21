@@ -54,7 +54,7 @@ class XLSheet(SheetReader):
         """
         return self._native_sheet.ncols
 
-    def _cell_value(self, row, column):
+    def cell_value(self, row, column):
         """
         Random access to the xls cells
         """
