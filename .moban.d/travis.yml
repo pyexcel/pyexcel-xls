@@ -4,6 +4,7 @@
   - 3.4
   - 3.5
   - pypy
+  - 3.6
 {%endblock%}
 
 {%block extra_matrix%}
