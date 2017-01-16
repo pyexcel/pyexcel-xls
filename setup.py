@@ -10,7 +10,7 @@ PY26 = PY2 and sys.version_info[1] < 7
 
 NAME = 'pyexcel-xls'
 AUTHOR = 'C.W.'
-VERSION = '0.3.0'
+VERSION = '0.3.1'
 EMAIL = 'wangc_2011 (at) hotmail.com'
 LICENSE = 'New BSD'
 DESCRIPTION = (
@@ -44,14 +44,11 @@ CLASSIFIERS = [
 ]
 
 INSTALL_REQUIRES = [
-    'pyexcel-io>=0.2.2',
+    'pyexcel-io>=0.3.0',
     'xlrd',
+    'xlwt',
 ]
 
-if PY2:
-    INSTALL_REQUIRES.append('xlwt')
-if not PY2:
-    INSTALL_REQUIRES.append('xlwt-future')
 
 PACKAGES = find_packages(exclude=['ez_setup', 'examples', 'tests'])
 EXTRAS_REQUIRE = {

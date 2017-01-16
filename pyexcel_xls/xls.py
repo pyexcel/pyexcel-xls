@@ -4,7 +4,7 @@
 
     The lower level xls/xlsm file format handler using xlrd/xlwt
 
-    :copyright: (c) 2015-2016 by Onni Software Ltd
+    :copyright: (c) 2016-2017 by Onni Software Ltd
     :license: New BSD License
 """
 import sys

@@ -1,4 +1,3 @@
-pyexcel-io>=0.2.2
+pyexcel-io>=0.3.0
 xlrd
-xlwt;python_version<"3"
-xlwt-future;python_version>="3"
+xlwt
