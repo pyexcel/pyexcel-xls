@@ -1,21 +1,21 @@
 import os
-from pyexcel_xls.xls import XLSWriter, XLSBook
+from pyexcel_xls.xls import XLSWriter as Writer, XLSBook as Reader
 from base import PyexcelWriterBase, PyexcelHatWriterBase
 
 
-class TestNativeXLWriter:
+class TestNativeXLSWriter:
     def test_write_book(self):
         self.content = {
             "Sheet1": [[1, 1, 1, 1], [2, 2, 2, 2], [3, 3, 3, 3]],
             "Sheet2": [[4, 4, 4, 4], [5, 5, 5, 5], [6, 6, 6, 6]],
             "Sheet3": [[u'X', u'Y', u'Z'], [1, 4, 7], [2, 5, 8], [3, 6, 9]]
         }
-        self.testfile = "xlwriter.xls"
-        writer = XLSWriter()
+        self.testfile = "writer.xls"
+        writer = Writer()
         writer.open(self.testfile)
         writer.write(self.content)
         writer.close()
-        reader = XLSBook()
+        reader = Reader()
         reader.open(self.testfile)
         content = reader.read_all()
         reader.close()
@@ -28,7 +28,7 @@ class TestNativeXLWriter:
             os.unlink(self.testfile)
 
 
-class TestXLSnCSVWriter(PyexcelWriterBase):
+class TestxlsnCSVWriter(PyexcelWriterBase):
     def setUp(self):
         self.testfile = "test.xls"
         self.testfile2 = "test.csv"
@@ -40,7 +40,7 @@ class TestXLSnCSVWriter(PyexcelWriterBase):
             os.unlink(self.testfile2)
 
 
-class TestXLSHatWriter(PyexcelHatWriterBase):
+class TestxlsHatWriter(PyexcelHatWriterBase):
     def setUp(self):
         self.testfile = "test.xls"
 

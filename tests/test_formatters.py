@@ -1,5 +1,4 @@
 import os
-import datetime
 from unittest import TestCase
 from textwrap import dedent
 
@@ -15,6 +14,7 @@ class TestDateFormat:
         01/01/15 13:13:13
         0.0      0.0
         """
+        import datetime
         r = pe.get_sheet(file_name=os.path.join("tests", "fixtures",
                                                 "date_field.xls"))
         assert isinstance(r[1, 0], datetime.date) is True
@@ -25,6 +25,7 @@ class TestDateFormat:
         assert r[4, 1].strftime("%H:%M:%S") == "00:00:00"
 
     def test_writing_date_format(self):
+        import datetime
         excel_filename = "testdateformat.xls"
         data = [[datetime.date(2014, 12, 25),
                 datetime.time(11, 11, 11),
