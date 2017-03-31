@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+DESCRIPTION = (
+    'A wrapper library to read, manipulate and write data in xls format. It' +
+    ' reads xlsx and xlsm format' +
+    ''
+)
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
@@ -25,15 +30,19 @@ html_static_path = ['_static']
 htmlhelp_basename = 'pyexcel-xlsdoc'
 latex_elements = {}
 latex_documents = [
-    ('index', 'pyexcel-xls.tex', u'pyexcel-xls Documentation',
+    ('index', 'pyexcel-xls.tex',
+     'pyexcel-xls Documentation',
      'Onni Software Ltd.', 'manual'),
 ]
 man_pages = [
-    ('index', 'pyexcel-xls', u'pyexcel-xls Documentation',
+    ('index', 'pyexcel-xls',
+     'pyexcel-xls Documentation',
      [u'Onni Software Ltd.'], 1)
 ]
 texinfo_documents = [
-    ('index', 'pyexcel-xls', u'pyexcel-xls Documentation',
-     'Onni Software Ltd.', 'pyexcel-xls', 'One line description of project.',
+    ('index', 'pyexcel-xls',
+     'pyexcel-xls Documentation',
+     'Onni Software Ltd.', 'pyexcel-xls',
+     DESCRIPTION,
      'Miscellaneous'),
 ]
