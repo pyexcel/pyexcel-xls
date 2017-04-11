@@ -74,6 +74,10 @@ class XLSBook(BookReader):
 
     It reads xls, xlsm, xlsx work book
     """
+    file_types = ['xls', 'xlsm', 'xlsx']
+    stream_type = 'binary'
+    library = 'pyexcel-xls'
+
     def __init__(self):
         BookReader.__init__(self)
         self._file_content = None
@@ -192,6 +196,10 @@ class XLSWriter(BookWriter):
     """
     xls writer
     """
+    file_types = ['xls']
+    stream_type = 'binary'
+    library = 'pyexcel-xls'
+
     def __init__(self):
         BookWriter.__init__(self)
         self.work_book = None
@@ -243,37 +251,3 @@ def xldate_to_python_date(value):
             date_tuple[5]
         )
     return ret
-
-
-_xls_reader_registry = {
-    "file_type": "xls",
-    "reader": XLSBook,
-    "writer": XLSWriter,
-    "stream_type": "binary",
-    "mime_type": "application/vnd.ms-excel",
-    "library": "pyexcel-xls"
-}
-
-_XLSM_MIME = (
-    "application/" +
-    "vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-
-_xlsm_registry = {
-    "file_type": "xlsm",
-    "reader": XLSBook,
-    "stream_type": "binary",
-    "mime_type": _XLSM_MIME,
-    "library": "pyexcel-xls"
-}
-
-_xlsx_registry = {
-    "file_type": "xlsx",
-    "reader": XLSBook,
-    "stream_type": "binary",
-    "mime_type": "application/vnd.ms-excel.sheet.macroenabled.12",
-    "library": "pyexcel-xls"
-}
-
-exports = (_xls_reader_registry,
-           _xlsm_registry,
-           _xlsx_registry)
