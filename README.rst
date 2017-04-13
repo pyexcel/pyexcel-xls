@@ -2,11 +2,17 @@
 pyexcel-xls - Let you focus on data, instead of xls format
 ================================================================================
 
-.. image:: https://api.travis-ci.org/pyexcel/pyexcel-xls.png
-    :target: http://travis-ci.org/pyexcel/pyexcel-xls
+.. image:: https://raw.githubusercontent.com/pyexcel/pyexcel.github.io/master/images/patreon.png
+   :target: https://www.patreon.com/pyexcel
+
+.. image:: https://api.travis-ci.org/pyexcel/pyexcel-xls.svg?branch=master
+   :target: http://travis-ci.org/pyexcel/pyexcel-xls
 
 .. image:: https://codecov.io/github/pyexcel/pyexcel-xls/coverage.png
-    :target: https://codecov.io/github/pyexcel/pyexcel-xls
+   :target: https://codecov.io/github/pyexcel/pyexcel-xls
+
+.. image:: https://readthedocs.org/projects/pyexcel-xls/badge/?version=latest
+   :target: http://pyexcel-xls.readthedocs.org/en/latest/
 
 **pyexcel-xls** is a tiny wrapper library to read, manipulate and write data in xls format and it can read xlsx and xlsm fromat. You are likely to use it with `pyexcel <https://github.com/pyexcel/pyexcel>`_.
 
@@ -332,3 +338,9 @@ Known Issues
    >>> import os
    >>> os.unlink("your_file.xls")
    >>> os.unlink("another_file.xls")
+
+Support the project
+================================================================================
+
+If your company has embedded pyexcel and its components into a revenue generating
+product, please `support me on patreon <https://www.patreon.com/pyexcel>`_.
