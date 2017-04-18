@@ -11,13 +11,20 @@
 # this line has to be place above all else
 # because of dynamic import
 __FILE_TYPE__ = 'xls'
-__META__ = {
-    'plugin_type': 'pyexcel io plugin',
-    'submodule': __FILE_TYPE__,
-    'file_types': [__FILE_TYPE__, 'xlsx', 'xlsm'],
-    'stream_type': 'binary'
-}
-__pyexcel_io_plugins__ = [__META__]
+__pyexcel_io_plugins__ = [
+    {
+        'plugin_type': 'pyexcel-io reader',
+        'submodule': 'xlsr',
+        'file_types': [__FILE_TYPE__, 'xlsx', 'xlsm'],
+        'stream_type': 'binary'
+    },
+    {
+        'plugin_type': 'pyexcel-io writer',
+        'submodule': 'xlsw',
+        'file_types': [__FILE_TYPE__],
+        'stream_type': 'binary'
+    },
+]
 
 
 from pyexcel_io.io import get_data as read_data, isstream, store_data as write_data
