@@ -10,24 +10,15 @@
 # flake8: noqa
 # this line has to be place above all else
 # because of dynamic import
-__FILE_TYPE__ = 'xls'
-__pyexcel_io_plugins__ = [
-    {
-        'plugin_type': 'pyexcel-io reader',
-        'submodule': 'xlsr',
-        'file_types': [__FILE_TYPE__, 'xlsx', 'xlsm'],
-        'stream_type': 'binary'
-    },
-    {
-        'plugin_type': 'pyexcel-io writer',
-        'submodule': 'xlsw',
-        'file_types': [__FILE_TYPE__],
-        'stream_type': 'binary'
-    },
-]
-
-
+from pyexcel_io.plugins import IORegistry
 from pyexcel_io.io import get_data as read_data, isstream, store_data as write_data
+
+__FILE_TYPE__ = 'xls'
+__pyexcel_io_plugins__ = IORegistry(__name__).add_a_reader(
+    submodule='xlsr',
+    file_types=[__FILE_TYPE__, 'xlsx', 'xlsm'],
+    stream_type='binary'
+).add_a_writer(submodule='xlsw', file_types=[__FILE_TYPE__], stream_type='binary')
 
 
 def get_data(afile, file_type=None, **keywords):
