@@ -1,8 +1,8 @@
 """
-    pyexcel_xls
+    pyexcel_xlsw
     ~~~~~~~~~~~~~~~~~~~
 
-    The lower level xls/xlsm file format handler using xlrd/xlwt
+    The lower level xls file format handler using xlwt
 
     :copyright: (c) 2016-2017 by Onni Software Ltd
     :license: New BSD License
