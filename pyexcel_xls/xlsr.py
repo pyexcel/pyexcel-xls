@@ -1,8 +1,8 @@
 """
-    pyexcel_xls
+    pyexcel_xlsr
     ~~~~~~~~~~~~~~~~~~~
 
-    The lower level xls/xlsm file format handler using xlrd/xlwt
+    The lower level xls/xlsm file format handler using xlrd
 
     :copyright: (c) 2016-2017 by Onni Software Ltd
     :license: New BSD License
@@ -91,6 +91,7 @@ class XLSBook(BookReader):
     def close(self):
         if self._native_book:
             self._native_book.release_resources()
+            self._native_book = None
 
     def read_sheet_by_index(self, sheet_index):
         self._native_book = self._get_book(on_demand=True)
