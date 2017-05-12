@@ -62,5 +62,11 @@ def test_issue_13_empty_file_content():
     pe.get_sheet(file_content='', file_type='xls')
 
 
+def test_issue_16_file_stream_has_no_getvalue():
+    test_file = get_fixture("hidden_sheets.xls")
+    with open(test_file, 'rb') as f:
+        pe.get_sheet(file_stream=f, file_type='xls')
+
+
 def get_fixture(file_name):
     return os.path.join("tests", "fixtures", file_name)

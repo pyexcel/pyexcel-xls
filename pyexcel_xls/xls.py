@@ -126,9 +126,11 @@ class XLSBook(BookReader):
         if self._file_name:
             xls_book = xlrd.open_workbook(self._file_name, on_demand=on_demand)
         elif self._file_stream:
+            self._file_stream.seek(0)
+            file_content = self._file_stream.read()
             xls_book = xlrd.open_workbook(
                 None,
-                file_contents=self._file_stream.getvalue(),
+                file_contents=file_content,
                 on_demand=on_demand
             )
         elif self._file_content is not None:
