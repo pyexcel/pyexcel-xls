@@ -66,9 +66,6 @@ class XLSWriter(BookWriter):
     """
     xls writer
     """
-    file_types = ['xls']
-    stream_type = 'binary'
-
     def __init__(self):
         BookWriter.__init__(self)
         self.work_book = None
