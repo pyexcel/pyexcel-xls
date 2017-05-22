@@ -10,16 +10,16 @@
 # flake8: noqa
 # this line has to be place above all else
 # because of dynamic import
-from pyexcel_io.plugins import IORegistry
+from pyexcel_io.plugins import IOPluginInfoChain
 from pyexcel_io.io import get_data as read_data, isstream, store_data as write_data
 
 __FILE_TYPE__ = 'xls'
-IORegistry(__name__).add_a_reader(
-    submodule='xlsr.XLSBook',
+IOPluginInfoChain(__name__).add_a_reader(
+    relative_plugin_class_path='xlsr.XLSBook',
     file_types=[__FILE_TYPE__, 'xlsx', 'xlsm'],
     stream_type='binary'
 ).add_a_writer(
-    submodule='xlsw.XLSWriter',
+    relative_plugin_class_path='xlsw.XLSWriter',
     file_types=[__FILE_TYPE__],
     stream_type='binary'
 )
