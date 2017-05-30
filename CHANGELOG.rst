@@ -7,10 +7,28 @@ Change log
 Updated
 ********************************************************************************
 
-#. `#15 <https://github.com/pyexcel/pyexcel-xlsx/issues/15>`_, close file
-   handle
+#. `#15 <https://github.com/pyexcel/pyexcel-xlsx/issues/15>`_, close file handle
 #. pyexcel-io plugin interface now updated to use
    `lml <https://github.com/chfw/lml>`_.
+
+0.3.3 - 30/05/2017
+--------------------------------------------------------------------------------
+
+Updated
+********************************************************************************
+
+#. `#18 <https://github.com/pyexcel/pyexcel-xls/issues/18>`_, pass on
+   encoding_override and others to xlrd.
+
+0.3.2 - 18.05.2017
+--------------------------------------------------------------------------------
+
+Updated
+********************************************************************************
+
+#. `#16 <https://github.com/pyexcel/pyexcel-xls/issues/16>`_, allow mmap to
+   be passed as file content
+
 
 0.3.1 - 16.01.2017
 --------------------------------------------------------------------------------

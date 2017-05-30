@@ -10,6 +10,7 @@ from pyexcel_xls import save_data
 from _compact import OrderedDict
 from nose.tools import eq_, raises
 import datetime
+from mock import patch
 
 
 def test_pyexcel_issue_5():
@@ -66,6 +67,18 @@ def test_issue_16_file_stream_has_no_getvalue():
     test_file = get_fixture("hidden_sheets.xls")
     with open(test_file, 'rb') as f:
         pe.get_sheet(file_stream=f, file_type='xls')
+
+
+@patch('xlrd.open_workbook')
+def test_issue_18_encoding_override_isnt_passed(fake_open):
+    fake_open.return_value = None
+    test_encoding = 'utf-32'
+    from pyexcel_xls.xlsr import XLSBook
+    book = XLSBook()
+    book.open('fake_file.xls', encoding_override=test_encoding)
+    book._get_book()
+    keywords = fake_open.call_args[1]
+    assert keywords['encoding_override'] == test_encoding
 
 
 def get_fixture(file_name):

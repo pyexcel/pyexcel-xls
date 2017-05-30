@@ -22,6 +22,13 @@ else:
     from collections import OrderedDict
 
 
+XLS_KEYWORDS = [
+    'filename', 'logfile', 'verbosity', 'use_mmap',
+    'file_contents', 'encoding_override', 'formatting_info',
+    'on_demand', 'ragged_rows'
+]
+
+
 class XLSheet(SheetReader):
     """
     xls, xlsx, xlsm sheet reader
@@ -118,29 +125,33 @@ class XLSBook(BookReader):
         return {sheet.name: sheet.to_array()}
 
     def _get_book(self, on_demand=False):
+        xlrd_params = self._extract_xlrd_params()
+        xlrd_params['on_demand'] = on_demand
+
         if self._file_name:
-            xls_book = xlrd.open_workbook(self._file_name, on_demand=on_demand)
+            xlrd_params['filename'] = self._file_name
         elif self._file_stream:
             self._file_stream.seek(0)
             file_content = self._file_stream.read()
-            xls_book = xlrd.open_workbook(
-                None,
-                file_contents=file_content,
-                on_demand=on_demand
-            )
+            xlrd_params['file_contents'] = file_content
         elif self._file_content is not None:
-            xls_book = xlrd.open_workbook(
-                None,
-                file_contents=self._file_content,
-                on_demand=on_demand
-            )
+            xlrd_params['file_contents'] = self._file_content
         else:
             raise IOError("No valid file name or file content found.")
+        xls_book = xlrd.open_workbook(**xlrd_params)
         return xls_book
 
     def _get_params(self):
         self.skip_hidden_sheets = self._keywords.get(
             'skip_hidden_sheets', True)
+
+    def _extract_xlrd_params(self):
+        params = {}
+        if self._keywords is not None:
+            for key in list(self._keywords.keys()):
+                if key in XLS_KEYWORDS:
+                    params[key] = self._keywords.pop(key)
+        return params
 
 
 def is_integer_ok_for_xl_float(value):
