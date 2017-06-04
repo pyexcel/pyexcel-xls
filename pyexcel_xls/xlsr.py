@@ -79,18 +79,18 @@ class XLSBook(BookReader):
         BookReader.__init__(self)
         self._file_content = None
 
-    def open(self, file_name, **keywords):
+    def open(self, file_name, skip_hidden_sheets=True, **keywords):
         BookReader.open(self, file_name, **keywords)
-        self._get_params()
+        self.__skip_hidden_sheets = skip_hidden_sheets
 
-    def open_stream(self, file_stream, **keywords):
+    def open_stream(self, file_stream, skip_hidden_sheets=True, **keywords):
         BookReader.open_stream(self, file_stream, **keywords)
-        self._get_params()
+        self.__skip_hidden_sheets = skip_hidden_sheets
 
-    def open_content(self, file_content, **keywords):
+    def open_content(self, file_content, skip_hidden_sheets=True, **keywords):
         self._keywords = keywords
         self._file_content = file_content
-        self._get_params()
+        self.__skip_hidden_sheets = skip_hidden_sheets
 
     def close(self):
         if self._native_book:
@@ -114,7 +114,7 @@ class XLSBook(BookReader):
         result = OrderedDict()
         self._native_book = self._get_book()
         for sheet in self._native_book.sheets():
-            if self.skip_hidden_sheets and sheet.visibility != 0:
+            if self.__skip_hidden_sheets and sheet.visibility != 0:
                 continue
             data_dict = self.read_sheet(sheet)
             result.update(data_dict)
@@ -140,10 +140,6 @@ class XLSBook(BookReader):
             raise IOError("No valid file name or file content found.")
         xls_book = xlrd.open_workbook(**xlrd_params)
         return xls_book
-
-    def _get_params(self):
-        self.skip_hidden_sheets = self._keywords.get(
-            'skip_hidden_sheets', True)
 
     def _extract_xlrd_params(self):
         params = {}
