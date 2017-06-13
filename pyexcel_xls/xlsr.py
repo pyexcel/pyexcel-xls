@@ -7,19 +7,13 @@
     :copyright: (c) 2016-2017 by Onni Software Ltd
     :license: New BSD License
 """
-import sys
 import math
 import datetime
 import xlrd
 
 from pyexcel_io.book import BookReader
 from pyexcel_io.sheet import SheetReader
-
-PY2 = sys.version_info[0] == 2
-if PY2 and sys.version_info[1] < 7:
-    from ordereddict import OrderedDict
-else:
-    from collections import OrderedDict
+from pyexcel_io._compact import OrderedDict
 
 
 XLS_KEYWORDS = [
