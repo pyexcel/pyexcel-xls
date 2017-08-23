@@ -85,11 +85,10 @@ def test_issue_18_encoding_override_isnt_passed(fake_open):
 
 
 def test_issue_20():
-    import pdb; pdb.set_trace()
     if not IN_TRAVIS:
         raise SkipTest()
     pe.get_book(url="https://github.com/pyexcel/pyexcel-xls/raw/master/tests/fixtures/file_with_an_empty_sheet.xls");  # flake8: noqa
-    
+
 
 def get_fixture(file_name):
     return os.path.join("tests", "fixtures", file_name)
