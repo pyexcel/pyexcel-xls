@@ -14,8 +14,6 @@ pyexcel-xls - Let you focus on data, instead of xls format
 .. image:: https://img.shields.io/gitter/room/gitterHQ/gitter.svg
    :target: https://gitter.im/pyexcel/Lobby
 
-.. image:: https://readthedocs.org/projects/pyexcel-xls/badge/?version=latest
-   :target: http://pyexcel-xls.readthedocs.org/en/latest/
 
 **pyexcel-xls** is a tiny wrapper library to read, manipulate and write data in xls format and it can read xlsx and xlsm fromat. You are likely to use it with `pyexcel <https://github.com/pyexcel/pyexcel>`_.
 

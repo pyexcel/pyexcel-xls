@@ -10,7 +10,7 @@ PY26 = PY2 and sys.version_info[1] < 7
 
 NAME = 'pyexcel-xls'
 AUTHOR = 'C.W.'
-VERSION = ''
+VERSION = '0.4.1'
 EMAIL = 'wangc_2011@hotmail.com'
 LICENSE = 'New BSD'
 DESCRIPTION = (

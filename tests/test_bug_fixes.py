@@ -13,7 +13,7 @@ from nose import SkipTest
 import datetime
 from mock import patch
 
-IS_TRAVIS = 'TRAVIS' in os.environ
+IN_TRAVIS = 'TRAVIS' in os.environ
 
 
 def test_pyexcel_issue_5():
@@ -86,7 +86,7 @@ def test_issue_18_encoding_override_isnt_passed(fake_open):
 
 def test_issue_20():
     import pdb; pdb.set_trace()
-    if not IS_TRAVIS:
+    if not IN_TRAVIS:
         raise SkipTest()
     pe.get_book(url="https://github.com/pyexcel/pyexcel-xls/raw/master/tests/fixtures/file_with_an_empty_sheet.xls");  # flake8: noqa
     

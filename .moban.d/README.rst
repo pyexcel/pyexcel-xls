@@ -1,5 +1,8 @@
 {%extends 'README.rst.jj2' %}
 
+{% block documentation_link %}
+{% endblock %}
+
 {%block description%}
 **pyexcel-{{file_type}}** is a tiny wrapper library to read, manipulate and write data in {{file_type}} format and it can read xlsx and xlsm fromat. You are likely to use it with `pyexcel <https://github.com/pyexcel/pyexcel>`_.
 {%endblock%}
