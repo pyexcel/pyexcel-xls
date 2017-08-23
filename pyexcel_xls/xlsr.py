@@ -125,7 +125,8 @@ class XLSBook(BookReader):
         if self._file_name:
             xlrd_params['filename'] = self._file_name
         elif self._file_stream:
-            self._file_stream.seek(0)
+            if hasattr(self._file_stream, 'seek'):
+                self._file_stream.seek(0)
             file_content = self._file_stream.read()
             xlrd_params['file_contents'] = file_content
         elif self._file_content is not None:
