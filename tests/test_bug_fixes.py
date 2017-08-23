@@ -9,8 +9,11 @@ import pyexcel as pe
 from pyexcel_xls import save_data
 from _compact import OrderedDict
 from nose.tools import eq_, raises
+from nose import SkipTest
 import datetime
 from mock import patch
+
+IS_TRAVIS = 'TRAVIS' in os.environ
 
 
 def test_pyexcel_issue_5():
@@ -80,6 +83,13 @@ def test_issue_18_encoding_override_isnt_passed(fake_open):
     keywords = fake_open.call_args[1]
     assert keywords['encoding_override'] == test_encoding
 
+
+def test_issue_20():
+    import pdb; pdb.set_trace()
+    if not IS_TRAVIS:
+        raise SkipTest()
+    pe.get_book(url="https://github.com/pyexcel/pyexcel-xls/raw/master/tests/fixtures/file_with_an_empty_sheet.xls");  # flake8: noqa
+    
 
 def get_fixture(file_name):
     return os.path.join("tests", "fixtures", file_name)
