@@ -10,11 +10,10 @@
 import math
 import datetime
 import xlrd
-from io import UnsupportedOperation
 
 from pyexcel_io.book import BookReader
 from pyexcel_io.sheet import SheetReader
-from pyexcel_io._compact import OrderedDict, PY2
+from pyexcel_io._compact import OrderedDict
 
 
 XLS_KEYWORDS = [
@@ -126,14 +125,7 @@ class XLSBook(BookReader):
         if self._file_name:
             xlrd_params['filename'] = self._file_name
         elif self._file_stream:
-            if PY2:
-                if hasattr(self._file_stream, 'seek'):
-                    self._file_stream.seek(0)
-            else:
-                try:
-                    self._file_stream.seek(0)
-                except UnsupportedOperation:
-                    pass
+            self._file_stream.seek(0)
             file_content = self._file_stream.read()
             xlrd_params['file_contents'] = file_content
         elif self._file_content is not None:
