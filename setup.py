@@ -19,7 +19,7 @@ DESCRIPTION = (
     ''
 )
 URL = 'https://github.com/pyexcel/pyexcel-xls'
-DOWNLOAD_URL = '%s/archive/0.4.1.tar.gz' % URL
+DOWNLOAD_URL = '%s/archive/0.5.0.tar.gz' % URL
 FILES = ['README.rst', 'CHANGELOG.rst']
 KEYWORDS = [
     'xls',

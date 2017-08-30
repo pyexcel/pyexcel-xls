@@ -1,6 +1,17 @@
 Change log
 ================================================================================
 
+0.5.0 - 30.08.2017
+--------------------------------------------------------------------------------
+
+Updated
+********************************************************************************
+
+#. `#20 <https://github.com/pyexcel/pyexcel-xls/issues/20>`_, is handled in
+   pyexcel-io
+#. put dependency on pyexcel-io 0.5.0, which uses cStringIO instead of StringIO.
+   Hence, there will be performance boost in handling files in memory.
+
 0.4.1 - 25.08.2017
 --------------------------------------------------------------------------------
 
