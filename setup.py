@@ -78,12 +78,12 @@ class PublishCommand(Command):
 
     def run(self):
         try:
-            self.status('Removing previous builds…')
+            self.status('Removing previous builds...')
             rmtree(os.path.join(here, 'dist'))
         except OSError:
             pass
 
-        self.status('Building Source and Wheel (universal) distribution…')
+        self.status('Building Source and Wheel (universal) distribution...')
         if os.system(GS_COMMAND) == 0:
             os.system(PUBLISH_COMMAND)
 
