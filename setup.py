@@ -9,7 +9,7 @@ PY26 = PY2 and sys.version_info[1] < 7
 
 NAME = 'pyexcel-xls'
 AUTHOR = 'C.W.'
-VERSION = '0.5.0'
+VERSION = '0.6.0'
 EMAIL = 'wangc_2011@hotmail.com'
 LICENSE = 'New BSD'
 DESCRIPTION = (
@@ -18,7 +18,7 @@ DESCRIPTION = (
     ''
 )
 URL = 'https://github.com/pyexcel/pyexcel-xls'
-DOWNLOAD_URL = '%s/archive/0.5.0.tar.gz' % URL
+DOWNLOAD_URL = '%s/archive/0.5.1.tar.gz' % URL
 FILES = ['README.rst',  'CHANGELOG.rst']
 KEYWORDS = [
     'xls',
@@ -54,8 +54,8 @@ EXTRAS_REQUIRE = {
 }
 PUBLISH_COMMAND = '{0} setup.py sdist bdist_wheel upload -r pypi'.format(
     sys.executable)
-GS_COMMAND = ('gs pyexcel-xls v0.5.0 ' +
-              "Find 0.5.0 in changelog for more details")
+GS_COMMAND = ('gs pyexcel-xls v0.5.1 ' +
+              "Find 0.5.1 in changelog for more details")
 here = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -78,12 +78,12 @@ class PublishCommand(Command):
 
     def run(self):
         try:
-            self.status('Removing previous builds…')
+            self.status('Removing previous builds...')
             rmtree(os.path.join(here, 'dist'))
         except OSError:
             pass
 
-        self.status('Building Source and Wheel (universal) distribution…')
+        self.status('Building Source and Wheel (universal) distribution...')
         if os.system(GS_COMMAND) == 0:
             os.system(PUBLISH_COMMAND)
 
