@@ -72,19 +72,26 @@ class XLSBook(BookReader):
     def __init__(self):
         BookReader.__init__(self)
         self._file_content = None
+        self.__skip_hidden_sheets = True
+        self.__skip_hidden_row_column = True
 
-    def open(self, file_name, skip_hidden_sheets=True, **keywords):
+    def open(self, file_name, **keywords):
+        self.__parse_keywords(**keywords)
         BookReader.open(self, file_name, **keywords)
-        self.__skip_hidden_sheets = skip_hidden_sheets
 
-    def open_stream(self, file_stream, skip_hidden_sheets=True, **keywords):
+    def open_stream(self, file_stream, **keywords):
+        self.__parse_keywords(**keywords)
         BookReader.open_stream(self, file_stream, **keywords)
-        self.__skip_hidden_sheets = skip_hidden_sheets
 
-    def open_content(self, file_content, skip_hidden_sheets=True, **keywords):
+    def open_content(self, file_content, **keywords):
+        self.__parse_keywords(**keywords)
         self._keywords = keywords
         self._file_content = file_content
-        self.__skip_hidden_sheets = skip_hidden_sheets
+
+    def __parse_keywords(self, **keywords):
+        self.__skip_hidden_sheets = keywords.get('skip_hidden_sheets', True)
+        self.__skip_hidden_row_column = keywords.get(
+            'skip_hidden_row_and_column', True)
 
     def close(self):
         if self._native_book:
@@ -131,6 +138,8 @@ class XLSBook(BookReader):
             xlrd_params['file_contents'] = self._file_content
         else:
             raise IOError("No valid file name or file content found.")
+        if self.__skip_hidden_row_column:
+            xlrd_params['formatting_info'] = True
         xls_book = xlrd.open_workbook(**xlrd_params)
         return xls_book
 
