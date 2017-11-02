@@ -5,6 +5,9 @@
 
 {%block description%}
 **pyexcel-{{file_type}}** is a tiny wrapper library to read, manipulate and write data in {{file_type}} format and it can read xlsx and xlsm fromat. You are likely to use it with `pyexcel <https://github.com/pyexcel/pyexcel>`_.
+
+New flag: `skip_hidden_row_and_column=True` allow you to skip hidden rows and columns. It may slow down its reading performance.
+
 {%endblock%}
 
 {%block extras %}

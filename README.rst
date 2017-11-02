@@ -17,6 +17,9 @@ pyexcel-xls - Let you focus on data, instead of xls format
 
 **pyexcel-xls** is a tiny wrapper library to read, manipulate and write data in xls format and it can read xlsx and xlsm fromat. You are likely to use it with `pyexcel <https://github.com/pyexcel/pyexcel>`_.
 
+New flag: `skip_hidden_row_and_column=True` allow you to skip hidden rows and columns. It may slow down its reading performance.
+
+
 Known constraints
 ==================
 

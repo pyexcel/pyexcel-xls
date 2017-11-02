@@ -32,6 +32,15 @@ class XLSheet(SheetReader):
     def __init__(self, sheet, auto_detect_int=True, **keywords):
         SheetReader.__init__(self, sheet, **keywords)
         self.__auto_detect_int = auto_detect_int
+        self.__hidden_cols = []
+        self.__hidden_rows = []
+        if keywords.get('skip_hidden_row_and_column') is True:
+            for col_index, info in self._native_sheet.colinfo_map.items():
+                if info.hidden == 1:
+                    self.__hidden_cols.append(col_index)
+            for row_index, info in self._native_sheet.rowinfo_map.items():
+                if info.hidden == 1:
+                    self.__hidden_rows.append(row_index)
 
     @property
     def name(self):
@@ -41,18 +50,19 @@ class XLSheet(SheetReader):
         """
         Number of rows in the xls sheet
         """
-        return self._native_sheet.nrows
+        return self._native_sheet.nrows - len(self.__hidden_rows)
 
     def number_of_columns(self):
         """
         Number of columns in the xls sheet
         """
-        return self._native_sheet.ncols
+        return self._native_sheet.ncols - len(self.__hidden_cols)
 
     def cell_value(self, row, column):
         """
         Random access to the xls cells
         """
+        row, column = self._offset_hidden_indices(row, column)
         cell_type = self._native_sheet.cell_type(row, column)
         value = self._native_sheet.cell_value(row, column)
         if cell_type == xlrd.XL_CELL_DATE:
@@ -61,6 +71,19 @@ class XLSheet(SheetReader):
             if has_no_digits_in_float(value):
                 value = int(value)
         return value
+
+    def _offset_hidden_indices(self, row, column):
+        row = calculate_offsets(row, self.__hidden_rows)
+        column = calculate_offsets(column, self.__hidden_cols)
+        return row, column
+
+
+def calculate_offsets(incoming_index, hidden_indices):
+    offset = 0
+    for index in hidden_indices:
+        if index <= (incoming_index + offset):
+            offset += 1
+    return incoming_index + offset
 
 
 class XLSBook(BookReader):
@@ -72,19 +95,26 @@ class XLSBook(BookReader):
     def __init__(self):
         BookReader.__init__(self)
         self._file_content = None
+        self.__skip_hidden_sheets = True
+        self.__skip_hidden_row_column = True
 
-    def open(self, file_name, skip_hidden_sheets=True, **keywords):
+    def open(self, file_name, **keywords):
+        self.__parse_keywords(**keywords)
         BookReader.open(self, file_name, **keywords)
-        self.__skip_hidden_sheets = skip_hidden_sheets
 
-    def open_stream(self, file_stream, skip_hidden_sheets=True, **keywords):
+    def open_stream(self, file_stream, **keywords):
+        self.__parse_keywords(**keywords)
         BookReader.open_stream(self, file_stream, **keywords)
-        self.__skip_hidden_sheets = skip_hidden_sheets
 
-    def open_content(self, file_content, skip_hidden_sheets=True, **keywords):
+    def open_content(self, file_content, **keywords):
+        self.__parse_keywords(**keywords)
         self._keywords = keywords
         self._file_content = file_content
-        self.__skip_hidden_sheets = skip_hidden_sheets
+
+    def __parse_keywords(self, **keywords):
+        self.__skip_hidden_sheets = keywords.get('skip_hidden_sheets', True)
+        self.__skip_hidden_row_column = keywords.get(
+            'skip_hidden_row_and_column', True)
 
     def close(self):
         if self._native_book:
@@ -131,6 +161,8 @@ class XLSBook(BookReader):
             xlrd_params['file_contents'] = self._file_content
         else:
             raise IOError("No valid file name or file content found.")
+        if self.__skip_hidden_row_column:
+            xlrd_params['formatting_info'] = True
         xls_book = xlrd.open_workbook(**xlrd_params)
         return xls_book
 
