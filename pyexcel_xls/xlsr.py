@@ -161,7 +161,7 @@ class XLSBook(BookReader):
             xlrd_params['file_contents'] = self._file_content
         else:
             raise IOError("No valid file name or file content found.")
-        if self.__skip_hidden_row_column:
+        if self.__skip_hidden_row_column and self._file_type == 'xls':
             xlrd_params['formatting_info'] = True
         xls_book = xlrd.open_workbook(**xlrd_params)
         return xls_book
