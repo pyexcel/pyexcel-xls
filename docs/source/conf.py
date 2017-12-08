@@ -10,11 +10,9 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.viewcode',
 ]
-
 intersphinx_mapping = {
     'pyexcel': ('http://pyexcel.readthedocs.io/en/latest/', None),
 }
-spelling_word_list_filename = 'spelling_wordlist.txt'
 templates_path = ['_templates']
 source_suffix = '.rst'
 master_doc = 'index'
@@ -22,7 +20,7 @@ master_doc = 'index'
 project = u'pyexcel-xls'
 copyright = u'2015-2017 Onni Software Ltd.'
 version = '0.5.4'
-release = '0.5.4'
+release = '0.5.5'
 exclude_patterns = []
 pygments_style = 'sphinx'
 html_theme = 'default'
