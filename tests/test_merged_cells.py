@@ -34,9 +34,8 @@ def test_merged_cell_class():
     test_dict = {}
     merged_cell = MergedCell(1, 4, 1, 4)
     merged_cell.register_cells(test_dict)
-    keys = list(test_dict.keys())
-    expected = ['2-2', '2-3', '2-1', '1-1',
-                '1-3', '1-2', '3-3', '3-2',
-                '3-1']
+    keys = sorted(list(test_dict.keys()))
+    expected = ['1-1', '1-2', '1-3', '2-1',
+                '2-2', '2-3', '3-1', '3-2', '3-3']
     eq_(keys, expected)
     eq_(merged_cell, test_dict['3-1'])
