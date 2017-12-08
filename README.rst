@@ -17,6 +17,8 @@ pyexcel-xls - Let you focus on data, instead of xls format
 
 **pyexcel-xls** is a tiny wrapper library to read, manipulate and write data in xls format and it can read xlsx and xlsm fromat. You are likely to use it with `pyexcel <https://github.com/pyexcel/pyexcel>`_.
 
+:fire: New flag: `detect_merged_cells` allows you to spread the same value among all merged cells. But be aware that this may slow down its reading performance.
+
 New flag: `skip_hidden_row_and_column` allows you to skip hidden rows and columns and is defaulted to **True**. It may slow down its reading performance. And it is only valid for 'xls' files. For 'xlsx' files, please use pyexcel-xlsx.
 
 
