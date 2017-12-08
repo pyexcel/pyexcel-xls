@@ -3,7 +3,7 @@ name: "pyexcel-xls"
 nick_name: xls
 version: 0.5.5
 current_version: 0.5.5
-release: 0.5.4
+release: 0.5.5
 file_type: xls
 dependencies:
   - pyexcel-io>=0.5.3
