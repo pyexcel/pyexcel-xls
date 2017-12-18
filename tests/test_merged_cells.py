@@ -5,16 +5,17 @@ from nose.tools import eq_
 
 
 def test_merged_cells():
-    data = get_data(os.path.join("tests", "fixtures", "merged-cell-sheet.xls"),
-                    detect_merged_cells=True,
-                    library="pyexcel-xls")
+    data = get_data(
+        get_fixture("merged-cell-sheet.xls"),
+        detect_merged_cells=True,
+        library="pyexcel-xls")
     expected = [[1, 2, 3], [1, 5, 6], [1, 8, 9], [10, 11, 11]]
     eq_(data['Sheet1'], expected)
 
 
 def test_complex_merged_cells():
     data = get_data(
-        os.path.join("tests", "fixtures", "complex-merged-cells-sheet.xls"),
+        get_fixture("complex-merged-cells-sheet.xls"),
         detect_merged_cells=True,
         library="pyexcel-xls")
     expected = [
@@ -30,6 +31,45 @@ def test_complex_merged_cells():
     eq_(data['Sheet1'], expected)
 
 
+def test_exploration():
+    data = get_data(
+        get_fixture("merged-sheet-exploration.xls"),
+        detect_merged_cells=True,
+        library="pyexcel-xls")
+    expected_sheet1 = [
+        [1, 1, 1, 1, 1, 1],
+        [2],
+        [2],
+        [2],
+        [2],
+        [2],
+        [2],
+        [2],
+        [2],
+        [2]]
+    eq_(data['Sheet1'], expected_sheet1)
+    expected_sheet2 = [
+        [3],
+        [3],
+        [3],
+        [3, 4, 4, 4, 4, 4, 4],
+        [3],
+        [3],
+        [3]]
+    eq_(data['Sheet2'], expected_sheet2)
+    expected_sheet3 = [
+        ['', '', '', '', '', 2, 2, 2],
+        [],
+        [],
+        [],
+        ['', '', '', 5],
+        ['', '', '', 5],
+        ['', '', '', 5],
+        ['', '', '', 5],
+        ['', '', '', 5]]
+    eq_(data['Sheet3'], expected_sheet3)
+
+
 def test_merged_cell_class():
     test_dict = {}
     merged_cell = MergedCell(1, 4, 1, 4)
@@ -39,3 +79,7 @@ def test_merged_cell_class():
                 '2-2', '2-3', '3-1', '3-2', '3-3']
     eq_(keys, expected)
     eq_(merged_cell, test_dict['3-1'])
+
+
+def get_fixture(file_name):
+    return os.path.join("tests", "fixtures", file_name)
