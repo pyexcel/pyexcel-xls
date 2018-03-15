@@ -4,6 +4,12 @@ releases:
 - changes:
   - action: Added
     details:
+    - "`pyexcel#120`, xlwt cannot save a book without any sheet. So, let's raise an exception in this case in order to warn the developers."
+  date: 15.03.2018
+  version: 0.5.6
+- changes:
+  - action: Added
+    details:
     - '`#25`, detect merged  cell in .xls'
   date: 8.11.2017
   version: 0.5.5
