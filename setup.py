@@ -9,17 +9,16 @@ PY26 = PY2 and sys.version_info[1] < 7
 
 NAME = 'pyexcel-xls'
 AUTHOR = 'C.W.'
-VERSION = '0.5.5'
+VERSION = '0.5.6'
 EMAIL = 'wangc_2011@hotmail.com'
 LICENSE = 'New BSD'
 DESCRIPTION = (
     'A wrapper library to read, manipulate and write data in xls format. It' +
-    ' reads xlsx and xlsm format' +
-    ''
+    'reads xlsx and xlsm format'
 )
 URL = 'https://github.com/pyexcel/pyexcel-xls'
 DOWNLOAD_URL = '%s/archive/0.5.5.tar.gz' % URL
-FILES = ['README.rst',  'CHANGELOG.rst']
+FILES = ['README.rst', 'CHANGELOG.rst']
 KEYWORDS = [
     'xls',
     'xlsx',
@@ -47,6 +46,7 @@ INSTALL_REQUIRES = [
     'xlrd',
     'xlwt',
 ]
+SETUP_COMMANDS = {}
 
 
 PACKAGES = find_packages(exclude=['ez_setup', 'examples', 'tests'])
@@ -85,6 +85,8 @@ class PublishCommand(Command):
         try:
             self.status('Removing previous builds...')
             rmtree(os.path.join(HERE, 'dist'))
+            rmtree(os.path.join(HERE, 'build'))
+            rmtree(os.path.join(HERE, 'pyexcel_xls.egg-info'))
         except OSError:
             pass
 
@@ -99,6 +101,11 @@ class PublishCommand(Command):
                 self.status(UPLOAD_FAILED_MSG % PUBLISH_COMMAND)
 
         sys.exit()
+
+
+SETUP_COMMANDS.update({
+    'publish': PublishCommand
+})
 
 
 def has_gease():
@@ -174,7 +181,5 @@ if __name__ == '__main__':
         include_package_data=True,
         zip_safe=False,
         classifiers=CLASSIFIERS,
-        cmdclass={
-            'publish': PublishCommand,
-        }
+        cmdclass=SETUP_COMMANDS
     )
