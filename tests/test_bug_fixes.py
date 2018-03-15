@@ -7,6 +7,7 @@
 import os
 import pyexcel as pe
 from pyexcel_xls import save_data
+from pyexcel_xls.xlsw import XLSWriter as Writer
 from _compact import OrderedDict
 from nose.tools import eq_, raises
 from nose import SkipTest
@@ -88,6 +89,15 @@ def test_issue_20():
     if not IN_TRAVIS:
         raise SkipTest()
     pe.get_book(url="https://github.com/pyexcel/pyexcel-xls/raw/master/tests/fixtures/file_with_an_empty_sheet.xls");  # flake8: noqa
+
+
+@raises(NotImplementedError)
+def test_empty_book_pyexcel_issue_120():
+    """
+    https://github.com/pyexcel/pyexcel/issues/120
+    """
+    writer = Writer()
+    writer.write({})
 
 
 def get_fixture(file_name):

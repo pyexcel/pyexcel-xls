@@ -18,6 +18,7 @@ from pyexcel_io.sheet import SheetWriter
 DEFAULT_DATE_FORMAT = "DD/MM/YY"
 DEFAULT_TIME_FORMAT = "HH:MM:SS"
 DEFAULT_DATETIME_FORMAT = "%s %s" % (DEFAULT_DATE_FORMAT, DEFAULT_TIME_FORMAT)
+EMPTY_SHEET_NOT_ALLOWED = "xlwt does not support a book without any sheets"
 
 
 class XLSheetWriter(SheetWriter):
@@ -75,6 +76,12 @@ class XLSWriter(BookWriter):
         BookWriter.open(self, file_name, **keywords)
         self.work_book = Workbook(style_compression=style_compression,
                                   encoding=encoding)
+
+    def write(self, incoming_dict):
+        if incoming_dict:
+            BookWriter.write(self, incoming_dict)
+        else:
+            raise NotImplementedError(EMPTY_SHEET_NOT_ALLOWED)
 
     def create_sheet(self, name):
         return XLSheetWriter(self.work_book, None, name)
