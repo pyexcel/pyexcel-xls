@@ -44,12 +44,13 @@ class XLSheet(SheetReader):
 
     Currently only support first sheet in the file
     """
-    def __init__(self, sheet, auto_detect_int=True, **keywords):
+    def __init__(self, sheet, auto_detect_int=True, date_mode=0, **keywords):
         SheetReader.__init__(self, sheet, **keywords)
         self.__auto_detect_int = auto_detect_int
         self.__hidden_cols = []
         self.__hidden_rows = []
         self.__merged_cells = {}
+        self._book_date_mode = date_mode
         if keywords.get('detect_merged_cells') is True:
             for merged_cell_ranges in sheet.merged_cells:
                 merged_cells = MergedCell(*merged_cell_ranges)
@@ -88,7 +89,7 @@ class XLSheet(SheetReader):
         value = self._native_sheet.cell_value(row, column)
 
         if cell_type == xlrd.XL_CELL_DATE:
-            value = xldate_to_python_date(value)
+            value = xldate_to_python_date(value, self._book_date_mode)
         elif cell_type == xlrd.XL_CELL_NUMBER and self.__auto_detect_int:
             if has_no_digits_in_float(value):
                 value = int(value)
@@ -176,7 +177,8 @@ class XLSBook(BookReader):
         return result
 
     def read_sheet(self, native_sheet):
-        sheet = XLSheet(native_sheet, **self._keywords)
+        sheet = XLSheet(native_sheet, date_mode=self._native_book.datemode,
+                        **self._keywords)
         return {sheet.name: sheet.to_array()}
 
     def _get_book(self, on_demand=False):
@@ -208,11 +210,12 @@ class XLSBook(BookReader):
         return params
 
 
-def xldate_to_python_date(value):
+def xldate_to_python_date(value, date_mode):
     """
     convert xl date to python date
     """
-    date_tuple = xlrd.xldate_as_tuple(value, 0)
+    date_tuple = xlrd.xldate_as_tuple(value, date_mode)
+
     ret = None
     if date_tuple == (0, 0, 0, 0, 0, 0):
         ret = datetime.datetime(1900, 1, 1, 0, 0, 0)
