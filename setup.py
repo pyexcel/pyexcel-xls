@@ -1,4 +1,6 @@
-# Template by setupmobans
+#!/usr/bin/env python3
+
+# Template by pypi-mobans
 import os
 import sys
 import codecs
@@ -9,27 +11,24 @@ PY26 = PY2 and sys.version_info[1] < 7
 
 NAME = 'pyexcel-xls'
 AUTHOR = 'C.W.'
-VERSION = '0.6.0'
+VERSION = '0.5.7'
 EMAIL = 'wangc_2011@hotmail.com'
 LICENSE = 'New BSD'
 DESCRIPTION = (
     'A wrapper library to read, manipulate and write data in xls format. It' +
-    ' reads xlsx and xlsm format' +
-    ''
+    'reads xlsx and xlsm format'
 )
 URL = 'https://github.com/pyexcel/pyexcel-xls'
-DOWNLOAD_URL = '%s/archive/0.5.1.tar.gz' % URL
-FILES = ['README.rst',  'CHANGELOG.rst']
+DOWNLOAD_URL = '%s/archive/0.5.6.tar.gz' % URL
+FILES = ['README.rst', 'CHANGELOG.rst']
 KEYWORDS = [
     'xls',
     'xlsx',
-    'xlsm'
-    'python'
+    'xlsm',
+    'python',
 ]
 
 CLASSIFIERS = [
-    'Topic :: Office/Business',
-    'Topic :: Utilities',
     'Topic :: Software Development :: Libraries',
     'Programming Language :: Python',
     'Intended Audience :: Developers',
@@ -47,16 +46,22 @@ INSTALL_REQUIRES = [
     'xlrd',
     'xlwt',
 ]
+SETUP_COMMANDS = {}
 
 
 PACKAGES = find_packages(exclude=['ez_setup', 'examples', 'tests'])
 EXTRAS_REQUIRE = {
 }
+# You do not need to read beyond this line
 PUBLISH_COMMAND = '{0} setup.py sdist bdist_wheel upload -r pypi'.format(
     sys.executable)
-GS_COMMAND = ('gs pyexcel-xls v0.5.1 ' +
-              "Find 0.5.1 in changelog for more details")
-here = os.path.abspath(os.path.dirname(__file__))
+GS_COMMAND = ('gs pyexcel-xls v0.5.6 ' +
+              "Find 0.5.6 in changelog for more details")
+NO_GS_MESSAGE = ('Automatic github release is disabled. ' +
+                 'Please install gease to enable it.')
+UPLOAD_FAILED_MSG = (
+    'Upload failed. please run "%s" yourself.' % PUBLISH_COMMAND)
+HERE = os.path.abspath(os.path.dirname(__file__))
 
 
 class PublishCommand(Command):
@@ -79,15 +84,41 @@ class PublishCommand(Command):
     def run(self):
         try:
             self.status('Removing previous builds...')
-            rmtree(os.path.join(here, 'dist'))
+            rmtree(os.path.join(HERE, 'dist'))
+            rmtree(os.path.join(HERE, 'build'))
+            rmtree(os.path.join(HERE, 'pyexcel_xls.egg-info'))
         except OSError:
             pass
 
         self.status('Building Source and Wheel (universal) distribution...')
-        if os.system(GS_COMMAND) == 0:
-            os.system(PUBLISH_COMMAND)
+        run_status = True
+        if has_gease():
+            run_status = os.system(GS_COMMAND) == 0
+        else:
+            self.status(NO_GS_MESSAGE)
+        if run_status:
+            if os.system(PUBLISH_COMMAND) != 0:
+                self.status(UPLOAD_FAILED_MSG % PUBLISH_COMMAND)
 
         sys.exit()
+
+
+SETUP_COMMANDS.update({
+    'publish': PublishCommand
+})
+
+
+def has_gease():
+    """
+    test if github release command is installed
+
+    visit http://github.com/moremoban/gease for more info
+    """
+    try:
+        import gease  # noqa
+        return True
+    except ImportError:
+        return False
 
 
 def read_files(*files):
@@ -101,7 +132,8 @@ def read_files(*files):
 
 def read(afile):
     """Read a file into setup"""
-    with codecs.open(afile, 'r', 'utf-8') as opened_file:
+    the_relative_file = os.path.join(HERE, afile)
+    with codecs.open(the_relative_file, 'r', 'utf-8') as opened_file:
         content = filter_out_test_code(opened_file)
         content = "".join(list(content))
         return content
@@ -150,8 +182,5 @@ if __name__ == '__main__':
         include_package_data=True,
         zip_safe=False,
         classifiers=CLASSIFIERS,
-        setup_requires=['gease'],
-        cmdclass={
-            'publish': PublishCommand,
-        }
+        cmdclass=SETUP_COMMANDS
     )

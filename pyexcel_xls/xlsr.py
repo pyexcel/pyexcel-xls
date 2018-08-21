@@ -21,6 +21,7 @@ XLS_KEYWORDS = [
     'file_contents', 'encoding_override', 'formatting_info',
     'on_demand', 'ragged_rows'
 ]
+DEFAULT_ERROR_VALUE = '#N/A'
 
 
 class XLSheet(SheetReader):
@@ -70,6 +71,8 @@ class XLSheet(SheetReader):
         elif cell_type == xlrd.XL_CELL_NUMBER and self.__auto_detect_int:
             if has_no_digits_in_float(value):
                 value = int(value)
+        elif cell_type == xlrd.XL_CELL_ERROR:
+            value = DEFAULT_ERROR_VALUE
         return value
 
     def _offset_hidden_indices(self, row, column):

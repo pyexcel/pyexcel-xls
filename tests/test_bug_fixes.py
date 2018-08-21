@@ -90,5 +90,13 @@ def test_issue_20():
     pe.get_book(url="https://github.com/pyexcel/pyexcel-xls/raw/master/tests/fixtures/file_with_an_empty_sheet.xls");  # flake8: noqa
 
 
+def test_issue_151():
+    s = pe.get_sheet(
+        file_name=get_fixture('pyexcel_issue_151.xlsx'),
+        skip_hidden_row_and_column=False,
+        library='pyexcel-xls')
+    eq_('#N/A', s[0,0])
+
+
 def get_fixture(file_name):
     return os.path.join("tests", "fixtures", file_name)
