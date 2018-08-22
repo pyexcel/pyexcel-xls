@@ -1,7 +1,44 @@
 Change log
 ================================================================================
 
-0.6.0 - unreleased
+0.5.7 - 15.03.2018
+--------------------------------------------------------------------------------
+
+Added
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. `pyexcel#54 <https://github.com/pyexcel/pyexcel/issues/54>`_, Book.datemode
+   attribute of that workbook should be passed always.
+
+0.5.6 - 15.03.2018
+--------------------------------------------------------------------------------
+
+Added
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. `pyexcel#120 <https://github.com/pyexcel/pyexcel/issues/120>`_, xlwt cannot
+   save a book without any sheet. So, let's raise an exception in this case in
+   order to warn the developers.
+
+0.5.5 - 8.11.2017
+--------------------------------------------------------------------------------
+
+Added
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. `#25 <https://github.com/pyexcel/pyexcel-xls/issues/25>`_, detect merged cell
+   in .xls
+
+0.5.4 - 2.11.2017
+--------------------------------------------------------------------------------
+
+Added
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. `#24 <https://github.com/pyexcel/pyexcel-xls/issues/24>`_, xlsx format cannot
+   use skip_hidden_row_and_column. please use pyexcel-xlsx instead.
+
+0.5.3 - 2.11.2017
 --------------------------------------------------------------------------------
 
 Added
@@ -9,6 +46,27 @@ Added
 
 #. `#21 <https://github.com/pyexcel/pyexcel-xls/issues/21>`_, skip hidden rows
    and columns under 'skip_hidden_row_and_column' flag.
+
+0.5.2 - 23.10.2017
+--------------------------------------------------------------------------------
+
+updated
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. pyexcel `pyexcel#105 <https://github.com/pyexcel/pyexcel/issues/105>`_,
+   remove gease from setup_requires, introduced by 0.5.1.
+#. remove python2.6 test support
+#. update its dependecy on pyexcel-io to 0.5.3
+
+0.5.1 - 20.10.2017
+--------------------------------------------------------------------------------
+
+added
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. `pyexcel#103 <https://github.com/pyexcel/pyexcel/issues/103>`_, include
+   LICENSE file in MANIFEST.in, meaning LICENSE file will appear in the released
+   tar ball.
 
 0.5.0 - 30.08.2017
 --------------------------------------------------------------------------------

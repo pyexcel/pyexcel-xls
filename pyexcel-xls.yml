@@ -6,7 +6,7 @@ current_version: 0.5.8
 release: 0.5.7
 file_type: xls
 dependencies:
-  - pyexcel-io>=0.5.0
+  - pyexcel-io>=0.5.3
   - xlrd
   - xlwt
 description: A wrapper library to read, manipulate and write data in xls format. It reads xlsx and xlsm format

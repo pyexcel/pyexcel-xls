@@ -4,9 +4,49 @@ releases:
 - changes:
   - action: Added
     details:
+    - "`pyexcel#54`, Book.datemode attribute of that workbook should be passed always."
+  date: 15.03.2018
+  version: 0.5.7
+- changes:
+  - action: Added
+    details:
+    - "`pyexcel#120`, xlwt cannot save a book without any sheet. So, let's raise an exception in this case in order to warn the developers."
+  date: 15.03.2018
+  version: 0.5.6
+- changes:
+  - action: Added
+    details:
+    - '`#25`, detect merged  cell in .xls'
+  date: 8.11.2017
+  version: 0.5.5
+- changes:
+  - action: Added
+    details:
+    - '`#24`, xlsx format cannot  use skip_hidden_row_and_column. please use pyexcel-xlsx
+      instead.'
+  date: 2.11.2017
+  version: 0.5.4
+- changes:
+  - action: Added
+    details:
     - '`#21`, skip hidden rows  and columns under ''skip_hidden_row_and_column'' flag.'
-  date: unreleased
-  version: 0.6.0
+  date: 2.11.2017
+  version: 0.5.3
+- changes:
+  - action: updated
+    details:
+    - pyexcel `pyexcel#105`, remove gease  from setup_requires, introduced by 0.5.1.
+    - remove python2.6 test support
+    - update its dependecy on pyexcel-io to 0.5.3
+  date: 23.10.2017
+  version: 0.5.2
+- changes:
+  - action: added
+    details:
+    - '`pyexcel#103`, include LICENSE file  in MANIFEST.in, meaning LICENSE file will
+      appear in the released tar ball.'
+  date: 20.10.2017
+  version: 0.5.1
 - changes:
   - action: Updated
     details:

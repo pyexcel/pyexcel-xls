@@ -7,6 +7,8 @@
 import os
 import pyexcel as pe
 from pyexcel_xls import save_data
+from pyexcel_xls.xlsr import xldate_to_python_date
+from pyexcel_xls.xlsw import XLSWriter as Writer
 from _compact import OrderedDict
 from nose.tools import eq_, raises
 from nose import SkipTest
@@ -97,6 +99,21 @@ def test_issue_151():
         library='pyexcel-xls')
     eq_('#N/A', s[0,0])
 
+
+@raises(NotImplementedError)
+def test_empty_book_pyexcel_issue_120():
+    """
+    https://github.com/pyexcel/pyexcel/issues/120
+    """
+    writer = Writer()
+    writer.write({})
+
+
+def test_pyexcel_issue_54():
+    xlvalue = 41071.0
+    date = xldate_to_python_date(xlvalue, 1)
+    eq_(date, datetime.date(2016, 6, 12))
+    
 
 def get_fixture(file_name):
     return os.path.join("tests", "fixtures", file_name)

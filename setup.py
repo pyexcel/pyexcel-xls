@@ -42,7 +42,7 @@ CLASSIFIERS = [
 ]
 
 INSTALL_REQUIRES = [
-    'pyexcel-io>=0.5.0',
+    'pyexcel-io>=0.5.3',
     'xlrd',
     'xlwt',
 ]
