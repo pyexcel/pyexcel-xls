@@ -4,3 +4,4 @@ codecov
 coverage
 flake8
 pyexcel
+xlrd==1.1.0

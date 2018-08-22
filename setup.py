@@ -1,4 +1,6 @@
-# Template by setupmobans
+#!/usr/bin/env python3
+
+# Template by pypi-mobans
 import os
 import sys
 import codecs
@@ -9,7 +11,7 @@ PY26 = PY2 and sys.version_info[1] < 7
 
 NAME = 'pyexcel-xls'
 AUTHOR = 'C.W.'
-VERSION = '0.5.7'
+VERSION = '0.5.8'
 EMAIL = 'wangc_2011@hotmail.com'
 LICENSE = 'New BSD'
 DESCRIPTION = (
@@ -17,18 +19,16 @@ DESCRIPTION = (
     'reads xlsx and xlsm format'
 )
 URL = 'https://github.com/pyexcel/pyexcel-xls'
-DOWNLOAD_URL = '%s/archive/0.5.7.tar.gz' % URL
+DOWNLOAD_URL = '%s/archive/0.5.8.tar.gz' % URL
 FILES = ['README.rst', 'CHANGELOG.rst']
 KEYWORDS = [
     'xls',
     'xlsx',
-    'xlsm'
-    'python'
+    'xlsm',
+    'python',
 ]
 
 CLASSIFIERS = [
-    'Topic :: Office/Business',
-    'Topic :: Utilities',
     'Topic :: Software Development :: Libraries',
     'Programming Language :: Python',
     'Intended Audience :: Developers',
@@ -55,8 +55,8 @@ EXTRAS_REQUIRE = {
 # You do not need to read beyond this line
 PUBLISH_COMMAND = '{0} setup.py sdist bdist_wheel upload -r pypi'.format(
     sys.executable)
-GS_COMMAND = ('gs pyexcel-xls v0.5.7 ' +
-              "Find 0.5.7 in changelog for more details")
+GS_COMMAND = ('gs pyexcel-xls v0.5.8 ' +
+              "Find 0.5.8 in changelog for more details")
 NO_GS_MESSAGE = ('Automatic github release is disabled. ' +
                  'Please install gease to enable it.')
 UPLOAD_FAILED_MSG = (
@@ -132,7 +132,8 @@ def read_files(*files):
 
 def read(afile):
     """Read a file into setup"""
-    with codecs.open(afile, 'r', 'utf-8') as opened_file:
+    the_relative_file = os.path.join(HERE, afile)
+    with codecs.open(the_relative_file, 'r', 'utf-8') as opened_file:
         content = filter_out_test_code(opened_file)
         content = "".join(list(content))
         return content
