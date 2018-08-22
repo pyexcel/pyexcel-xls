@@ -4,6 +4,12 @@ releases:
 - changes:
   - action: Added
     details:
+    - "`pyexcel#151`, read cell error as #N/A."
+  date: 22.08.2018
+  version: 0.5.8
+- changes:
+  - action: Added
+    details:
     - "`pyexcel#54`, Book.datemode attribute of that workbook should be passed always."
   date: 15.03.2018
   version: 0.5.7
