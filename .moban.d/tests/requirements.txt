@@ -1,4 +1,5 @@
 {% extends 'tests/requirements.txt.jj2' %}
 {%block extras %}
 pyexcel
+xlrd==1.1.0
 {%endblock%}
