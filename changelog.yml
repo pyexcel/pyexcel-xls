@@ -1,0 +1,99 @@
+name: pyexcel-xls
+organisation: pyexcel
+releases:
+- changes:
+  - action: Added
+    details:
+    - '`#21`, skip hidden rows  and columns under ''skip_hidden_row_and_column'' flag.'
+  date: unreleased
+  version: 0.6.0
+- changes:
+  - action: Updated
+    details:
+    - '`#20`, is handled in  pyexcel-io'
+    - put dependency on pyexcel-io 0.5.0, which uses cStringIO instead of StringIO.  Hence,
+      there will be performance boost in handling files in memory.
+  date: 30.08.2017
+  version: 0.5.0
+- changes:
+  - action: Updated
+    details:
+    - '`#20`, handle unseekable  stream given by http response.'
+  date: 25.08.2017
+  version: 0.4.1
+- changes:
+  - action: Updated
+    details:
+    - '`pyexcel-xlsx#15`, close file handle'
+    - pyexcel-io plugin interface now updated to use  `lml <https://github.com/chfw/lml>`_.
+  date: 19.06.2017
+  version: 0.4.0
+- changes:
+  - action: Updated
+    details:
+    - '`#18`, pass on  encoding_override and others to xlrd.'
+  date: 30/05/2017
+  version: 0.3.3
+- changes:
+  - action: Updated
+    details:
+    - '`#16`, allow mmap to  be passed as file content'
+  date: 18.05.2017
+  version: 0.3.2
+- changes:
+  - action: Updated
+    details:
+    - '`#14`, Python 3.6 -  cannot use LOCALE flag with a str pattern'
+    - fix its dependency on pyexcel-io 0.3.0
+  date: 16.01.2017
+  version: 0.3.1
+- changes:
+  - action: Updated
+    details:
+    - '`#13`, alert on empyty  file content'
+    - Support pyexcel-io v0.3.0
+  date: 22.12.2016
+  version: 0.3.0
+- changes:
+  - action: Updated
+    details:
+    - '`#10`, To support  generator as member of the incoming two dimensional data'
+  date: 20.09.2016
+  version: 0.2.3
+- changes:
+  - action: Added
+    details:
+    - 'support pagination. two pairs: start_row, row_limit and start_column,  column_limit
+      help you deal with large files.'
+  date: 31.08.2016
+  version: 0.2.2
+- changes:
+  - action: Added
+    details:
+    - '`#9`, `skip_hidden_sheets`  is added. By default, hidden sheets are skipped
+      when reading all sheets.  Reading sheet by name or by index are not affected.'
+  date: 13.07.2016
+  version: 0.2.1
+- changes:
+  - action: Added
+    details:
+    - By default, `float` will be converted to `int` where fits. `auto_detect_int`,  a
+      flag to switch off the autoatic conversion from `float` to `int`.
+    - '''library=pyexcel-xls'' was added so as to inform pyexcel to use it instead
+      of  other libraries, in the situation where there are more than one plugin for  a
+      file type, e.g. xlsm'
+  - action: Updated
+    details:
+    - support the auto-import feature of pyexcel-io 0.2.0
+    - xlwt is now used for python 2 implementation while xlwt-future is used for  python
+      3
+  date: 01.06.2016
+  version: 0.2.0
+- changes:
+  - action: Added
+    details:
+    - Passing "streaming=True" to get_data, you will get the two dimensional array  as
+      a generator
+    - Passing "data=your_generator" to save_data is acceptable too.
+  date: 17.01.2016
+  version: 0.1.0
