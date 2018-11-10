@@ -89,7 +89,7 @@ def test_issue_18_encoding_override_isnt_passed(fake_open):
 def test_issue_20():
     if not IN_TRAVIS:
         raise SkipTest()
-    pe.get_book(url="https://github.com/pyexcel/pyexcel-xls/raw/master/tests/fixtures/file_with_an_empty_sheet.xls");  # flake8: noqa
+    pe.get_book(url="https://github.com/pyexcel/pyexcel-xls/raw/master/tests/fixtures/file_with_an_empty_sheet.xls")  # noqa: E501
 
 
 def test_issue_151():
@@ -97,7 +97,7 @@ def test_issue_151():
         file_name=get_fixture('pyexcel_issue_151.xlsx'),
         skip_hidden_row_and_column=False,
         library='pyexcel-xls')
-    eq_('#N/A', s[0,0])
+    eq_('#N/A', s[0, 0])
 
 
 @raises(NotImplementedError)
@@ -113,7 +113,7 @@ def test_pyexcel_issue_54():
     xlvalue = 41071.0
     date = xldate_to_python_date(xlvalue, 1)
     eq_(date, datetime.date(2016, 6, 12))
-    
+
 
 def get_fixture(file_name):
     return os.path.join("tests", "fixtures", file_name)
