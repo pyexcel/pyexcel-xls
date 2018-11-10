@@ -8,20 +8,26 @@
     :license: New BSD License
 """
 import datetime
+
 import xlrd
 
 from pyexcel_io.book import BookReader
 from pyexcel_io.sheet import SheetReader
-from pyexcel_io._compact import OrderedDict, irange
 from pyexcel_io.service import has_no_digits_in_float
-
+from pyexcel_io._compact import OrderedDict, irange
 
 XLS_KEYWORDS = [
-    'filename', 'logfile', 'verbosity', 'use_mmap',
-    'file_contents', 'encoding_override', 'formatting_info',
-    'on_demand', 'ragged_rows'
+    "filename",
+    "logfile",
+    "verbosity",
+    "use_mmap",
+    "file_contents",
+    "encoding_override",
+    "formatting_info",
+    "on_demand",
+    "ragged_rows",
 ]
-DEFAULT_ERROR_VALUE = '#N/A'
+DEFAULT_ERROR_VALUE = "#N/A"
 
 
 class MergedCell(object):
@@ -45,6 +51,7 @@ class XLSheet(SheetReader):
 
     Currently only support first sheet in the file
     """
+
     def __init__(self, sheet, auto_detect_int=True, date_mode=0, **keywords):
         SheetReader.__init__(self, sheet, **keywords)
         self.__auto_detect_int = auto_detect_int
@@ -52,11 +59,11 @@ class XLSheet(SheetReader):
         self.__hidden_rows = []
         self.__merged_cells = {}
         self._book_date_mode = date_mode
-        if keywords.get('detect_merged_cells') is True:
+        if keywords.get("detect_merged_cells") is True:
             for merged_cell_ranges in sheet.merged_cells:
                 merged_cells = MergedCell(*merged_cell_ranges)
                 merged_cells.register_cells(self.__merged_cells)
-        if keywords.get('skip_hidden_row_and_column') is True:
+        if keywords.get("skip_hidden_row_and_column") is True:
             for col_index, info in self._native_sheet.colinfo_map.items():
                 if info.hidden == 1:
                     self.__hidden_cols.append(col_index)
@@ -84,7 +91,7 @@ class XLSheet(SheetReader):
         """
         Random access to the xls cells
         """
-        if self._keywords.get('skip_hidden_row_and_column') is True:
+        if self._keywords.get("skip_hidden_row_and_column") is True:
             row, column = self._offset_hidden_indices(row, column)
         cell_type = self._native_sheet.cell_type(row, column)
         value = self._native_sheet.cell_value(row, column)
@@ -126,6 +133,7 @@ class XLSBook(BookReader):
 
     It reads xls, xlsm, xlsx work book
     """
+
     def __init__(self):
         BookReader.__init__(self)
         self._file_content = None
@@ -147,10 +155,11 @@ class XLSBook(BookReader):
         self._file_content = file_content
 
     def __parse_keywords(self, **keywords):
-        self.__skip_hidden_sheets = keywords.get('skip_hidden_sheets', True)
+        self.__skip_hidden_sheets = keywords.get("skip_hidden_sheets", True)
         self.__skip_hidden_row_column = keywords.get(
-            'skip_hidden_row_and_column', True)
-        self.__detect_merged_cells = keywords.get('detect_merged_cells', False)
+            "skip_hidden_row_and_column", True
+        )
+        self.__detect_merged_cells = keywords.get("detect_merged_cells", False)
 
     def close(self):
         if self._native_book:
@@ -181,27 +190,30 @@ class XLSBook(BookReader):
         return result
 
     def read_sheet(self, native_sheet):
-        sheet = XLSheet(native_sheet, date_mode=self._native_book.datemode,
-                        **self._keywords)
+        sheet = XLSheet(
+            native_sheet,
+            date_mode=self._native_book.datemode,
+            **self._keywords
+        )
         return {sheet.name: sheet.to_array()}
 
     def _get_book(self, on_demand=False):
         xlrd_params = self._extract_xlrd_params()
-        xlrd_params['on_demand'] = on_demand
+        xlrd_params["on_demand"] = on_demand
 
         if self._file_name:
-            xlrd_params['filename'] = self._file_name
+            xlrd_params["filename"] = self._file_name
         elif self._file_stream:
             file_content = self._file_stream.read()
-            xlrd_params['file_contents'] = file_content
+            xlrd_params["file_contents"] = file_content
         elif self._file_content is not None:
-            xlrd_params['file_contents'] = self._file_content
+            xlrd_params["file_contents"] = self._file_content
         else:
             raise IOError("No valid file name or file content found.")
-        if self.__skip_hidden_row_column and self._file_type == 'xls':
-            xlrd_params['formatting_info'] = True
+        if self.__skip_hidden_row_column and self._file_type == "xls":
+            xlrd_params["formatting_info"] = True
         if self.__detect_merged_cells:
-            xlrd_params['formatting_info'] = True
+            xlrd_params["formatting_info"] = True
         xls_book = xlrd.open_workbook(**xlrd_params)
         return xls_book
 
@@ -224,13 +236,9 @@ def xldate_to_python_date(value, date_mode):
     if date_tuple == (0, 0, 0, 0, 0, 0):
         ret = datetime.datetime(1900, 1, 1, 0, 0, 0)
     elif date_tuple[0:3] == (0, 0, 0):
-        ret = datetime.time(date_tuple[3],
-                            date_tuple[4],
-                            date_tuple[5])
+        ret = datetime.time(date_tuple[3], date_tuple[4], date_tuple[5])
     elif date_tuple[3:6] == (0, 0, 0):
-        ret = datetime.date(date_tuple[0],
-                            date_tuple[1],
-                            date_tuple[2])
+        ret = datetime.date(date_tuple[0], date_tuple[1], date_tuple[2])
     else:
         ret = datetime.datetime(
             date_tuple[0],
@@ -238,6 +246,6 @@ def xldate_to_python_date(value, date_mode):
             date_tuple[2],
             date_tuple[3],
             date_tuple[4],
-            date_tuple[5]
+            date_tuple[5],
         )
     return ret

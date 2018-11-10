@@ -8,12 +8,12 @@
     :license: New BSD License
 """
 import datetime
+
 import xlrd
-from xlwt import Workbook, XFStyle
+from xlwt import XFStyle, Workbook
 
 from pyexcel_io.book import BookWriter
 from pyexcel_io.sheet import SheetWriter
-
 
 DEFAULT_DATE_FORMAT = "DD/MM/YY"
 DEFAULT_TIME_FORMAT = "HH:MM:SS"
@@ -25,6 +25,7 @@ class XLSheetWriter(SheetWriter):
     """
     xls sheet writer
     """
+
     def set_sheet_name(self, name):
         """Create a sheet
         """
@@ -40,8 +41,12 @@ class XLSheetWriter(SheetWriter):
             tmp_array = []
             if isinstance(value, datetime.datetime):
                 tmp_array = [
-                    value.year, value.month, value.day,
-                    value.hour, value.minute, value.second
+                    value.year,
+                    value.month,
+                    value.day,
+                    value.hour,
+                    value.minute,
+                    value.second,
                 ]
                 value = xlrd.xldate.xldate_from_datetime_tuple(tmp_array, 0)
                 style = XFStyle()
@@ -67,15 +72,18 @@ class XLSWriter(BookWriter):
     """
     xls writer
     """
+
     def __init__(self):
         BookWriter.__init__(self)
         self.work_book = None
 
-    def open(self, file_name,
-             encoding='ascii', style_compression=2, **keywords):
+    def open(
+        self, file_name, encoding="ascii", style_compression=2, **keywords
+    ):
         BookWriter.open(self, file_name, **keywords)
-        self.work_book = Workbook(style_compression=style_compression,
-                                  encoding=encoding)
+        self.work_book = Workbook(
+            style_compression=style_compression, encoding=encoding
+        )
 
     def write(self, incoming_dict):
         if incoming_dict:

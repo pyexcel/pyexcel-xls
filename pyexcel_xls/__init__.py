@@ -11,17 +11,21 @@
 # this line has to be place above all else
 # because of dynamic import
 from pyexcel_io.plugins import IOPluginInfoChain
-from pyexcel_io.io import get_data as read_data, isstream, save_data as write_data
+from pyexcel_io.io import (
+    get_data as read_data,
+    isstream,
+    save_data as write_data,
+)
 
-__FILE_TYPE__ = 'xls'
+__FILE_TYPE__ = "xls"
 IOPluginInfoChain(__name__).add_a_reader(
-    relative_plugin_class_path='xlsr.XLSBook',
-    file_types=[__FILE_TYPE__, 'xlsx', 'xlsm'],
-    stream_type='binary'
+    relative_plugin_class_path="xlsr.XLSBook",
+    file_types=[__FILE_TYPE__, "xlsx", "xlsm"],
+    stream_type="binary",
 ).add_a_writer(
-    relative_plugin_class_path='xlsw.XLSWriter',
+    relative_plugin_class_path="xlsw.XLSWriter",
     file_types=[__FILE_TYPE__],
-    stream_type='binary'
+    stream_type="binary",
 )
 
 
