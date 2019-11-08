@@ -2,12 +2,29 @@
 pyexcel-xls - Let you focus on data, instead of xls format
 ================================================================================
 
-.. image:: https://api.travis-ci.org/pyexcel/pyexcel-xls.svg
+.. image:: https://raw.githubusercontent.com/pyexcel/pyexcel.github.io/master/images/patreon.png
+   :target: https://www.patreon.com/chfw
+
+.. image:: https://travis-ci.org/pyexcel/pyexcel-xls.svg?branch=master
    :target: http://travis-ci.org/pyexcel/pyexcel-xls
 
-.. image:: https://codecov.io/github/pyexcel/pyexcel-xls/coverage.png
-   :target: https://codecov.io/github/pyexcel/pyexcel-xls
+.. image:: https://codecov.io/gh/pyexcel/pyexcel-xls/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/pyexcel/pyexcel-xls
 
+.. image:: https://badge.fury.io/py/pyexcel-xls.svg
+   :target: https://pypi.org/project/pyexcel-xls
+
+.. image:: https://anaconda.org/conda-forge/pyexcel-xls/badges/version.svg
+   :target: https://anaconda.org/conda-forge/pyexcel-xls
+
+.. image:: https://pepy.tech/badge/pyexcel-xls/month
+   :target: https://pepy.tech/project/pyexcel-xls/month
+
+.. image:: https://anaconda.org/conda-forge/pyexcel-xls/badges/downloads.svg
+   :target: https://anaconda.org/conda-forge/pyexcel-xls
+
+.. image:: https://img.shields.io/gitter/room/gitterHQ/gitter.svg
+   :target: https://gitter.im/pyexcel/Lobby
 
 
 **pyexcel-xls** is a tiny wrapper library to read, manipulate and write data in xls format and it can read xlsx and xlsm fromat. You are likely to use it with `pyexcel <https://github.com/pyexcel/pyexcel>`_.

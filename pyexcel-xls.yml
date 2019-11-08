@@ -5,6 +5,7 @@ version: 0.6.0
 current_version: 0.6.0
 release: 0.5.8
 file_type: xls
+is_on_conda: true
 dependencies:
   - pyexcel-io>=0.5.3
   - xlrd
