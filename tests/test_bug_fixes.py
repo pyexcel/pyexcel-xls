@@ -9,13 +9,13 @@ import datetime
 
 import pyexcel as pe
 from _compact import OrderedDict
+from pyexcel_xls import save_data
+from pyexcel_xls.xlsr import xldate_to_python_date
+from pyexcel_xls.xlsw import XLSWriter as Writer
 
 from mock import patch
 from nose import SkipTest
 from nose.tools import eq_, raises
-from pyexcel_xls import save_data
-from pyexcel_xls.xlsr import xldate_to_python_date
-from pyexcel_xls.xlsw import XLSWriter as Writer
 
 IN_TRAVIS = "TRAVIS" in os.environ
 
