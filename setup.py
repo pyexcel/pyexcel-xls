@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 
-# Template by pypi-mobans
+"""
+Template by pypi-mobans
+"""
+
+import os
+import sys
 import codecs
 import locale
-import os
 import platform
-import sys
 from shutil import rmtree
 
-from setuptools import Command, find_packages, setup
+from setuptools import Command, setup, find_packages
 
 PY2 = sys.version_info[0] == 2
 PY26 = PY2 and sys.version_info[1] < 7
@@ -56,13 +59,12 @@ CLASSIFIERS = [
     "Programming Language :: Python :: 3.4",
     "Programming Language :: Python :: 3.5",
     "Programming Language :: Python :: 3.6",
-
     "Programming Language :: Python :: 3.7",
-
     "Programming Language :: Python :: 3.8",
 
     'Programming Language :: Python :: Implementation :: PyPy'
 ]
+
 
 INSTALL_REQUIRES = [
     "pyexcel-io>=0.5.3",
@@ -71,8 +73,7 @@ INSTALL_REQUIRES = [
 ]
 SETUP_COMMANDS = {}
 
-
-PACKAGES = find_packages(exclude=["ez_setup", "examples", "tests"])
+PACKAGES = find_packages(exclude=["ez_setup", "examples", "tests", "tests.*"])
 EXTRAS_REQUIRE = {
 }
 # You do not need to read beyond this line
