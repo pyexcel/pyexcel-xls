@@ -11,21 +11,6 @@ python:
   - 3.6
   - 3.5
   - 2.7
-matrix:
-  include:
-    - python: 2.7
-      dist: trusty
-      sudo: required
-      virtualenv:
-        system_site_packages: true
-      addons:
-        apt:
-          packages:
-            - python-xlwt
-            - python-xlrd
-            - python-coverage
-            - python-nose
-            - python-mock
 
 stages:
   - lint
@@ -60,7 +45,6 @@ jobs:
 stage: test
 
 before_install:
-  - if [[ $TRAVIS_PYTHON_VERSION == "2.6" ]]; then pip install ordereddict; fi
   - if [[ -f min_requirements.txt && "$MINREQ" -eq 1 ]]; then
       mv min_requirements.txt requirements.txt ;
     fi
