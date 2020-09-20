@@ -10,4 +10,6 @@ dependencies:
   - pyexcel-io>=0.5.3
   - xlrd
   - xlwt
+test_dependencies:
+  - pyexcel
 description: A wrapper library to read, manipulate and write data in xls format. It reads xlsx and xlsm format
