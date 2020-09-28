@@ -15,16 +15,29 @@ from pyexcel_io.io import save_data as write_data
 
 # this line has to be place above all else
 # because of dynamic import
-from pyexcel_io.plugins import IOPluginInfoChain
+from pyexcel_io.plugins import IOPluginInfoChain, NewIOPluginInfoChain
 
 __FILE_TYPE__ = "xls"
-IOPluginInfoChain(__name__).add_a_reader(
-    relative_plugin_class_path="xlsr.XLSBook",
-    file_types=[__FILE_TYPE__, "xlsx", "xlsm"],
-    stream_type="binary",
-).add_a_writer(
+IOPluginInfoChain(__name__).add_a_writer(
     relative_plugin_class_path="xlsw.XLSWriter",
     file_types=[__FILE_TYPE__],
+    stream_type="binary",
+)
+
+NewIOPluginInfoChain(__name__).add_a_reader(
+    relative_plugin_class_path="xlsr.XLSInFile",
+    locations=["file"],
+    file_types=[__FILE_TYPE__, "xlsx", "xlsm"],
+    stream_type="binary",
+).add_a_reader(
+    relative_plugin_class_path="xlsr.XLSInMemory",
+    locations=["memory"],
+    file_types=[__FILE_TYPE__, "xlsx", "xlsm"],
+    stream_type="binary",
+).add_a_reader(
+    relative_plugin_class_path="xlsr.XLSInContent",
+    locations=["content"],
+    file_types=[__FILE_TYPE__, "xlsx", "xlsm"],
     stream_type="binary",
 )
 

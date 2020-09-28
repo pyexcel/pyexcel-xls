@@ -11,7 +11,6 @@ import datetime
 
 import xlrd
 from xlwt import XFStyle, Workbook
-
 from pyexcel_io.book import BookWriter
 from pyexcel_io.sheet import SheetWriter
 
@@ -27,8 +26,7 @@ class XLSheetWriter(SheetWriter):
     """
 
     def set_sheet_name(self, name):
-        """Create a sheet
-        """
+        """Create a sheet"""
         self._native_sheet = self._native_book.add_sheet(name)
         self.current_row = 0
 

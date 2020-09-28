@@ -1,8 +1,9 @@
 import os
 
 from base import PyexcelWriterBase, PyexcelHatWriterBase
-from pyexcel_xls.xlsr import XLSBook as Reader
+from pyexcel_xls.xlsr import XLSReader as Reader
 from pyexcel_xls.xlsw import XLSWriter as Writer
+from pyexcel_io._compact import OrderedDict
 
 
 class TestNativeXLSWriter:
@@ -17,9 +18,16 @@ class TestNativeXLSWriter:
         writer.open(self.testfile)
         writer.write(self.content)
         writer.close()
-        reader = Reader()
-        reader.open(self.testfile)
-        content = reader.read_all()
+        reader = Reader("xls", filename=self.testfile)
+        content = OrderedDict()
+        for index, sheet in enumerate(reader.content_array):
+            content.update(
+                {
+                    reader.content_array[index].name: list(
+                        reader.read_sheet(index).to_array()
+                    )
+                }
+            )
         for key in content.keys():
             content[key] = list(content[key])
         assert content == self.content
