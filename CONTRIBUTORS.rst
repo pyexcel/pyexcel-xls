@@ -4,4 +4,4 @@
 
 In alphabetical order:
 
-* `John Vandenberg <https://api.github.com/users/jayvdb>`_
+* `John Vandenberg <https://github.com/jayvdb>`_
