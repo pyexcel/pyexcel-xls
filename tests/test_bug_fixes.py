@@ -110,7 +110,7 @@ def test_empty_book_pyexcel_issue_120():
     """
     https://github.com/pyexcel/pyexcel/issues/120
     """
-    writer = Writer()
+    writer = Writer("fake.xls", "xls")
     writer.write({})
 
 
