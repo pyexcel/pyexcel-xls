@@ -4,7 +4,7 @@
 
     The lower level xls/xlsx/xlsm file format handler using xlrd/xlwt
 
-    :copyright: (c) 2016-2017 by Onni Software Ltd
+    :copyright: (c) 2016-2020 by Onni Software Ltd
     :license: New BSD License
 """
 
@@ -15,11 +15,11 @@ from pyexcel_io.io import save_data as write_data
 
 # this line has to be place above all else
 # because of dynamic import
-from pyexcel_io.plugins import NewIOPluginInfoChain
+from pyexcel_io.plugins import IOPluginInfoChainV2
 
 __FILE_TYPE__ = "xls"
 
-NewIOPluginInfoChain(__name__).add_a_reader(
+IOPluginInfoChainV2(__name__).add_a_reader(
     relative_plugin_class_path="xlsr.XLSInFile",
     locations=["file"],
     file_types=[__FILE_TYPE__, "xlsx", "xlsm"],

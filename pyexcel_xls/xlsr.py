@@ -4,15 +4,16 @@
 
     The lower level xls/xlsm file format handler using xlrd
 
-    :copyright: (c) 2016-2017 by Onni Software Ltd
+    :copyright: (c) 2016-2020 by Onni Software Ltd
     :license: New BSD License
 """
 import datetime
 
 import xlrd
-from pyexcel_io.sheet import SheetReader
 from pyexcel_io.service import has_no_digits_in_float
 from pyexcel_io._compact import irange
+from pyexcel_io.plugin_api.abstract_sheet import ISheet
+from pyexcel_io.plugin_api.abstract_reader import IReader
 
 XLS_KEYWORDS = [
     "filename",
@@ -43,7 +44,7 @@ class MergedCell(object):
                 registry[key] = self
 
 
-class XLSheet(SheetReader):
+class XLSheet(ISheet):
     """
     xls, xlsx, xlsm sheet reader
 
@@ -51,12 +52,13 @@ class XLSheet(SheetReader):
     """
 
     def __init__(self, sheet, auto_detect_int=True, date_mode=0, **keywords):
-        SheetReader.__init__(self, sheet, **keywords)
         self.__auto_detect_int = auto_detect_int
         self.__hidden_cols = []
         self.__hidden_rows = []
         self.__merged_cells = {}
         self._book_date_mode = date_mode
+        self._native_sheet = sheet
+        self._keywords = keywords
         if keywords.get("detect_merged_cells") is True:
             for merged_cell_ranges in sheet.merged_cells:
                 merged_cells = MergedCell(*merged_cell_ranges)
@@ -73,17 +75,14 @@ class XLSheet(SheetReader):
     def name(self):
         return self._native_sheet.name
 
-    def number_of_rows(self):
-        """
-        Number of rows in the xls sheet
-        """
-        return self._native_sheet.nrows - len(self.__hidden_rows)
+    def row_iterator(self):
+        number_of_rows = self._native_sheet.nrows - len(self.__hidden_rows)
+        return range(number_of_rows)
 
-    def number_of_columns(self):
-        """
-        Number of columns in the xls sheet
-        """
-        return self._native_sheet.ncols - len(self.__hidden_cols)
+    def column_iterator(self, row):
+        number_of_columns = self._native_sheet.ncols - len(self.__hidden_cols)
+        for column in range(number_of_columns):
+            yield self.cell_value(row, column)
 
     def cell_value(self, row, column):
         """
@@ -125,7 +124,7 @@ def calculate_offsets(incoming_index, hidden_indices):
     return incoming_index + offset
 
 
-class XLSReader(object):
+class XLSReader(IReader):
     """
     XLSBook reader
 
@@ -152,11 +151,6 @@ class XLSReader(object):
                 continue
             self.content_array.append(sheet)
 
-    def close(self):
-        if self._native_book:
-            self._native_book.release_resources()
-            self._native_book = None
-
     def read_sheet(self, index):
         native_sheet = self.content_array[index]
         sheet = XLSheet(
@@ -165,6 +159,11 @@ class XLSReader(object):
             **self._keywords
         )
         return sheet
+
+    def close(self):
+        if self._native_book:
+            self._native_book.release_resources()
+            self._native_book = None
 
     def get_xls_book(self, **xlrd_params):
         xls_book = xlrd.open_workbook(**xlrd_params)
