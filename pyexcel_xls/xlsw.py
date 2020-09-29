@@ -4,16 +4,15 @@
 
     The lower level xls file format handler using xlwt
 
-    :copyright: (c) 2016-2017 by Onni Software Ltd
+    :copyright: (c) 2016-2020 by Onni Software Ltd
     :license: New BSD License
 """
 import datetime
 
 import xlrd
 from xlwt import XFStyle, Workbook
-
-from pyexcel_io.book import BookWriter
 from pyexcel_io.sheet import SheetWriter
+from pyexcel_io.plugin_api.abstract_writer import IWriter
 
 DEFAULT_DATE_FORMAT = "DD/MM/YY"
 DEFAULT_TIME_FORMAT = "HH:MM:SS"
@@ -27,8 +26,7 @@ class XLSheetWriter(SheetWriter):
     """
 
     def set_sheet_name(self, name):
-        """Create a sheet
-        """
+        """Create a sheet"""
         self._native_sheet = self._native_book.add_sheet(name)
         self.current_row = 0
 
@@ -68,31 +66,32 @@ class XLSheetWriter(SheetWriter):
         self.current_row += 1
 
 
-class XLSWriter(BookWriter):
+class XLSWriter(IWriter):
     """
     xls writer
     """
 
-    def __init__(self):
-        BookWriter.__init__(self)
-        self.work_book = None
-
-    def open(
-        self, file_name, encoding="ascii", style_compression=2, **keywords
+    def __init__(
+        self,
+        file_alike_object,
+        _,  # file_type not used
+        encoding="ascii",
+        style_compression=2,
+        **keywords
     ):
-        BookWriter.open(self, file_name, **keywords)
+        self._file_alike_object = file_alike_object
         self.work_book = Workbook(
             style_compression=style_compression, encoding=encoding
         )
 
-    def write(self, incoming_dict):
-        if incoming_dict:
-            BookWriter.write(self, incoming_dict)
-        else:
-            raise NotImplementedError(EMPTY_SHEET_NOT_ALLOWED)
-
     def create_sheet(self, name):
         return XLSheetWriter(self.work_book, None, name)
+
+    def write(self, incoming_dict):
+        if incoming_dict:
+            IWriter.write(self, incoming_dict)
+        else:
+            raise NotImplementedError(EMPTY_SHEET_NOT_ALLOWED)
 
     def close(self):
         """

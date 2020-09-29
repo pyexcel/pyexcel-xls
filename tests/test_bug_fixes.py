@@ -6,6 +6,7 @@
 
 import os
 import datetime
+from unittest.mock import MagicMock, patch
 
 import pyexcel as pe
 from _compact import OrderedDict
@@ -13,7 +14,6 @@ from pyexcel_xls import save_data
 from pyexcel_xls.xlsr import xldate_to_python_date
 from pyexcel_xls.xlsw import XLSWriter as Writer
 
-from mock import patch
 from nose import SkipTest
 from nose.tools import eq_, raises
 
@@ -79,13 +79,11 @@ def test_issue_16_file_stream_has_no_getvalue():
 
 @patch("xlrd.open_workbook")
 def test_issue_18_encoding_override_isnt_passed(fake_open):
-    fake_open.return_value = None
+    fake_open.return_value = MagicMock(sheets=MagicMock(return_value=[]))
     test_encoding = "utf-32"
-    from pyexcel_xls.xlsr import XLSBook
+    from pyexcel_xls.xlsr import XLSInFile
 
-    book = XLSBook()
-    book.open("fake_file.xls", encoding_override=test_encoding)
-    book._get_book()
+    XLSInFile("fake_file.xls", "xls", encoding_override=test_encoding)
     keywords = fake_open.call_args[1]
     assert keywords["encoding_override"] == test_encoding
 
@@ -112,7 +110,7 @@ def test_empty_book_pyexcel_issue_120():
     """
     https://github.com/pyexcel/pyexcel/issues/120
     """
-    writer = Writer()
+    writer = Writer("fake.xls", "xls")
     writer.write({})
 
 

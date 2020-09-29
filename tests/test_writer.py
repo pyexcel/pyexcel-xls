@@ -1,7 +1,7 @@
 import os
 
 from base import PyexcelWriterBase, PyexcelHatWriterBase
-from pyexcel_xls.xlsr import XLSBook as Reader
+from pyexcel_xls.xlsr import XLSReader as Reader
 from pyexcel_xls.xlsw import XLSWriter as Writer
 
 
@@ -13,12 +13,10 @@ class TestNativeXLSWriter:
             "Sheet3": [[u"X", u"Y", u"Z"], [1, 4, 7], [2, 5, 8], [3, 6, 9]],
         }
         self.testfile = "writer.xls"
-        writer = Writer()
-        writer.open(self.testfile)
+        writer = Writer(self.testfile, "xls")
         writer.write(self.content)
         writer.close()
-        reader = Reader()
-        reader.open(self.testfile)
+        reader = Reader("xls", filename=self.testfile)
         content = reader.read_all()
         for key in content.keys():
             content[key] = list(content[key])
