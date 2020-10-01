@@ -11,7 +11,6 @@ import datetime
 
 import xlrd
 from pyexcel_io.service import has_no_digits_in_float
-from pyexcel_io._compact import irange
 from pyexcel_io.plugin_api.abstract_sheet import ISheet
 from pyexcel_io.plugin_api.abstract_reader import IReader
 
@@ -38,8 +37,8 @@ class MergedCell(object):
         self.value = None
 
     def register_cells(self, registry):
-        for rowx in irange(self.__rl, self.__rh):
-            for colx in irange(self.__cl, self.__ch):
+        for rowx in range(self.__rl, self.__rh):
+            for colx in range(self.__cl, self.__ch):
                 key = "%s-%s" % (rowx, colx)
                 registry[key] = self
 
