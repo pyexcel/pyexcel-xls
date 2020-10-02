@@ -11,7 +11,8 @@ import datetime
 
 import xlrd
 from xlwt import XFStyle, Workbook
-from pyexcel_io.sheet import SheetWriter
+from pyexcel_io import constants
+from pyexcel_io.plugin_api.abstract_sheet import ISheetWriter
 from pyexcel_io.plugin_api.abstract_writer import IWriter
 
 DEFAULT_DATE_FORMAT = "DD/MM/YY"
@@ -20,14 +21,18 @@ DEFAULT_DATETIME_FORMAT = "%s %s" % (DEFAULT_DATE_FORMAT, DEFAULT_TIME_FORMAT)
 EMPTY_SHEET_NOT_ALLOWED = "xlwt does not support a book without any sheets"
 
 
-class XLSheetWriter(SheetWriter):
+class XLSheetWriter(ISheetWriter):
     """
     xls sheet writer
     """
 
-    def set_sheet_name(self, name):
-        """Create a sheet"""
-        self._native_sheet = self._native_book.add_sheet(name)
+    def __init__(self, xls_book, xls_sheet, sheet_name, **keywords):
+        if sheet_name is None:
+            sheet_name = constants.DEFAULT_SHEET_NAME
+        self._xls_book = xls_book
+        self._xls_sheet = xls_sheet
+        self._keywords = keywords
+        self._xls_sheet = self._xls_book.add_sheet(sheet_name)
         self.current_row = 0
 
     def write_row(self, array):
@@ -60,10 +65,13 @@ class XLSheetWriter(SheetWriter):
                 style = XFStyle()
                 style.num_format_str = DEFAULT_TIME_FORMAT
             if style:
-                self._native_sheet.write(self.current_row, i, value, style)
+                self._xls_sheet.write(self.current_row, i, value, style)
             else:
-                self._native_sheet.write(self.current_row, i, value)
+                self._xls_sheet.write(self.current_row, i, value)
         self.current_row += 1
+
+    def close(self):
+        pass
 
 
 class XLSWriter(IWriter):
