@@ -12,8 +12,7 @@ import datetime
 import xlrd
 from xlwt import XFStyle, Workbook
 from pyexcel_io import constants
-from pyexcel_io.plugin_api.abstract_sheet import ISheetWriter
-from pyexcel_io.plugin_api.abstract_writer import IWriter
+from pyexcel_io.plugin_api import IWriter, ISheetWriter
 
 DEFAULT_DATE_FORMAT = "DD/MM/YY"
 DEFAULT_TIME_FORMAT = "HH:MM:SS"

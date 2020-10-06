@@ -11,8 +11,7 @@ import datetime
 
 import xlrd
 from pyexcel_io.service import has_no_digits_in_float
-from pyexcel_io.plugin_api.abstract_sheet import ISheet
-from pyexcel_io.plugin_api.abstract_reader import IReader
+from pyexcel_io.plugin_api import ISheet, IReader
 
 XLS_KEYWORDS = [
     "filename",
