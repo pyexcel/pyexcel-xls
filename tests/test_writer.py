@@ -1,7 +1,7 @@
 import os
 
 from base import PyexcelWriterBase, PyexcelHatWriterBase
-from pyexcel_xls.xlsr import XLSReader as Reader
+from pyexcel_xls import get_data
 from pyexcel_xls.xlsw import XLSWriter as Writer
 
 
@@ -16,12 +16,10 @@ class TestNativeXLSWriter:
         writer = Writer(self.testfile, "xls")
         writer.write(self.content)
         writer.close()
-        reader = Reader("xls", filename=self.testfile)
-        content = reader.read_all()
+        content = get_data(self.testfile)
         for key in content.keys():
             content[key] = list(content[key])
         assert content == self.content
-        reader.close()
 
     def tearDown(self):
         if os.path.exists(self.testfile):
