@@ -25,12 +25,11 @@ class XLSheetWriter(ISheetWriter):
     xls sheet writer
     """
 
-    def __init__(self, xls_book, xls_sheet, sheet_name, **keywords):
+    def __init__(self, xls_book, xls_sheet, sheet_name):
         if sheet_name is None:
             sheet_name = constants.DEFAULT_SHEET_NAME
         self._xls_book = xls_book
         self._xls_sheet = xls_sheet
-        self._keywords = keywords
         self._xls_sheet = self._xls_book.add_sheet(sheet_name)
         self.current_row = 0
 
@@ -86,7 +85,7 @@ class XLSWriter(IWriter):
         style_compression=2,
         **keywords
     ):
-        self._file_alike_object = file_alike_object
+        self.file_alike_object = file_alike_object
         self.work_book = Workbook(
             style_compression=style_compression, encoding=encoding
         )
@@ -104,4 +103,4 @@ class XLSWriter(IWriter):
         """
         This call actually save the file
         """
-        self.work_book.save(self._file_alike_object)
+        self.work_book.save(self.file_alike_object)

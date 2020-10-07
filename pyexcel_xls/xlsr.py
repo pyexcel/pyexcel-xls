@@ -55,30 +55,30 @@ class XLSheet(ISheet):
         self.__hidden_rows = []
         self.__merged_cells = {}
         self._book_date_mode = date_mode
-        self._native_sheet = sheet
+        self.xls_sheet = sheet
         self._keywords = keywords
         if keywords.get("detect_merged_cells") is True:
             for merged_cell_ranges in sheet.merged_cells:
                 merged_cells = MergedCell(*merged_cell_ranges)
                 merged_cells.register_cells(self.__merged_cells)
         if keywords.get("skip_hidden_row_and_column") is True:
-            for col_index, info in self._native_sheet.colinfo_map.items():
+            for col_index, info in self.xls_sheet.colinfo_map.items():
                 if info.hidden == 1:
                     self.__hidden_cols.append(col_index)
-            for row_index, info in self._native_sheet.rowinfo_map.items():
+            for row_index, info in self.xls_sheet.rowinfo_map.items():
                 if info.hidden == 1:
                     self.__hidden_rows.append(row_index)
 
     @property
     def name(self):
-        return self._native_sheet.name
+        return self.xls_sheet.name
 
     def row_iterator(self):
-        number_of_rows = self._native_sheet.nrows - len(self.__hidden_rows)
+        number_of_rows = self.xls_sheet.nrows - len(self.__hidden_rows)
         return range(number_of_rows)
 
     def column_iterator(self, row):
-        number_of_columns = self._native_sheet.ncols - len(self.__hidden_cols)
+        number_of_columns = self.xls_sheet.ncols - len(self.__hidden_cols)
         for column in range(number_of_columns):
             yield self.cell_value(row, column)
 
@@ -88,8 +88,8 @@ class XLSheet(ISheet):
         """
         if self._keywords.get("skip_hidden_row_and_column") is True:
             row, column = self._offset_hidden_indices(row, column)
-        cell_type = self._native_sheet.cell_type(row, column)
-        value = self._native_sheet.cell_value(row, column)
+        cell_type = self.xls_sheet.cell_type(row, column)
+        value = self.xls_sheet.cell_value(row, column)
 
         if cell_type == xlrd.XL_CELL_DATE:
             value = xldate_to_python_date(value, self._book_date_mode)
@@ -143,8 +143,8 @@ class XLSReader(IReader):
             xlrd_params["formatting_info"] = True
 
         self.content_array = []
-        self._native_book = self.get_xls_book(**xlrd_params)
-        for sheet in self._native_book.sheets():
+        self.xls_book = self.get_xls_book(**xlrd_params)
+        for sheet in self.xls_book.sheets():
             if self.__skip_hidden_sheets and sheet.visibility != 0:
                 continue
             self.content_array.append(sheet)
@@ -153,15 +153,15 @@ class XLSReader(IReader):
         native_sheet = self.content_array[index]
         sheet = XLSheet(
             native_sheet,
-            date_mode=self._native_book.datemode,
+            date_mode=self.xls_book.datemode,
             **self._keywords
         )
         return sheet
 
     def close(self):
-        if self._native_book:
-            self._native_book.release_resources()
-            self._native_book = None
+        if self.xls_book:
+            self.xls_book.release_resources()
+            self.xls_book = None
 
     def get_xls_book(self, **xlrd_params):
         xls_book = xlrd.open_workbook(**xlrd_params)
