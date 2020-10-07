@@ -13,3 +13,4 @@ dependencies:
 test_dependencies:
   - pyexcel
 description: A wrapper library to read, manipulate and write data in xls format. It reads xlsx and xlsm format
+moban_command: false
