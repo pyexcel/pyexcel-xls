@@ -9,6 +9,8 @@
     'xlsm'
 {%endblock%}
 
+{% block morefiles %}"CONTRIBUTORS.rst",{% endblock %}
+
 {%block additional_classifiers%}
     'Programming Language :: Python :: Implementation :: PyPy'
 {%endblock%}

@@ -3,5 +3,10 @@ mock;python_version<"3"
 codecov
 coverage
 flake8
+black
+isort
+collective.checkdocs
+pygments
+moban
+moban_jinja2_github
 pyexcel
-xlrd==1.1.0

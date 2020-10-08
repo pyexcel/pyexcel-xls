@@ -25,6 +25,7 @@ parts/
 sdist/
 var/
 wheels/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -43,14 +44,17 @@ pip-delete-this-directory.txt
 # Unit test / coverage reports
 htmlcov/
 .tox/
+.nox/
 .coverage
 .coverage.*
 .cache
 nosetests.xml
 coverage.xml
 *.cover
+*.py,cover
 .hypothesis/
 .pytest_cache/
+cover/
 
 # Translations
 *.mo
@@ -60,6 +64,7 @@ coverage.xml
 *.log
 local_settings.py
 db.sqlite3
+db.sqlite3-journal
 
 # Flask stuff:
 instance/
@@ -72,16 +77,34 @@ instance/
 docs/_build/
 
 # PyBuilder
+.pybuilder/
 target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
 
-# pyenv
-.python-version
+# IPython
+profile_default/
+ipython_config.py
 
-# celery beat schedule file
+# pyenv
+#   For a library or package, you might want to ignore these files since the code is
+#   intended to run in multiple environments; otherwise, check them in:
+# .python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   install all needed dependencies.
+#Pipfile.lock
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+__pypackages__/
+
+# Celery stuff
 celerybeat-schedule
+celerybeat.pid
 
 # SageMath parsed files
 *.sage.py
@@ -107,6 +130,17 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
 
 # VirtualEnv rules
 # Virtualenv
@@ -140,6 +174,7 @@ pip-selfcheck.json
 # Windows rules
 # Windows thumbnail cache files
 Thumbs.db
+Thumbs.db:encryptable
 ehthumbs.db
 ehthumbs_vista.db
 
@@ -238,9 +273,14 @@ flycheck_*.el
 # directory configuration
 .dir-locals.el
 
+# network security
+/network-security.data
+
+
 # Vim rules
 # Swap
 [._]*.s[a-v][a-z]
+!*.svg  # comment out if you don't need vector files
 [._]*.sw[a-p]
 [._]s[a-rt-v][a-z]
 [._]ss[a-gi-z]
@@ -248,6 +288,7 @@ flycheck_*.el
 
 # Session
 Session.vim
+Sessionx.vim
 
 # Temporary
 .netrwhist
@@ -258,7 +299,7 @@ tags
 [._]*.un~
 
 # JetBrains rules
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff
@@ -267,6 +308,9 @@ tags
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+
+# Generated files
+.idea/**/contentModel.xml
 
 # Sensitive or high-churn files
 .idea/**/dataSources/
@@ -280,6 +324,19 @@ tags
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/artifacts
+# .idea/compiler.xml
+# .idea/jarRepositories.xml
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
 
 # CMake
 cmake-build-*/
@@ -311,6 +368,9 @@ fabric.properties
 # Editor-based Rest Client
 .idea/httpRequests
 
+# Android studio 3.1+ serialized cache file
+.idea/caches/build_file_checksums.ser
+
 # SublimeText rules
 # Cache files for Sublime Text
 *.tmlanguage.cache
@@ -326,6 +386,7 @@ fabric.properties
 
 # SFTP configuration file
 sftp-config.json
+sftp-config-alt*.json
 
 # Package control specific files
 Package Control.last-run
@@ -363,6 +424,10 @@ tmtags
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
 
 # Xcode rules
 # Xcode
@@ -389,8 +454,10 @@ DerivedData/
 *.perspectivev3
 !default.perspectivev3
 
-# Eclipse rules
+## Gcc Patch
+/*.gcno
 
+# Eclipse rules
 .metadata
 bin/
 tmp/
@@ -441,11 +508,16 @@ local.properties
 
 # Annotation Processing
 .apt_generated/
+.apt_generated_test/
 
 # Scala IDE specific (Scala & Java development for Eclipse)
 .cache-main
 .scala_dependencies
 .worksheet
+
+# Uncomment this line if you wish to ignore the project description file.
+# Typically, this file would be tracked if it contains build/dependency configurations:
+#.project
 
 # TortoiseGit rules
 # Project-level settings
@@ -468,3 +540,7 @@ cscope.files
 cscope.out
 cscope.in.out
 cscope.po.out
+
+
+# remove moban hash dictionary
+.moban.hashes
