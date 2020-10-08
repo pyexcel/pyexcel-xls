@@ -40,7 +40,7 @@ DESCRIPTION = (
     "reads xlsx and xlsm format"
 )
 URL = "https://github.com/pyexcel/pyexcel-xls"
-DOWNLOAD_URL = "%s/archive/0.5.8.tar.gz" % URL
+DOWNLOAD_URL = "%s/archive/0.6.0.tar.gz" % URL
 FILES = ["README.rst","CONTRIBUTORS.rst", "CHANGELOG.rst"]
 KEYWORDS = [
     "python",
@@ -78,8 +78,8 @@ EXTRAS_REQUIRE = {
 }
 # You do not need to read beyond this line
 PUBLISH_COMMAND = "{0} setup.py sdist bdist_wheel upload -r pypi".format(sys.executable)
-GS_COMMAND = ("gs pyexcel-xls v0.5.8 " +
-              "Find 0.5.8 in changelog for more details")
+GS_COMMAND = ("gs pyexcel-xls v0.6.0 " +
+              "Find 0.6.0 in changelog for more details")
 NO_GS_MESSAGE = ("Automatic github release is disabled. " +
                  "Please install gease to enable it.")
 UPLOAD_FAILED_MSG = (

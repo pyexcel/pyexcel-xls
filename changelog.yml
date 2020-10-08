@@ -2,6 +2,18 @@ name: pyexcel-xls
 organisation: pyexcel
 releases:
 - changes:
+  - action: Updated
+    details:
+    - 'New style xlsx plugins, promoted by pyexcel-io v0.6.0.'
+  date: 8.10.2020
+  version: 0.6.0
+- changes:
+  - action: Added
+    details:
+    - "`#35`, include tests"
+  date: 29.08.2020
+  version: 0.5.9
+- changes:
   - action: Added
     details:
     - "`pyexcel#151`, read cell error as #N/A."
