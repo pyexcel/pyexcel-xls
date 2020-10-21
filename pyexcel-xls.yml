@@ -1,9 +1,9 @@
 overrides: "pyexcel.yaml"
 name: "pyexcel-xls"
 nick_name: xls
-version: 0.6.0
-current_version: 0.6.0
-release: 0.6.0
+version: 0.6.1
+current_version: 0.6.1
+release: 0.6.1
 file_type: xls
 is_on_conda: true
 dependencies:
@@ -14,3 +14,5 @@ test_dependencies:
   - pyexcel
 description: A wrapper library to read, manipulate and write data in xls format. It reads xlsx and xlsm format
 moban_command: false
+python_requires: ">=3.6"
+min_python_version: "3.6"
