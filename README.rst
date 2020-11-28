@@ -8,8 +8,8 @@ pyexcel-xls - Let you focus on data, instead of xls format
 .. image:: https://raw.githubusercontent.com/pyexcel/pyexcel-mobans/master/images/awesome-badge.svg
    :target: https://awesome-python.com/#specific-formats-processing
 
-.. image:: https://travis-ci.org/pyexcel/pyexcel-xls.svg?branch=master
-   :target: http://travis-ci.org/pyexcel/pyexcel-xls
+.. image:: https://github.com/pyexcel/pyexcel-xls/workflows/run_tests/badge.svg
+   :target: http://github.com/pyexcel/pyexcel-xls/actions
 
 .. image:: https://codecov.io/gh/pyexcel/pyexcel-xls/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/pyexcel/pyexcel-xls
@@ -21,7 +21,7 @@ pyexcel-xls - Let you focus on data, instead of xls format
    :target: https://anaconda.org/conda-forge/pyexcel-xls
 
 .. image:: https://pepy.tech/badge/pyexcel-xls/month
-   :target: https://pepy.tech/project/pyexcel-xls/month
+   :target: https://pepy.tech/project/pyexcel-xls
 
 .. image:: https://anaconda.org/conda-forge/pyexcel-xls/badges/downloads.svg
    :target: https://anaconda.org/conda-forge/pyexcel-xls
