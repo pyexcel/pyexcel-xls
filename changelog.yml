@@ -4,6 +4,12 @@ releases:
 - changes:
   - action: Updated
     details:
+    - "lock down xlrd version less than version 2.0, because 2.0+ does not support xlsx read"
+  date: 12.12.2020
+  version: 0.6.2
+- changes:
+  - action: Updated
+    details:
     - "Restrict this library to get installed on python 3.6+, because pyexcel-io 0.6.0+ supports only python 3.6+."
   date: 21.10.2020
   version: 0.6.1
