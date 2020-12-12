@@ -1,14 +1,14 @@
 overrides: "pyexcel.yaml"
 name: "pyexcel-xls"
 nick_name: xls
-version: 0.6.1
-current_version: 0.6.1
-release: 0.6.1
+version: 0.6.2
+current_version: 0.6.2
+release: 0.6.2
 file_type: xls
 is_on_conda: true
 dependencies:
   - pyexcel-io>=0.6.2
-  - xlrd
+  - xlrd<2
   - xlwt
 test_dependencies:
   - pyexcel
