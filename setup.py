@@ -69,7 +69,7 @@ PYTHON_REQUIRES = ">=3.6"
 
 INSTALL_REQUIRES = [
     "pyexcel-io>=0.6.2",
-    "xlrd",
+    "xlrd<2",
     "xlwt",
 ]
 SETUP_COMMANDS = {}
