@@ -41,6 +41,14 @@ New flag: `detect_merged_cells` allows you to spread the same value among all me
 
 New flag: `skip_hidden_row_and_column` allows you to skip hidden rows and columns and is defaulted to **True**. It may slow down its reading performance. And it is only valid for 'xls' files. For 'xlsx' files, please use pyexcel-xlsx.
 
+Warning
+================================================================================
+
+xls file cannot contain more than 65,000 rows. You are risking the reputation
+of yourself/your company/
+`your country <https://www.bbc.co.uk/news/technology-54423988>`_ if you keep
+using xls and are not aware of its row limit.
+
 
 Support the project
 ================================================================================
