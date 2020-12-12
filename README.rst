@@ -8,8 +8,8 @@ pyexcel-xls - Let you focus on data, instead of xls format
 .. image:: https://raw.githubusercontent.com/pyexcel/pyexcel-mobans/master/images/awesome-badge.svg
    :target: https://awesome-python.com/#specific-formats-processing
 
-.. image:: https://travis-ci.org/pyexcel/pyexcel-xls.svg?branch=master
-   :target: http://travis-ci.org/pyexcel/pyexcel-xls
+.. image:: https://github.com/pyexcel/pyexcel-xls/workflows/run_tests/badge.svg
+   :target: http://github.com/pyexcel/pyexcel-xls/actions
 
 .. image:: https://codecov.io/gh/pyexcel/pyexcel-xls/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/pyexcel/pyexcel-xls
@@ -21,7 +21,7 @@ pyexcel-xls - Let you focus on data, instead of xls format
    :target: https://anaconda.org/conda-forge/pyexcel-xls
 
 .. image:: https://pepy.tech/badge/pyexcel-xls/month
-   :target: https://pepy.tech/project/pyexcel-xls/month
+   :target: https://pepy.tech/project/pyexcel-xls
 
 .. image:: https://anaconda.org/conda-forge/pyexcel-xls/badges/downloads.svg
    :target: https://anaconda.org/conda-forge/pyexcel-xls
@@ -35,11 +35,26 @@ pyexcel-xls - Let you focus on data, instead of xls format
 .. image:: https://img.shields.io/static/v1?label=coding%20style&message=black&color=black&style=flat-square
     :target: https://github.com/psf/black
 
-**pyexcel-xls** is a tiny wrapper library to read, manipulate and write data in xls format and it can read xlsx and xlsm fromat. You are likely to use it with `pyexcel <https://github.com/pyexcel/pyexcel>`_.
+**pyexcel-xls** is a tiny wrapper library to read, manipulate and
+write data in xls format and it can read xlsx and xlsm fromat.
+You are likely to use it with `pyexcel <https://github.com/pyexcel/pyexcel>`_.
 
-New flag: `detect_merged_cells` allows you to spread the same value among all merged cells. But be aware that this may slow down its reading performance.
+New flag: `detect_merged_cells` allows you to spread the same value among
+all merged cells. But be aware that this may slow down its reading
+performance.
 
-New flag: `skip_hidden_row_and_column` allows you to skip hidden rows and columns and is defaulted to **True**. It may slow down its reading performance. And it is only valid for 'xls' files. For 'xlsx' files, please use pyexcel-xlsx.
+New flag: `skip_hidden_row_and_column` allows you to skip hidden rows
+and columns and is defaulted to **True**. It may slow down its reading
+performance. And it is only valid for 'xls' files. For 'xlsx' files,
+please use pyexcel-xlsx.
+
+Warning
+================================================================================
+
+xls file cannot contain more than 65,000 rows. You are risking the reputation
+of yourself/your company/
+`your country <https://www.bbc.co.uk/news/technology-54423988>`_ if you keep
+using xls and are not aware of its row limit.
 
 
 Support the project
