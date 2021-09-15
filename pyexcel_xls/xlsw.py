@@ -52,6 +52,14 @@ class XLSheetWriter(ISheetWriter):
                 value = xlrd.xldate.xldate_from_datetime_tuple(tmp_array, 0)
                 style = XFStyle()
                 style.num_format_str = DEFAULT_DATETIME_FORMAT
+            elif isinstance(value, datetime.timedelta):
+                hours = value.days * 24 + value.seconds // 3600
+                minutes = (value.seconds // 60) % 60
+                seconds = value.seconds % 60
+                tmp_array = [hours, minutes, seconds]
+                value = xlrd.xldate.xldate_from_time_tuple(tmp_array)
+                style = XFStyle()
+                style.num_format_str = DEFAULT_TIME_FORMAT
             elif isinstance(value, datetime.date):
                 tmp_array = [value.year, value.month, value.day]
                 value = xlrd.xldate.xldate_from_date_tuple(tmp_array, 0)
