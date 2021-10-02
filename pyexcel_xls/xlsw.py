@@ -16,6 +16,7 @@ from pyexcel_io.plugin_api import IWriter, ISheetWriter
 
 DEFAULT_DATE_FORMAT = "DD/MM/YY"
 DEFAULT_TIME_FORMAT = "HH:MM:SS"
+DEFAULT_LONGTIME_FORMAT = "[HH]:MM:SS"
 DEFAULT_DATETIME_FORMAT = "%s %s" % (DEFAULT_DATE_FORMAT, DEFAULT_TIME_FORMAT)
 EMPTY_SHEET_NOT_ALLOWED = "xlwt does not support a book without any sheets"
 
@@ -53,13 +54,9 @@ class XLSheetWriter(ISheetWriter):
                 style = XFStyle()
                 style.num_format_str = DEFAULT_DATETIME_FORMAT
             elif isinstance(value, datetime.timedelta):
-                hours = value.days * 24 + value.seconds // 3600
-                minutes = (value.seconds // 60) % 60
-                seconds = value.seconds % 60
-                tmp_array = [hours, minutes, seconds]
-                value = xlrd.xldate.xldate_from_time_tuple(tmp_array)
+                value = value.days + value.seconds / 86_400
                 style = XFStyle()
-                style.num_format_str = DEFAULT_TIME_FORMAT
+                style.num_format_str = DEFAULT_LONGTIME_FORMAT 
             elif isinstance(value, datetime.date):
                 tmp_array = [value.year, value.month, value.day]
                 value = xlrd.xldate.xldate_from_date_tuple(tmp_array, 0)
