@@ -56,8 +56,8 @@ class TestDateFormat:
         assert r[0, 1].strftime("%H:%M:%S") == "11:11:11"
         assert isinstance(r[0, 2], datetime.date) is True
         assert r[0, 2].strftime("%d/%m/%y %H:%M:%S") == "25/12/14 11:11:11"
-        assert isinstance(r[0, 2], datetime.timedelta)
-        assert r[0, 1].strftime("%H:%M:%S") == "3:30:20"
+        assert isinstance(r[0, 3], datetime.datetime)
+        assert r[0, 3].strftime("%D-%H:%M:%S") == "03/04/00-08:05:56"
         os.unlink(excel_filename)
 
 
