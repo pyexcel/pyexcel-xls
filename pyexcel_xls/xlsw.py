@@ -56,7 +56,7 @@ class XLSheetWriter(ISheetWriter):
             elif isinstance(value, datetime.timedelta):
                 value = value.days + value.seconds / 86_400
                 style = XFStyle()
-                style.num_format_str = DEFAULT_LONGTIME_FORMAT 
+                style.num_format_str = DEFAULT_LONGTIME_FORMAT
             elif isinstance(value, datetime.date):
                 tmp_array = [value.year, value.month, value.day]
                 value = xlrd.xldate.xldate_from_date_tuple(tmp_array, 0)
