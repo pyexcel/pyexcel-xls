@@ -8,7 +8,7 @@ file_type: xls
 is_on_conda: true
 dependencies:
   - pyexcel-io>=0.6.2
-  - xlrd<2
+  - xlrd
   - xlwt
 test_dependencies:
   - pyexcel
