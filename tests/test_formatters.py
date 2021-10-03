@@ -38,13 +38,13 @@ class TestDateFormat:
                 datetime.time(11, 11, 11),
                 datetime.datetime(2014, 12, 25, 11, 11, 11),
                 datetime.timedelta(
-                        days=50,
-                        seconds=27,
-                        microseconds=10,
-                        milliseconds=29000,
-                        minutes=5,
-                        hours=8,
-                        weeks=2,
+                    days=50,
+                    seconds=27,
+                    microseconds=10,
+                    milliseconds=29000,
+                    minutes=5,
+                    hours=8,
+                    weeks=2,
                 ),
             ]
         ]

@@ -88,7 +88,7 @@ class XLSWriter(IWriter):
         _,  # file_type not used
         encoding="ascii",
         style_compression=2,
-        **keywords
+        **keywords,
     ):
         self.file_alike_object = file_alike_object
         self.work_book = Workbook(
