@@ -6,7 +6,7 @@ releases:
     details:
     - "`#46`: remove the hard pin on xlrd version < 2.0"
     - "`#47`: limit support to persist datetime.timedelta. see more details in doc"
-  date: tbd
+  date: 07.10.2021
   version: 0.6.3
 - changes:
   - action: Updated

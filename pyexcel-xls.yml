@@ -1,7 +1,7 @@
 overrides: "pyexcel.yaml"
 name: "pyexcel-xls"
 nick_name: xls
-version: 0.6.2
+version: 0.6.3
 current_version: 0.6.3
 release: 0.6.3
 file_type: xls

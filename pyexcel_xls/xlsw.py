@@ -4,7 +4,7 @@
 
     The lower level xls file format handler using xlwt
 
-    :copyright: (c) 2016-2020 by Onni Software Ltd
+    :copyright: (c) 2016-2021 by Onni Software Ltd
     :license: New BSD License
 """
 import datetime
