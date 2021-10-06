@@ -39,21 +39,25 @@ pyexcel-xls - Let you focus on data, instead of xls format
 write data in xls format and it can read xlsx and xlsm fromat.
 You are likely to use it with `pyexcel <https://github.com/pyexcel/pyexcel>`_.
 
-Update:
+Oct 2021 - Update:
+===================
 
 1. v0.6.3 removed the pin on xlrd < 2. If you have xlrd >= 2, this
 library will NOT read 'xlsx' format and you need to install pyexcel-xlsx. Othwise,
 this library can use xlrd < 2 to read xlsx format for you. So 'xlsx' support
 in this library will vary depending on the installed version of xlrd.
 
-2. 0.6.3 can write datetime.timedelta. but when the value is read out,
+2. v0.6.3 can write datetime.timedelta. but when the value is read out,
 you will get datetime.datetime. so you as the developer decides what to do with it.
 
-New flag: `detect_merged_cells` allows you to spread the same value among
+Past news
+===========
+
+`detect_merged_cells` allows you to spread the same value among
 all merged cells. But be aware that this may slow down its reading
 performance.
 
-New flag: `skip_hidden_row_and_column` allows you to skip hidden rows
+`skip_hidden_row_and_column` allows you to skip hidden rows
 and columns and is defaulted to **True**. It may slow down its reading
 performance. And it is only valid for 'xls' files. For 'xlsx' files,
 please use pyexcel-xlsx.
