@@ -39,6 +39,16 @@ pyexcel-xls - Let you focus on data, instead of xls format
 write data in xls format and it can read xlsx and xlsm fromat.
 You are likely to use it with `pyexcel <https://github.com/pyexcel/pyexcel>`_.
 
+Update:
+
+1. v0.6.3 removed the pin on xlrd < 2. If you have xlrd >= 2, this
+library will NOT read 'xlsx' format and you need to install pyexcel-xlsx. Othwise,
+this library can use xlrd < 2 to read xlsx format for you. So 'xlsx' support
+in this library will vary depending on the installed version of xlrd.
+
+2. 0.6.3 can write datetime.timedelta. but when the value is read out,
+you will get datetime.datetime. so you as the developer decides what to do with it.
+
 New flag: `detect_merged_cells` allows you to spread the same value among
 all merged cells. But be aware that this may slow down its reading
 performance.
@@ -51,7 +61,7 @@ please use pyexcel-xlsx.
 Warning
 ================================================================================
 
-xls file cannot contain more than 65,000 rows. You are risking the reputation
+**xls file cannot contain more than 65,000 rows**. You are risking the reputation
 of yourself/your company/
 `your country <https://www.bbc.co.uk/news/technology-54423988>`_ if you keep
 using xls and are not aware of its row limit.
@@ -353,7 +363,7 @@ Then install relevant development requirements:
 #. pip install -r tests/requirements.txt
 
 Once you have finished your changes, please provide test case(s), relevant documentation
-and update CHANGELOG.rst.
+and update changelog.yml
 
 .. note::
 
@@ -372,7 +382,7 @@ On Linux/Unix systems, please launch your tests like this::
 
     $ make
 
-On Windows systems, please issue this command::
+On Windows, please issue this command::
 
     > test.bat
 
@@ -384,7 +394,7 @@ Please run::
 
     $ make format
 
-so as to beautify your code otherwise travis-ci may fail your unit test.
+so as to beautify your code otherwise your build may fail your unit test.
 
 
 Known Issues
