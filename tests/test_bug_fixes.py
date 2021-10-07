@@ -10,7 +10,7 @@ from unittest.mock import MagicMock, patch
 
 import pyexcel as pe
 from _compact import OrderedDict
-from pyexcel_xls import save_data
+from pyexcel_xls import XLRD_VERSION_2_OR_ABOVE, save_data
 from pyexcel_xls.xlsr import xldate_to_python_date
 from pyexcel_xls.xlsw import XLSWriter as Writer
 
@@ -97,6 +97,8 @@ def test_issue_20():
 
 
 def test_issue_151():
+    if XLRD_VERSION_2_OR_ABOVE:
+        raise SkipTest()
     s = pe.get_sheet(
         file_name=get_fixture("pyexcel_issue_151.xlsx"),
         skip_hidden_row_and_column=False,

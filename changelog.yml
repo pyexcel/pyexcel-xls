@@ -2,6 +2,15 @@ name: pyexcel-xls
 organisation: pyexcel
 releases:
 - changes:
+  - action: Removed
+    details:
+    - "`#46`: remove the hard pin on xlrd version < 2.0"
+  - action: Added
+    details:
+    - "`#47`: limit support to persist datetime.timedelta. see more details in doc"
+  date: 07.10.2021
+  version: 0.7.0
+- changes:
   - action: Updated
     details:
     - "lock down xlrd version less than version 2.0, because 2.0+ does not support xlsx read"

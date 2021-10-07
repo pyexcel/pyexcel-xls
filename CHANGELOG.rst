@@ -1,6 +1,19 @@
 Change log
 ================================================================================
 
+0.7.0 - 07.10.2021
+--------------------------------------------------------------------------------
+
+**Removed**
+
+#. `#46 <https://github.com/pyexcel/pyexcel-xls/issues/46>`_: remove the hard
+   pin on xlrd version < 2.0
+
+**Added**
+
+#. `#47 <https://github.com/pyexcel/pyexcel-xls/issues/47>`_: limit support to
+   persist datetime.timedelta. see more details in doc
+
 0.6.2 - 12.12.2020
 --------------------------------------------------------------------------------
 

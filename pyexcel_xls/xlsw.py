@@ -4,7 +4,7 @@
 
     The lower level xls file format handler using xlwt
 
-    :copyright: (c) 2016-2020 by Onni Software Ltd
+    :copyright: (c) 2016-2021 by Onni Software Ltd
     :license: New BSD License
 """
 import datetime
@@ -16,6 +16,7 @@ from pyexcel_io.plugin_api import IWriter, ISheetWriter
 
 DEFAULT_DATE_FORMAT = "DD/MM/YY"
 DEFAULT_TIME_FORMAT = "HH:MM:SS"
+DEFAULT_LONGTIME_FORMAT = "[HH]:MM:SS"
 DEFAULT_DATETIME_FORMAT = "%s %s" % (DEFAULT_DATE_FORMAT, DEFAULT_TIME_FORMAT)
 EMPTY_SHEET_NOT_ALLOWED = "xlwt does not support a book without any sheets"
 
@@ -52,6 +53,10 @@ class XLSheetWriter(ISheetWriter):
                 value = xlrd.xldate.xldate_from_datetime_tuple(tmp_array, 0)
                 style = XFStyle()
                 style.num_format_str = DEFAULT_DATETIME_FORMAT
+            elif isinstance(value, datetime.timedelta):
+                value = value.days + value.seconds / 86_400
+                style = XFStyle()
+                style.num_format_str = DEFAULT_LONGTIME_FORMAT
             elif isinstance(value, datetime.date):
                 tmp_array = [value.year, value.month, value.day]
                 value = xlrd.xldate.xldate_from_date_tuple(tmp_array, 0)
@@ -83,7 +88,7 @@ class XLSWriter(IWriter):
         _,  # file_type not used
         encoding="ascii",
         style_compression=2,
-        **keywords
+        **keywords,
     ):
         self.file_alike_object = file_alike_object
         self.work_book = Workbook(

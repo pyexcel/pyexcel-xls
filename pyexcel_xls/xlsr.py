@@ -4,7 +4,7 @@
 
     The lower level xls/xlsm file format handler using xlrd
 
-    :copyright: (c) 2016-2020 by Onni Software Ltd
+    :copyright: (c) 2016-2021 by Onni Software Ltd
     :license: New BSD License
 """
 import datetime
@@ -152,9 +152,7 @@ class XLSReader(IReader):
     def read_sheet(self, index):
         native_sheet = self.content_array[index]
         sheet = XLSheet(
-            native_sheet,
-            date_mode=self.xls_book.datemode,
-            **self._keywords
+            native_sheet, date_mode=self.xls_book.datemode, **self._keywords
         )
         return sheet
 
