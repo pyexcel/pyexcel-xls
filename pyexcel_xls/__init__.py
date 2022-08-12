@@ -35,6 +35,7 @@ XLRD_VERSION_2_OR_ABOVE = xlrd_version_2_or_greater()
 supported_file_formats = [__FILE_TYPE__, "xlsx", "xlsm"]
 if XLRD_VERSION_2_OR_ABOVE:
     supported_file_formats.remove("xlsx")
+    supported_file_formats.remove("xlsm")
 
 
 IOPluginInfoChainV2(__name__).add_a_reader(
