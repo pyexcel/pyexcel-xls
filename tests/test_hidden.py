@@ -11,7 +11,7 @@ def test_simple_hidden_sheets():
         skip_hidden_row_and_column=True,
     )
     expected = [[1, 3], [7, 9]]
-    eq_(data["Sheet1"], expected)
+    assert data["Sheet1"] == expected
 
 
 def test_complex_hidden_sheets():
@@ -20,4 +20,4 @@ def test_complex_hidden_sheets():
         skip_hidden_row_and_column=True,
     )
     expected = [[1, 3, 5, 7, 9], [31, 33, 35, 37, 39], [61, 63, 65, 67]]
-    eq_(data["Sheet1"], expected)
+    assert data["Sheet1"] == expected

@@ -29,7 +29,7 @@ class PyexcelHatWriterBase:
     def test_series_table(self):
         pyexcel.save_as(adict=self.content, dest_file_name=self.testfile)
         r = pyexcel.get_sheet(file_name=self.testfile, name_columns_by_row=0)
-        eq_(r.dict, self.content)
+        assert r.dict == self.content
 
 
 class PyexcelWriterBase:

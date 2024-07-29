@@ -17,7 +17,7 @@ class TestStringIO:
             )
             result = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", 1.1, 1]
             actual = list(r.enumerate())
-            eq_(result, actual)
+            assert result == actual
         if os.path.exists(testfile):
             os.unlink(testfile)
 
@@ -29,4 +29,4 @@ class TestStringIO:
         )
         result = [1, 2, 3, 4, 5, 6]
         actual = list(r.enumerate())
-        eq_(result, actual)
+        assert result == actual

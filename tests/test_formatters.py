@@ -22,7 +22,7 @@ class TestDateFormat:
             library="pyexcel-xls",
         )
         assert isinstance(r[1, 0], datetime.date)
-        eq_(r[1, 0].strftime("%d/%m/%y"), "25/12/14")
+        assert r[1, 0].strftime("%d/%m/%y") == "25/12/14"
         assert isinstance(r[1, 1], datetime.time) is True
         assert r[1, 1].strftime("%H:%M:%S") == "11:11:11"
         assert r[4, 0].strftime("%d/%m/%Y") == "01/01/1900"
@@ -76,7 +76,7 @@ class TestAutoDetectInt:
         | 1 | 2 | 3.1 |
         +---+---+-----+"""
         ).strip()
-        eq_(str(sheet), expected)
+        assert str(sheet) == expected
 
     def test_get_book_auto_detect_int(self):
         book = pe.get_book(file_name=self.test_file, library="pyexcel-xls")
@@ -87,7 +87,7 @@ class TestAutoDetectInt:
         | 1 | 2 | 3.1 |
         +---+---+-----+"""
         ).strip()
-        eq_(str(book), expected)
+        assert str(book) == expected
 
     def test_auto_detect_int_false(self):
         sheet = pe.get_sheet(
@@ -102,7 +102,7 @@ class TestAutoDetectInt:
         | 1.0 | 2.0 | 3.1 |
         +-----+-----+-----+"""
         ).strip()
-        eq_(str(sheet), expected)
+        assert str(sheet) == expected
 
     def test_get_book_auto_detect_int_false(self):
         book = pe.get_book(
@@ -117,7 +117,7 @@ class TestAutoDetectInt:
         | 1.0 | 2.0 | 3.1 |
         +-----+-----+-----+"""
         ).strip()
-        eq_(str(book), expected)
+        assert str(book) == expected
 
     def tearDown(self):
         os.unlink(self.test_file)

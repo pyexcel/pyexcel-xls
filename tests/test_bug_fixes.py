@@ -43,15 +43,15 @@ def test_issue_9_hidden_sheet():
     test_file = get_fixture("hidden_sheets.xls")
     book_dict = pe.get_book_dict(file_name=test_file)
     assert "hidden" not in book_dict
-    eq_(book_dict["shown"], [["A", "B"]])
+    assert book_dict["shown"] == [["A", "B"]]
 
 
 def test_issue_9_hidden_sheet_2():
     test_file = get_fixture("hidden_sheets.xls")
     book_dict = pe.get_book_dict(file_name=test_file, skip_hidden_sheets=False)
     assert "hidden" in book_dict
-    eq_(book_dict["shown"], [["A", "B"]])
-    eq_(book_dict["hidden"], [["a", "b"]])
+    assert book_dict["shown"] == [["A", "B"]]
+    assert book_dict["hidden"] == [["a", "b"]]
 
 
 def test_issue_10_generator_as_content():
@@ -104,7 +104,7 @@ def test_issue_151():
         skip_hidden_row_and_column=False,
         library="pyexcel-xls",
     )
-    eq_("#N/A", s[0, 0])
+    assert "#N/A" == s[0, 0]
 
 
 @raises(NotImplementedError)
@@ -119,7 +119,7 @@ def test_empty_book_pyexcel_issue_120():
 def test_pyexcel_issue_54():
     xlvalue = 41071.0
     date = xldate_to_python_date(xlvalue, 1)
-    eq_(date, datetime.date(2016, 6, 12))
+    assert date == datetime.date(2016, 6, 12)
 
 
 def get_fixture(file_name):
