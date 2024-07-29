@@ -6,7 +6,7 @@ from nose.tools import eq_
 
 
 class TestFilter:
-    def setUp(self):
+    def setup_method(self):
         self.test_file = "test_filter.xls"
         sample = [
             [1, 21, 31],
@@ -69,5 +69,5 @@ class TestFilter:
         expected = [[24]]
         assert filtered_data[self.sheet_name] == expected
 
-    def tearDown(self):
+    def teardown_method(self):
         os.unlink(self.test_file)

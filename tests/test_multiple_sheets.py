@@ -13,13 +13,13 @@ else:
 
 
 class TestXlsNxlsMultipleSheets(PyexcelMultipleSheetBase):
-    def setUp(self):
+    def setup_method(self):
         self.testfile = "multiple1.xls"
         self.testfile2 = "multiple1.xls"
         self.content = _produce_ordered_dict()
         self._write_test_file(self.testfile)
 
-    def tearDown(self):
+    def teardown_method(self):
         self._clean_up()
 
 
@@ -35,7 +35,7 @@ class TestAddBooks:
         self.rows = 3
         pyexcel.save_book_as(bookdict=self.content, dest_file_name=file)
 
-    def setUp(self):
+    def setup_method(self):
         self.testfile = "multiple1.xls"
         self.testfile2 = "multiple2.xls"
         self.testfile3 = "multiple3.xls"
@@ -208,7 +208,7 @@ class TestAddBooks:
         except TypeError:
             assert 1 == 1
 
-    def tearDown(self):
+    def teardown_method(self):
         if os.path.exists(self.testfile):
             os.unlink(self.testfile)
         if os.path.exists(self.testfile2):
@@ -216,7 +216,7 @@ class TestAddBooks:
 
 
 class TestMultiSheetReader:
-    def setUp(self):
+    def setup_method(self):
         self.testfile = "file_with_an_empty_sheet.xls"
 
     def test_reader_with_correct_sheets(self):

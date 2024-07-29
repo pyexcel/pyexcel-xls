@@ -21,17 +21,17 @@ class TestNativeXLSWriter:
             content[key] = list(content[key])
         assert content == self.content
 
-    def tearDown(self):
+    def teardown_method(self):
         if os.path.exists(self.testfile):
             os.unlink(self.testfile)
 
 
 class TestxlsnCSVWriter(PyexcelWriterBase):
-    def setUp(self):
+    def setup_method(self):
         self.testfile = "test.xls"
         self.testfile2 = "test.csv"
 
-    def tearDown(self):
+    def teardown_method(self):
         if os.path.exists(self.testfile):
             os.unlink(self.testfile)
         if os.path.exists(self.testfile2):
@@ -39,9 +39,9 @@ class TestxlsnCSVWriter(PyexcelWriterBase):
 
 
 class TestxlsHatWriter(PyexcelHatWriterBase):
-    def setUp(self):
+    def setup_method(self):
         self.testfile = "test.xls"
 
-    def tearDown(self):
+    def teardown_method(self):
         if os.path.exists(self.testfile):
             os.unlink(self.testfile)
