@@ -8,13 +8,12 @@ import os
 import datetime
 from unittest.mock import MagicMock, patch
 
+import pytest
 import pyexcel as pe
 from _compact import OrderedDict
 from pyexcel_xls import XLRD_VERSION_2_OR_ABOVE, save_data
 from pyexcel_xls.xlsr import xldate_to_python_date
 from pyexcel_xls.xlsw import XLSWriter as Writer
-
-import pytest
 
 IN_TRAVIS = "TRAVIS" in os.environ
 
