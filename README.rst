@@ -380,7 +380,7 @@ and update changelog.yml
 How to test your contribution
 ------------------------------
 
-Although `nose` and `doctest` are both used in code testing, it is adviable that unit tests are put in tests. `doctest` is incorporated only to make sure the code examples in documentation remain valid across different development releases.
+Although `pytest` and `doctest` are both used in code testing, it is adviable that unit tests are put in tests. `doctest` is incorporated only to make sure the code examples in documentation remain valid across different development releases.
 
 On Linux/Unix systems, please launch your tests like this::
 
