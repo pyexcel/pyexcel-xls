@@ -14,8 +14,8 @@ from pyexcel_xls import XLRD_VERSION_2_OR_ABOVE, save_data
 from pyexcel_xls.xlsr import xldate_to_python_date
 from pyexcel_xls.xlsw import XLSWriter as Writer
 
-from nose import SkipTest
 from nose.tools import eq_, raises
+import pytest
 
 IN_TRAVIS = "TRAVIS" in os.environ
 
@@ -90,7 +90,7 @@ def test_issue_18_encoding_override_isnt_passed(fake_open):
 
 def test_issue_20():
     if not IN_TRAVIS:
-        raise SkipTest()
+        pytest.skip("Must be in CI for this test")
     pe.get_book(
         url="https://github.com/pyexcel/pyexcel-xls/raw/master/tests/fixtures/file_with_an_empty_sheet.xls"  # noqa: E501
     )
@@ -98,7 +98,7 @@ def test_issue_20():
 
 def test_issue_151():
     if XLRD_VERSION_2_OR_ABOVE:
-        raise SkipTest()
+        pytest.skip("XLRD<2 required for this test")
     s = pe.get_sheet(
         file_name=get_fixture("pyexcel_issue_151.xlsx"),
         skip_hidden_row_and_column=False,
