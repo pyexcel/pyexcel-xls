@@ -1,7 +1,6 @@
-nose
+pytest
+pytest-cov
 mock;python_version<"3"
-codecov
-coverage
 flake8
 black
 isort
