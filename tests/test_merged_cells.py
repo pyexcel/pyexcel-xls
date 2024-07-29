@@ -3,8 +3,6 @@ import os
 from pyexcel_xls import get_data
 from pyexcel_xls.xlsr import MergedCell
 
-from nose.tools import eq_
-
 
 def test_merged_cells():
     data = get_data(

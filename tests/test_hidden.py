@@ -2,8 +2,6 @@ import os
 
 from pyexcel_xls import get_data
 
-from nose.tools import eq_
-
 
 def test_simple_hidden_sheets():
     data = get_data(

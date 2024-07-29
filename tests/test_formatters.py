@@ -3,8 +3,6 @@ from textwrap import dedent
 
 import pyexcel as pe
 
-from nose.tools import eq_
-
 
 class TestDateFormat:
     def test_reading_date_format(self):
