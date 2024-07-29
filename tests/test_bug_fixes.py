@@ -14,7 +14,6 @@ from pyexcel_xls import XLRD_VERSION_2_OR_ABOVE, save_data
 from pyexcel_xls.xlsr import xldate_to_python_date
 from pyexcel_xls.xlsw import XLSWriter as Writer
 
-from nose.tools import eq_, raises
 import pytest
 
 IN_TRAVIS = "TRAVIS" in os.environ
@@ -66,9 +65,9 @@ def test_issue_10_generator_as_content():
     save_data("test.xls", {"sheet": data_gen()})
 
 
-@raises(IOError)
 def test_issue_13_empty_file_content():
-    pe.get_sheet(file_content="", file_type="xls")
+    with pytest.raises(IOError):
+        pe.get_sheet(file_content="", file_type="xls")
 
 
 def test_issue_16_file_stream_has_no_getvalue():
@@ -107,13 +106,13 @@ def test_issue_151():
     assert "#N/A" == s[0, 0]
 
 
-@raises(NotImplementedError)
 def test_empty_book_pyexcel_issue_120():
     """
     https://github.com/pyexcel/pyexcel/issues/120
     """
-    writer = Writer("fake.xls", "xls")
-    writer.write({})
+    with pytest.raises(NotImplementedError):
+        writer = Writer("fake.xls", "xls")
+        writer.write({})
 
 
 def test_pyexcel_issue_54():
