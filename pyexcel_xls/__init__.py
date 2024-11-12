@@ -7,6 +7,7 @@
     :copyright: (c) 2016-2021 by Onni Software Ltd
     :license: New BSD License
 """
+
 import xlrd
 
 # flake8: noqa
