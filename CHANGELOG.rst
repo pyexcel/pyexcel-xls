@@ -9,6 +9,10 @@ Change log
 #. `#54 <https://github.com/pyexcel/pyexcel-xls/issues/54>`_: remove xlsm
    support for xlrd > 2.0.0
 
+**Updated**
+
+#. first project to migrate to pytest
+
 0.7.0 - 07.10.2021
 --------------------------------------------------------------------------------
 
