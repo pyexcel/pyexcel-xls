@@ -5,6 +5,9 @@ releases:
   - action: Removed
     details:
     - "`#54`: remove xlsm support for xlrd > 2.0.0"
+  - action: Updated
+    details:
+    - "first project to migrate to pytest"
   date: 31.03.2024
   version: 0.7.1
 - changes:
