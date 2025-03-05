@@ -10,3 +10,4 @@ pygments
 moban
 moban_jinja2_github
 pyexcel
+pytest
