@@ -202,7 +202,7 @@ if __name__ == "__main__":
         keywords=KEYWORDS,
         python_requires=PYTHON_REQUIRES,
         extras_require=EXTRAS_REQUIRE,
-        tests_require=["pytest", "pytest-cov"],
+        tests_require=["nose"],
         install_requires=INSTALL_REQUIRES,
         packages=PACKAGES,
         include_package_data=True,

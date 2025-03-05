@@ -8,9 +8,6 @@ pyexcel-xls - Let you focus on data, instead of xls format
 .. image:: https://raw.githubusercontent.com/pyexcel/pyexcel-mobans/master/images/awesome-badge.svg
    :target: https://awesome-python.com/#specific-formats-processing
 
-.. image:: https://github.com/pyexcel/pyexcel-xls/workflows/run_tests/badge.svg
-   :target: http://github.com/pyexcel/pyexcel-xls/actions
-
 .. image:: https://codecov.io/gh/pyexcel/pyexcel-xls/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/pyexcel/pyexcel-xls
 
@@ -19,6 +16,7 @@ pyexcel-xls - Let you focus on data, instead of xls format
 
 .. image:: https://anaconda.org/conda-forge/pyexcel-xls/badges/version.svg
    :target: https://anaconda.org/conda-forge/pyexcel-xls
+
 
 .. image:: https://pepy.tech/badge/pyexcel-xls/month
    :target: https://pepy.tech/project/pyexcel-xls
@@ -75,18 +73,11 @@ Support the project
 ================================================================================
 
 If your company has embedded pyexcel and its components into a revenue generating
-product, please support me on github, `patreon <https://www.patreon.com/bePatron?u=5537627>`_
-or `bounty source <https://salt.bountysource.com/teams/chfw-pyexcel>`_ to maintain
-the project and develop it further.
+product, please support me on github, or `patreon <https://www.patreon.com/bePatron?u=5537627>`_
+maintain the project and develop it further.
 
-If you are an individual, you are welcome to support me too and for however long
-you feel like. As my backer, you will receive
-`early access to pyexcel related contents <https://www.patreon.com/pyexcel/posts>`_.
-
-And your issues will get prioritized if you would like to become my patreon as `pyexcel pro user`.
-
-With your financial support, I will be able to invest
-a little bit more time in coding, documentation and writing interesting posts.
+With your financial support, I will be able to invest a little bit more time in coding,
+documentation and writing interesting posts.
 
 
 Known constraints
@@ -372,15 +363,18 @@ and update changelog.yml
 .. note::
 
     As to rnd_requirements.txt, usually, it is created when a dependent
-    library is not released. Once the dependecy is installed
+    library is not released. Once the dependency is installed
     (will be released), the future
     version of the dependency in the requirements.txt will be valid.
 
 
 How to test your contribution
-------------------------------
+--------------------------------------------------------------------------------
 
-Although `pytest` and `doctest` are both used in code testing, it is adviable that unit tests are put in tests. `doctest` is incorporated only to make sure the code examples in documentation remain valid across different development releases.
+Although `nose` and `doctest` are both used in code testing, it is advisable
+that unit tests are put in tests. `doctest` is incorporated only to make sure
+the code examples in documentation remain valid across different development
+releases.
 
 On Linux/Unix systems, please launch your tests like this::
 
