@@ -4,6 +4,12 @@ releases:
 - changes:
   - action: Removed
     details:
+    - "`#54`: remove xlsm support for xlrd > 2.0.0"
+  date: 31.03.2024
+  version: 0.7.1
+- changes:
+  - action: Removed
+    details:
     - "`#46`: remove the hard pin on xlrd version < 2.0"
   - action: Added
     details:
