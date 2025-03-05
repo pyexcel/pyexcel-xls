@@ -12,6 +12,7 @@ dependencies:
   - xlwt
 test_dependencies:
   - pyexcel
+  - pytest
 description: A wrapper library to read, manipulate and write data in xls format. It reads xlsx and xlsm format
 moban_command: false
 python_requires: ">=3.6"
