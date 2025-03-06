@@ -1,3 +1,3 @@
 #/bin/bash
 pip freeze
-pytest
+python -m pytest
