@@ -1,17 +1,18 @@
 Change log
 ================================================================================
 
-0.7.1 - 31.03.2024
+0.7.1 - 07.03.2024
 --------------------------------------------------------------------------------
 
 **Removed**
 
-#. `#54 <https://github.com/pyexcel/pyexcel-xls/issues/54>`_: remove xlsm
+#. `#52 <https://github.com/pyexcel/pyexcel-xls/issues/52>`_: remove xlsm
    support for xlrd > 2.0.0
 
 **Updated**
 
-#. first project to migrate to pytest
+#. `#54 <https://github.com/pyexcel/pyexcel-xls/issues/54>`_: first project in
+   pyexcel to migrate to pytest
 
 0.7.0 - 07.10.2021
 --------------------------------------------------------------------------------
