@@ -10,7 +10,7 @@ class TestNativeXLSWriter:
         self.content = {
             "Sheet1": [[1, 1, 1, 1], [2, 2, 2, 2], [3, 3, 3, 3]],
             "Sheet2": [[4, 4, 4, 4], [5, 5, 5, 5], [6, 6, 6, 6]],
-            "Sheet3": [[u"X", u"Y", u"Z"], [1, 4, 7], [2, 5, 8], [3, 6, 9]],
+            "Sheet3": [["X", "Y", "Z"], [1, 4, 7], [2, 5, 8], [3, 6, 9]],
         }
         self.testfile = "writer.xls"
         writer = Writer(self.testfile, "xls")
@@ -21,17 +21,17 @@ class TestNativeXLSWriter:
             content[key] = list(content[key])
         assert content == self.content
 
-    def tearDown(self):
+    def teardown_method(self):
         if os.path.exists(self.testfile):
             os.unlink(self.testfile)
 
 
 class TestxlsnCSVWriter(PyexcelWriterBase):
-    def setUp(self):
+    def setup_method(self):
         self.testfile = "test.xls"
         self.testfile2 = "test.csv"
 
-    def tearDown(self):
+    def teardown_method(self):
         if os.path.exists(self.testfile):
             os.unlink(self.testfile)
         if os.path.exists(self.testfile2):
@@ -39,9 +39,9 @@ class TestxlsnCSVWriter(PyexcelWriterBase):
 
 
 class TestxlsHatWriter(PyexcelHatWriterBase):
-    def setUp(self):
+    def setup_method(self):
         self.testfile = "test.xls"
 
-    def tearDown(self):
+    def teardown_method(self):
         if os.path.exists(self.testfile):
             os.unlink(self.testfile)

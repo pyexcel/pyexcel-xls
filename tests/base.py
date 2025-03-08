@@ -3,8 +3,6 @@ import datetime  # noqa
 
 import pyexcel
 
-from nose.tools import eq_, raises  # noqa
-
 
 def create_sample_file1(file):
     data = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", 1.1, 1]
@@ -29,7 +27,7 @@ class PyexcelHatWriterBase:
     def test_series_table(self):
         pyexcel.save_as(adict=self.content, dest_file_name=self.testfile)
         r = pyexcel.get_sheet(file_name=self.testfile, name_columns_by_row=0)
-        eq_(r.dict, self.content)
+        assert r.dict == self.content
 
 
 class PyexcelWriterBase:
@@ -83,7 +81,7 @@ class PyexcelMultipleSheetBase:
         expected = [[4, 4, 4, 4], [5, 5, 5, 5], [6, 6, 6, 6]]
         assert data == expected
         data = list(b["Sheet3"].rows())
-        expected = [[u"X", u"Y", u"Z"], [1, 4, 7], [2, 5, 8], [3, 6, 9]]
+        expected = [["X", "Y", "Z"], [1, 4, 7], [2, 5, 8], [3, 6, 9]]
         assert data == expected
         sheet3 = b["Sheet3"]
         sheet3.name_columns_by_row(0)

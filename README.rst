@@ -8,9 +8,6 @@ pyexcel-xls - Let you focus on data, instead of xls format
 .. image:: https://raw.githubusercontent.com/pyexcel/pyexcel-mobans/master/images/awesome-badge.svg
    :target: https://awesome-python.com/#specific-formats-processing
 
-.. image:: https://github.com/pyexcel/pyexcel-xls/workflows/run_tests/badge.svg
-   :target: http://github.com/pyexcel/pyexcel-xls/actions
-
 .. image:: https://codecov.io/gh/pyexcel/pyexcel-xls/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/pyexcel/pyexcel-xls
 
@@ -19,6 +16,7 @@ pyexcel-xls - Let you focus on data, instead of xls format
 
 .. image:: https://anaconda.org/conda-forge/pyexcel-xls/badges/version.svg
    :target: https://anaconda.org/conda-forge/pyexcel-xls
+
 
 .. image:: https://pepy.tech/badge/pyexcel-xls/month
    :target: https://pepy.tech/project/pyexcel-xls
@@ -42,12 +40,12 @@ You are likely to use it with `pyexcel <https://github.com/pyexcel/pyexcel>`_.
 Oct 2021 - Update:
 ===================
 
-1. v0.6.3 removed the pin on xlrd < 2. If you have xlrd >= 2, this
+1. v0.7.0 removed the pin on xlrd < 2. If you have xlrd >= 2, this
 library will NOT read 'xlsx' format and you need to install pyexcel-xlsx. Othwise,
 this library can use xlrd < 2 to read xlsx format for you. So 'xlsx' support
 in this library will vary depending on the installed version of xlrd.
 
-2. v0.6.3 can write datetime.timedelta. but when the value is read out,
+2. v0.7.0 can write datetime.timedelta. but when the value is read out,
 you will get datetime.datetime. so you as the developer decides what to do with it.
 
 Past news
@@ -75,18 +73,11 @@ Support the project
 ================================================================================
 
 If your company has embedded pyexcel and its components into a revenue generating
-product, please support me on github, `patreon <https://www.patreon.com/bePatron?u=5537627>`_
-or `bounty source <https://salt.bountysource.com/teams/chfw-pyexcel>`_ to maintain
-the project and develop it further.
+product, please support me on github, or `patreon <https://www.patreon.com/bePatron?u=5537627>`_
+maintain the project and develop it further.
 
-If you are an individual, you are welcome to support me too and for however long
-you feel like. As my backer, you will receive
-`early access to pyexcel related contents <https://www.patreon.com/pyexcel/posts>`_.
-
-And your issues will get prioritized if you would like to become my patreon as `pyexcel pro user`.
-
-With your financial support, I will be able to invest
-a little bit more time in coding, documentation and writing interesting posts.
+With your financial support, I will be able to invest a little bit more time in coding,
+documentation and writing interesting posts.
 
 
 Known constraints
@@ -372,15 +363,18 @@ and update changelog.yml
 .. note::
 
     As to rnd_requirements.txt, usually, it is created when a dependent
-    library is not released. Once the dependecy is installed
+    library is not released. Once the dependency is installed
     (will be released), the future
     version of the dependency in the requirements.txt will be valid.
 
 
 How to test your contribution
-------------------------------
+--------------------------------------------------------------------------------
 
-Although `nose` and `doctest` are both used in code testing, it is adviable that unit tests are put in tests. `doctest` is incorporated only to make sure the code examples in documentation remain valid across different development releases.
+Although `nose` and `doctest` are both used in code testing, it is advisable
+that unit tests are put in tests. `doctest` is incorporated only to make sure
+the code examples in documentation remain valid across different development
+releases.
 
 On Linux/Unix systems, please launch your tests like this::
 

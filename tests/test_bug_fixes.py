@@ -8,14 +8,12 @@ import os
 import datetime
 from unittest.mock import MagicMock, patch
 
+import pytest
 import pyexcel as pe
 from _compact import OrderedDict
 from pyexcel_xls import XLRD_VERSION_2_OR_ABOVE, save_data
 from pyexcel_xls.xlsr import xldate_to_python_date
 from pyexcel_xls.xlsw import XLSWriter as Writer
-
-from nose import SkipTest
-from nose.tools import eq_, raises
 
 IN_TRAVIS = "TRAVIS" in os.environ
 
@@ -43,15 +41,15 @@ def test_issue_9_hidden_sheet():
     test_file = get_fixture("hidden_sheets.xls")
     book_dict = pe.get_book_dict(file_name=test_file)
     assert "hidden" not in book_dict
-    eq_(book_dict["shown"], [["A", "B"]])
+    assert book_dict["shown"] == [["A", "B"]]
 
 
 def test_issue_9_hidden_sheet_2():
     test_file = get_fixture("hidden_sheets.xls")
     book_dict = pe.get_book_dict(file_name=test_file, skip_hidden_sheets=False)
     assert "hidden" in book_dict
-    eq_(book_dict["shown"], [["A", "B"]])
-    eq_(book_dict["hidden"], [["a", "b"]])
+    assert book_dict["shown"] == [["A", "B"]]
+    assert book_dict["hidden"] == [["a", "b"]]
 
 
 def test_issue_10_generator_as_content():
@@ -66,9 +64,9 @@ def test_issue_10_generator_as_content():
     save_data("test.xls", {"sheet": data_gen()})
 
 
-@raises(IOError)
 def test_issue_13_empty_file_content():
-    pe.get_sheet(file_content="", file_type="xls")
+    with pytest.raises(IOError):
+        pe.get_sheet(file_content="", file_type="xls")
 
 
 def test_issue_16_file_stream_has_no_getvalue():
@@ -90,7 +88,7 @@ def test_issue_18_encoding_override_isnt_passed(fake_open):
 
 def test_issue_20():
     if not IN_TRAVIS:
-        raise SkipTest()
+        pytest.skip("Must be in CI for this test")
     pe.get_book(
         url="https://github.com/pyexcel/pyexcel-xls/raw/master/tests/fixtures/file_with_an_empty_sheet.xls"  # noqa: E501
     )
@@ -98,28 +96,28 @@ def test_issue_20():
 
 def test_issue_151():
     if XLRD_VERSION_2_OR_ABOVE:
-        raise SkipTest()
+        pytest.skip("XLRD<2 required for this test")
     s = pe.get_sheet(
         file_name=get_fixture("pyexcel_issue_151.xlsx"),
         skip_hidden_row_and_column=False,
         library="pyexcel-xls",
     )
-    eq_("#N/A", s[0, 0])
+    assert "#N/A" == s[0, 0]
 
 
-@raises(NotImplementedError)
 def test_empty_book_pyexcel_issue_120():
     """
     https://github.com/pyexcel/pyexcel/issues/120
     """
-    writer = Writer("fake.xls", "xls")
-    writer.write({})
+    with pytest.raises(NotImplementedError):
+        writer = Writer("fake.xls", "xls")
+        writer.write({})
 
 
 def test_pyexcel_issue_54():
     xlvalue = 41071.0
     date = xldate_to_python_date(xlvalue, 1)
-    eq_(date, datetime.date(2016, 6, 12))
+    assert date == datetime.date(2016, 6, 12)
 
 
 def get_fixture(file_name):
