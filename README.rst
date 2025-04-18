@@ -72,12 +72,11 @@ using xls and are not aware of its row limit.
 Support the project
 ================================================================================
 
-If your company has embedded pyexcel and its components into a revenue generating
-product, please support me on github, or `patreon <https://www.patreon.com/bePatron?u=5537627>`_
-maintain the project and develop it further.
-
-With your financial support, I will be able to invest a little bit more time in coding,
-documentation and writing interesting posts.
+If your company uses pyexcel and its components in a revenue-generating product,
+please consider supporting the project on GitHub or
+`Patreon <https://www.patreon.com/bePatron?u=5537627>`_. Your financial
+support will enable me to dedicate more time to coding, improving documentation,
+and creating engaging content.
 
 
 Known constraints
@@ -117,15 +116,8 @@ As a standalone library
 
     >>> import os
     >>> import sys
-    >>> if sys.version_info[0] < 3:
-    ...     from StringIO import StringIO
-    ... else:
-    ...     from io import BytesIO as StringIO
-    >>> PY2 = sys.version_info[0] == 2
-    >>> if PY2 and sys.version_info[1] < 7:
-    ...      from ordereddict import OrderedDict
-    ... else:
-    ...     from collections import OrderedDict
+    >>> from io import BytesIO
+    >>> from collections import OrderedDict
 
 
 Write to an xls file
@@ -169,7 +161,7 @@ Here's the sample code to write a dictionary to an xls file:
     >>> data = OrderedDict()
     >>> data.update({"Sheet 1": [[1, 2, 3], [4, 5, 6]]})
     >>> data.update({"Sheet 2": [[7, 8, 9], [10, 11, 12]]})
-    >>> io = StringIO()
+    >>> io = BytesIO()
     >>> save_data(io, data)
     >>> # do something with the io
     >>> # In reality, you might give it to your http response
@@ -315,10 +307,10 @@ You got to wrap the binary content with stream to get xls working:
     +-------+-------+-------+
 
 
-Writing to a StringIO instance
+Writing to a BytesIO instance
 ********************************************************************************
 
-You need to pass a StringIO instance to Writer:
+You need to pass a BytesIO instance to Writer:
 
 .. code-block:: python
 
@@ -326,7 +318,7 @@ You need to pass a StringIO instance to Writer:
     ...     [1, 2, 3],
     ...     [4, 5, 6]
     ... ]
-    >>> io = StringIO()
+    >>> io = BytesIO()
     >>> sheet = pe.Sheet(data)
     >>> io = sheet.save_to_memory("xls", io)
     >>> # then do something with io
